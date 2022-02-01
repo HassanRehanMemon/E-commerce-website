@@ -1,24 +1,15 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-
+import { Button, Alert } from 'react-bootstrap'
+import './bootstrap.min.css'
+import Footer from './components/Footer';
+import Header from './components/Header';
 function App() {
+  // const logo = require('./logo.svg') as string;
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App py-3">
+      <Header />
+      Hello World
+      <Button className="btn btn-block">Buttons</Button>
+      <Footer />
     </div>
   );
 }
