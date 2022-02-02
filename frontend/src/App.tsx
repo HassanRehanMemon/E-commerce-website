@@ -9,11 +9,13 @@ import HomeScreen from './screens/HomeScreen';
 function App() {
   // const logo = require('./logo.svg') as string;
   return (
-    <div className="App py-3">
+    <div className="App">
       <Header />
-      <Container>
-        <HomeScreen />
-      </Container>
+      <main className="py-3">
+        <Container>
+          <HomeScreen />
+        </Container>
+      </main>
       <Footer />
     </div>
   );

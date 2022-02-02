@@ -1,23 +1,32 @@
 import React from 'react';
+import { Card} from 'react-bootstrap'
 
-interface product  {
+interface product {
     name: string,
-    image : string,
-    description : string,
+    image: string,
+    description?: string,
     brand: string,
     category: string,
-    price : number,
-    countInStock : number,
-    rating : number,
-    numReviews : number,
+    price: number,
+    countInStock: number,
+    rating?: number,
+    numReviews?: number,
 }
 
-interface Props{
+interface Props {
     product: product
 }
-const Product: React.FC<Props> = ({product}) => {
+const Product: React.FC<Props> = ({ product }) => {
     console.log(product)
-  return (<div> {product.name}</div>);
+    return (
+        <Card className="my-3 py-3 rounded">
+            <Card.Img variant="top" src={product.image}/>
+            <Card.Body>
+                <Card.Title>{product.name}</Card.Title>
+                <Card.Text>{product.description}</Card.Text>
+            </Card.Body>
+        </Card>
+    );
 };
 
 export default Product;
