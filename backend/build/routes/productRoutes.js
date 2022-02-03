@@ -16,7 +16,14 @@ const express_1 = __importDefault(require("express"));
 const express_async_handler_1 = __importDefault(require("express-async-handler"));
 const products_1 = __importDefault(require("../data/products"));
 const router = express_1.default.Router();
-router.get('/api/products', (0, express_async_handler_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+router.get('/', (0, express_async_handler_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     res.send(products_1.default);
+})));
+router.get('/:id', (0, express_async_handler_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const id = req.params.id;
+    const product = products_1.default.find((product) => {
+        return product._id === id;
+    });
+    res.send(product);
 })));
 exports.default = router;
