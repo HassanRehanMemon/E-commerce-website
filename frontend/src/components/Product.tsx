@@ -23,7 +23,8 @@ const Product: React.FC<Props> = ({ product }) => {
             <Card.Img variant="top" src={product.image}/>
             <Card.Body>
                 <Card.Title>{product.name}</Card.Title>
-                <Card.Text>{product.description}</Card.Text>
+                <Card.Text>{product.rating}</Card.Text>
+                <Card.Text as="h3">${product.price}</Card.Text>
             </Card.Body>
         </Card>
     );
