@@ -4,8 +4,17 @@ import products from '../data/products'
 
 const router = express.Router();
 
-router.get('/api/products', asyncHandler(async (req, res) => {
+router.get('/', asyncHandler(async (req, res) => {
     res.send(products)
+}))
+
+router.get('/:id', asyncHandler(async (req, res)=>{
+    const id = req.params.id
+    const product = products.find((product) => {
+        return product._id === id
+    })
+    res.send(product)
+
 }))
 
 export default router

@@ -7,10 +7,7 @@ app.get('/', (req, res) => {
     res.send('Api is running')
 })
 
-app.use(prodcutRoutes)
-// app.get('/api/products', (req, res) => {
-
-// })
+app.use('/api/products' ,prodcutRoutes)
 
 app.listen(5000, () => {
     console.log('api is running ')
