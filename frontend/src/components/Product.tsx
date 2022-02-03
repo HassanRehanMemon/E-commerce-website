@@ -1,5 +1,6 @@
 import React from 'react';
 import { Card} from 'react-bootstrap'
+import Rating from './Rating';
 
 interface product {
     name: string,
@@ -9,7 +10,7 @@ interface product {
     category: string,
     price: number,
     countInStock: number,
-    rating?: number,
+    rating: number,
     numReviews?: number,
 }
 
@@ -23,7 +24,9 @@ const Product: React.FC<Props> = ({ product }) => {
             <Card.Img variant="top" src={product.image}/>
             <Card.Body>
                 <Card.Title>{product.name}</Card.Title>
-                <Card.Text>{product.rating}</Card.Text>
+                <Card.Text>
+                    <Rating rating={product.rating} text={`${product.numReviews} reviews`}  />
+                </Card.Text>
                 <Card.Text as="h3">${product.price}</Card.Text>
             </Card.Body>
         </Card>
