@@ -3,12 +3,14 @@ import { ProductList } from '../constants';
 
 type ProductListState = {
     products? : any,
-    error? : string
+    error? : string,
+    loading: boolean
 };
 
 const initProductListState: ProductListState = {
-    products : {},
-    error : ""
+    products : [],
+    error : "",
+    loading:true
     
 }
 
@@ -27,7 +29,7 @@ export const productListReducer = (state: ProductListState= initProductListState
             return { ...state, products: action.payload }
 
         case (ProductList.FAIL):
-            return { ...state, error: action.error }
+            return { ...state, payload: action.payload }
 
         default:
             return state
