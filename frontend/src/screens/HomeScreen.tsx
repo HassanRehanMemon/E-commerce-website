@@ -1,9 +1,20 @@
 import React from 'react';
-import products from '../products';
 import { Row, Col, Container } from 'react-bootstrap'
 import Product from '../components/Product';
+import { useEffect, useState } from 'react';
+import axios, {AxiosResponse} from 'axios'
 
 const HomeScreen = () => {
+    
+    const [products, setProduct] = useState<any[]>([]);
+    
+    useEffect(()=>{
+        axios.get('/api/products').then(({data})=>{
+            // console.log(data);
+            setProduct(data)
+        })
+    }, [])
+
     return (
         <Container>
 
@@ -11,8 +22,8 @@ const HomeScreen = () => {
                 {
                     products.map((product) => {
                         return (
-                            <Col sm={12} md={6} lg={4} xl={3}>
-                                <Product key={product._id} product={JSON.parse(JSON.stringify(product))} />
+                            <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
+                                <Product product={JSON.parse(JSON.stringify(product))} />
                             </Col>
                         )
                         // return <Product />
