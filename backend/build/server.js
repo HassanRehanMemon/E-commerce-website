@@ -6,8 +6,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const app = (0, express_1.default)();
 app.get('/', (req, res) => {
-    res.send('Api is runninasdfg');
+    res.send('Api is running');
 });
 app.listen(5000, () => {
-    console.log('api is running asdf...');
+    console.log('api is running ');
 });
