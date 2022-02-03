@@ -4,9 +4,9 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "build": "tsc",
-    "start": "node backend/server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start:ts": "tsc -w",
+    "start:js": "nodemon backend/build/server.js",
+    "start": "concurrently npm:start:*"
   },
   "author": "",
   "license": "ISC",
