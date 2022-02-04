@@ -6,7 +6,6 @@ const errorHandler = (error: any, req: any, res: any, next: any) => {
         message: error.message,
         stack: process.env.NODE_ENV === 'production' ? null : res.stack,
     })
-    console.log('here');
 
 }
 

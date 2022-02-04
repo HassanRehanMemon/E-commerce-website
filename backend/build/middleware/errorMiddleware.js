@@ -8,7 +8,6 @@ const errorHandler = (error, req, res, next) => {
         message: error.message,
         stack: process.env.NODE_ENV === 'production' ? null : res.stack,
     });
-    console.log('here');
 };
 exports.errorHandler = errorHandler;
 const notFound = (req, res, next) => {
