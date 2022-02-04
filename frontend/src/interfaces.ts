@@ -3,11 +3,11 @@ export interface product {
     _id: any
     name: string,
     image: string,
-    description?: string,
+    description: string,
     brand: string,
     category: string,
     price: number,
     countInStock: number,
     rating: number,
-    numReviews?: number,
+    numReviews: number,
 }
