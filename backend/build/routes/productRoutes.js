@@ -14,16 +14,21 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const express_async_handler_1 = __importDefault(require("express-async-handler"));
-const products_1 = __importDefault(require("../data/products"));
+const productModel_1 = __importDefault(require("../models/productModel"));
 const router = express_1.default.Router();
 router.get('/', (0, express_async_handler_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    res.send(products_1.default);
+    res.send(yield productModel_1.default.find());
 })));
 router.get('/:id', (0, express_async_handler_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const id = req.params.id;
-    const product = products_1.default.find((product) => {
-        return product._id === id;
-    });
-    res.send(product);
+    const product = yield productModel_1.default.findById({ _id: id });
+    if (product) {
+        res.send(product);
+    }
+    else {
+        res.status(404).json({
+            message: "Product not found"
+        });
+    }
 })));
 exports.default = router;

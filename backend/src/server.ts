@@ -3,6 +3,7 @@ import prodcutRoutes from './routes/productRoutes'
 import mongoose from 'mongoose'
 import dotenv from "dotenv";
 import connectDB from "./config/db";
+import { errorHandler, notFound } from "./middleware/errorMiddleware";
 
 const app = express();
 dotenv.config()
@@ -13,6 +14,9 @@ app.get('/', (req, res) => {
 })
 
 app.use('/api/products' ,prodcutRoutes)
+
+app.use(notFound)
+app.use(errorHandler)
 
 app.listen(5000, () => {
     console.log('api is running ')
