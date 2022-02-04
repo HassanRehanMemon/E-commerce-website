@@ -29,5 +29,8 @@ const productSchema = new mongoose_1.default.Schema({
     rating: { type: Number, required: true, default: 0.0 },
     numReiviews: { type: Number, required: true, default: 0.0 },
     reviews: [reviewSchema],
+}, {
+    timestamps: true,
 });
 const Product = mongoose_1.default.model('Product', productSchema);
+exports.default = Product;
