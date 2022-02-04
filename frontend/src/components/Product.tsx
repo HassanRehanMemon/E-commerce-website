@@ -2,19 +2,8 @@ import React from 'react';
 import { Card } from 'react-bootstrap'
 import Rating from './Rating';
 import { Link } from 'react-router-dom'
+import { product } from '../interfaces';
 
-interface product {
-    _id: any
-    name: string,
-    image: string,
-    description?: string,
-    brand: string,
-    category: string,
-    price: number,
-    countInStock: number,
-    rating: number,
-    numReviews?: number,
-}
 
 interface Props {
     product: product
