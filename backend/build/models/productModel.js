@@ -4,7 +4,21 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importDefault(require("mongoose"));
+const reviewSchema = new mongoose_1.default.Schema({
+    name: { type: String, required: true },
+    rating: { type: Number, required: true },
+    user: {
+        type: mongoose_1.default.Schema.Types.ObjectId,
+        required: true,
+        ref: 'User'
+    },
+});
 const productSchema = new mongoose_1.default.Schema({
+    user: {
+        type: mongoose_1.default.Schema.Types.ObjectId,
+        required: true,
+        ref: 'User'
+    },
     name: { type: String, required: true },
     image: { type: String, required: true },
     description: { type: String, required: true },
@@ -14,4 +28,6 @@ const productSchema = new mongoose_1.default.Schema({
     countInStock: { type: Number, required: true, default: 0.0 },
     rating: { type: Number, required: true, default: 0.0 },
     numReiviews: { type: Number, required: true, default: 0.0 },
+    reviews: [reviewSchema],
 });
+const Product = mongoose_1.default.model('Product', productSchema);
