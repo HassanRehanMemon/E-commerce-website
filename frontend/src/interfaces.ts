@@ -13,16 +13,29 @@ export interface product {
 }
 
 
-// product reducer
+// product List reducer : to list all reducers
 
-export interface ProductListAction  {
+export interface ProductListAction {
     type: string
     payload?: any
     error?: string
 };
 
-export interface ProductListState  {
-    products? : any,
-    error? : string,
+export interface ProductListState {
+    products?: product[],
+    error?: string,
     loading: boolean
 };
+
+// Product Detail reducer: to list single product
+export interface ProductDetailState {
+    product: product,
+    error?: string,
+    loading: boolean
+}
+
+export interface productDetailAction {
+    type: string
+    payload?: any
+    error?: string
+}

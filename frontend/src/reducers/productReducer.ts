@@ -1,6 +1,6 @@
 import React from 'react';
-import { ProductList } from '../constants';
-import { ProductListAction, ProductListState } from '../interfaces';
+import { ProductDetail, ProductList } from '../constants';
+import { product, productDetailAction, ProductDetailState, ProductListAction, ProductListState } from '../interfaces';
 
 
 
@@ -27,4 +27,27 @@ export const productListReducer = (state: ProductListState= initProductListState
             return state
     }
 };
+
+const initProductDetail: ProductDetailState ={
+    product: <product>{},
+    error : "",
+    loading: true 
+}
+
+export const listProductDetails = (state: ProductDetailState= initProductDetail, action: productDetailAction) => {
+    switch (action.type) {
+        case (ProductDetail.REQUEST):
+            return { ...state, products: [], error: "" }
+
+        case (ProductDetail.SUCCESS):
+            return { ...state, products: action.payload }
+
+        case (ProductDetail.FAIL):
+            return { ...state, error: action.payload }
+
+        default:
+            return state
+    }
+
+}
 
