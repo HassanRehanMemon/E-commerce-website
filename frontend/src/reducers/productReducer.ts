@@ -1,11 +1,8 @@
 import React from 'react';
 import { ProductList } from '../constants';
+import { ProductListAction, ProductListState } from '../interfaces';
 
-type ProductListState = {
-    products? : any,
-    error? : string,
-    loading: boolean
-};
+
 
 const initProductListState: ProductListState = {
     products : [],
@@ -14,11 +11,6 @@ const initProductListState: ProductListState = {
     
 }
 
-type ProductListAction = {
-    type: string
-    payload?: any
-    error?: string
-};
 
 export const productListReducer = (state: ProductListState= initProductListState, action: ProductListAction) => {
     switch (action.type) {
@@ -29,7 +21,7 @@ export const productListReducer = (state: ProductListState= initProductListState
             return { ...state, products: action.payload }
 
         case (ProductList.FAIL):
-            return { ...state, payload: action.payload }
+            return { ...state, error: action.payload }
 
         default:
             return state

@@ -17,6 +17,7 @@ const express_async_handler_1 = __importDefault(require("express-async-handler")
 const productModel_1 = __importDefault(require("../models/productModel"));
 const router = express_1.default.Router();
 router.get('/', (0, express_async_handler_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    // throw new Error('just an error')
     res.send(yield productModel_1.default.find());
 })));
 router.get('/:id', (0, express_async_handler_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {

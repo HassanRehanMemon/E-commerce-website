@@ -1,10 +1,11 @@
 import React from 'react';
-import { Row, Col, Container } from 'react-bootstrap'
+import { Row, Col, Container, Alert } from 'react-bootstrap'
 import Product from '../components/Product';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { State } from '../reducers'
 import { listProducts } from '../actions/productAction';
+import Loader from '../components/Loader';
 
 const HomeScreen = () => {
 
@@ -26,15 +27,19 @@ const HomeScreen = () => {
         <Container>
 
             <Row>
-                {loading &&
-                    products.map((product: { _id: React.Key | null | undefined; }) => {
-                        return (
-                            <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
-                                <Product product={JSON.parse(JSON.stringify(product))} />
-                            </Col>
-                        )
-                        // return <Product />
-                    })
+                {!loading ? <Loader />
+                    : error !== ""
+                        ? 
+                        <Alert variant={'danger'} className={'w-100'}> {error} </Alert>
+                        :
+                        products.map((product: { _id: React.Key | null | undefined; }) => {
+                            return (
+                                <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
+                                    <Product product={JSON.parse(JSON.stringify(product))} />
+                                </Col>
+                            )
+                            // return <Product />
+                        })
                 }
             </Row>
 

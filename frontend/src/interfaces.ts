@@ -11,3 +11,18 @@ export interface product {
     rating: number,
     numReviews: number,
 }
+
+
+// product reducer
+
+export interface ProductListAction  {
+    type: string
+    payload?: any
+    error?: string
+};
+
+export interface ProductListState  {
+    products? : any,
+    error? : string,
+    loading: boolean
+};
