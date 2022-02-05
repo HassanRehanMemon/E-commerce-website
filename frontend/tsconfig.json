@@ -18,7 +18,9 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    
+    "downlevelIteration": true,                       /* Emit more compliant, but verbose and less performant JavaScript for iteration. */
   },
   "include": [
     "src",

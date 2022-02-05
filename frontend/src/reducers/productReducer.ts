@@ -5,45 +5,45 @@ import { product, productDetailAction, ProductDetailState, ProductListAction, Pr
 
 
 const initProductListState: ProductListState = {
-    products : [],
-    error : "",
-    loading:true
-    
+    products: [],
+    error: "",
+    loading: true
+
 }
 
 
-export const productListReducer = (state: ProductListState= initProductListState, action: ProductListAction) => {
+export const productListReducer = (state: ProductListState = initProductListState, action: ProductListAction) => {
     switch (action.type) {
         case (ProductList.REQUEST):
-            return { ...state, products: [], error: "", loading: true}
+            return { ...state, products: [], error: "", loading: true }
 
         case (ProductList.SUCCESS):
-            return { ...state, products: action.payload, loading:false }
+            return { ...state, products: action.payload, loading: false }
 
         case (ProductList.FAIL):
-            return { ...state, error: action.payload, loading:false }
+            return { ...state, error: action.payload, loading: false }
 
         default:
             return state
     }
 };
 
-const initProductDetail: ProductDetailState ={
+const initProductDetail: ProductDetailState = {
     product: <product>{},
-    error : "",
-    loading: true 
+    error: "",
+    loading: true
 }
 
-export const listProductDetails = (state: ProductDetailState= initProductDetail, action: productDetailAction) => {
+export const listProductDetails = (state: ProductDetailState = initProductDetail, action: productDetailAction) => {
     switch (action.type) {
         case (ProductDetail.REQUEST):
-            return { ...state, product: [], error: "" ,loading: true}
+            return { ...state, product: <product>{}, error: "", loading: true }
 
         case (ProductDetail.SUCCESS):
-            return { ...state, product: action.payload, loading:false }
+            return { ...state, product: action.payload, loading: false }
 
         case (ProductDetail.FAIL):
-            return { ...state, error: action.payload, loading:false }
+            return { ...state, error: action.payload, loading: false }
 
         default:
             return state

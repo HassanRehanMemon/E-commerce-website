@@ -18,7 +18,6 @@ export interface product {
 export interface ProductListAction {
     type: string
     payload?: any
-    error?: string
 };
 
 export interface ProductListState {
@@ -37,5 +36,4 @@ export interface ProductDetailState {
 export interface productDetailAction {
     type: string
     payload?: any
-    error?: string
 }
