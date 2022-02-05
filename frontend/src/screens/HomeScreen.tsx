@@ -27,7 +27,7 @@ const HomeScreen = () => {
         <Container>
 
             <Row>
-                {!loading ? <Loader />
+                {loading ? <Loader />
                     : error !== ""
                         ? 
                         <Alert variant={'danger'} className={'w-100'}> {error} </Alert>

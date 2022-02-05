@@ -1,28 +1,35 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Button, Row, Col, Image, ListGroup, Card } from 'react-bootstrap'
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
+import { listDetailProduct } from '../actions/productAction';
 import Loader from '../components/Loader';
 import Rating from '../components/Rating';
 import { product } from '../interfaces';
+import { State } from '../reducers';
 
 const ProductScreen = () => {
     const { id } = useParams();
-    const [product, setProduct] = useState<product>();
+    const dispatch = useDispatch()
+    const {product, error, loading} = useSelector((state: State) => state.productDetail)
+    // const [product, setProduct] = useState<product>();
 
     useEffect(() => {
-        axios.get(`/api/products/${id}`).then(({ data }) => {
-            console.log(data)
-            setProduct(data)
-            // setProduct({...data, 'countInStock':0})
-        })
+        // axios.get(`/api/products/${id}`).then(({ data }) => {
+        //     console.log(data)
+        //     setProduct(data)
+        //     // setProduct({...data, 'countInStock':0})
+        // })
+        dispatch(listDetailProduct(id))
+
 
     }, [])
     return (
         <div>
             <Link to='/' className="btn btn-dark my-3">Go Back</Link>
             {
-                product === undefined
+                loading
                     ? <Loader />
                     :
                     <Row>

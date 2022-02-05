@@ -15,13 +15,13 @@ const initProductListState: ProductListState = {
 export const productListReducer = (state: ProductListState= initProductListState, action: ProductListAction) => {
     switch (action.type) {
         case (ProductList.REQUEST):
-            return { ...state, products: [], error: "" }
+            return { ...state, products: [], error: "", loading: true}
 
         case (ProductList.SUCCESS):
-            return { ...state, products: action.payload }
+            return { ...state, products: action.payload, loading:false }
 
         case (ProductList.FAIL):
-            return { ...state, error: action.payload }
+            return { ...state, error: action.payload, loading:false }
 
         default:
             return state
@@ -37,13 +37,13 @@ const initProductDetail: ProductDetailState ={
 export const listProductDetails = (state: ProductDetailState= initProductDetail, action: productDetailAction) => {
     switch (action.type) {
         case (ProductDetail.REQUEST):
-            return { ...state, products: [], error: "" }
+            return { ...state, product: [], error: "" ,loading: true}
 
         case (ProductDetail.SUCCESS):
-            return { ...state, products: action.payload }
+            return { ...state, product: action.payload, loading:false }
 
         case (ProductDetail.FAIL):
-            return { ...state, error: action.payload }
+            return { ...state, error: action.payload, loading:false }
 
         default:
             return state

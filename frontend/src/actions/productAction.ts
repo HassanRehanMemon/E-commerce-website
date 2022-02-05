@@ -1,5 +1,5 @@
 import { Dispatch } from "redux";
-import { ProductList } from "../constants";
+import { ProductDetail, ProductList } from "../constants";
 import axios from 'axios'
 
 
@@ -8,7 +8,6 @@ export const listProducts = () => async (dispatch: Dispatch) => {
     try {
         dispatch({ type: ProductList.REQUEST })
         const data = await axios.get('/api/products')
-        console.log(data.data)
         dispatch({ type: ProductList.SUCCESS, payload: data.data })
 
 
@@ -16,5 +15,16 @@ export const listProducts = () => async (dispatch: Dispatch) => {
         dispatch({ type: ProductList.FAIL, payload: error.message })
 
 
+    }
+}
+
+export const listDetailProduct = (id: any) => async (dispatch: Dispatch) =>{
+    try {
+        dispatch({type: ProductDetail.REQUEST})
+        const product = await axios.get(`/api/products/${id}`)
+        dispatch({type: ProductDetail.SUCCESS, payload: product.data})
+    } catch (error: any) {
+        dispatch({type: ProductDetail.SUCCESS, payload: error.message})
+        
     }
 }
