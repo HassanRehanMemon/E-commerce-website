@@ -14,6 +14,7 @@ router.get('/:id', asyncHandler(async (req, res) => {
     const id = req.params.id
     const product = await Product.findById({ _id: id })
     if (product) {
+        // throw new Error('just an error')
         res.send(product)
 
     } else {

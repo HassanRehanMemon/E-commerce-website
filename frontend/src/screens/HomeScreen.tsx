@@ -26,22 +26,25 @@ const HomeScreen = () => {
     return (
         <Container>
 
-            <Row>
-                {loading ? <Loader />
-                    : error !== ""
-                        ? 
-                        <Alert variant={'danger'} className={'w-100'}> {error} </Alert>
-                        :
-                        products.map((product: { _id: React.Key | null | undefined; }) => {
-                            return (
-                                <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
-                                    <Product product={JSON.parse(JSON.stringify(product))} />
-                                </Col>
-                            )
-                            // return <Product />
-                        })
-                }
-            </Row>
+            {loading ? <Loader />
+                : error !== ""
+                    ?
+                    <Alert variant={'danger'} > {error} </Alert>
+                    :
+                    <Row>
+                        {
+
+                            products.map((product: { _id: React.Key | null | undefined; }) => {
+                                return (
+                                    <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
+                                        <Product product={JSON.parse(JSON.stringify(product))} />
+                                    </Col>
+                                )
+                                // return <Product />
+                            })
+                        }
+                    </Row>
+            }
 
 
         </Container>

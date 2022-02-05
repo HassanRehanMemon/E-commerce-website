@@ -24,7 +24,7 @@ export const listDetailProduct = (id: any) => async (dispatch: Dispatch) =>{
         const product = await axios.get(`/api/products/${id}`)
         dispatch({type: ProductDetail.SUCCESS, payload: product.data})
     } catch (error: any) {
-        dispatch({type: ProductDetail.SUCCESS, payload: error.message})
+        dispatch({type: ProductDetail.FAIL, payload: error.message})
         
     }
 }

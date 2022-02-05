@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { Button, Row, Col, Image, ListGroup, Card } from 'react-bootstrap'
+import { Button, Row, Col, Image, ListGroup, Card, Alert } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import { listDetailProduct } from '../actions/productAction';
@@ -31,6 +31,9 @@ const ProductScreen = () => {
             {
                 loading
                     ? <Loader />
+                    : error !== "" 
+                    ? 
+                    <Alert variant='danger'>{error}</Alert>
                     :
                     <Row>
                         <Col md={6}>

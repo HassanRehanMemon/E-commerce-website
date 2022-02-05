@@ -24,6 +24,7 @@ router.get('/:id', (0, express_async_handler_1.default)((req, res) => __awaiter(
     const id = req.params.id;
     const product = yield productModel_1.default.findById({ _id: id });
     if (product) {
+        // throw new Error('just an error')
         res.send(product);
     }
     else {
