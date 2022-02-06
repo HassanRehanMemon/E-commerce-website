@@ -2,6 +2,7 @@ import expressAsyncHandler from "express-async-handler";
 import { Response, Request, NextFunction } from "express";
 import User from "../models/userModel";
 import bcrypt from 'bcrypt'
+import { generateToken } from "../utils/generateToken";
 
 
 export const authUser = expressAsyncHandler(async (req: Request, res: Response) => {
@@ -16,13 +17,14 @@ export const authUser = expressAsyncHandler(async (req: Request, res: Response) 
             name: user.name,
             email: user.email,
             isAdmin: user.isAdmin,
-            token: null
+            token: generateToken(user._id)
         })
 
     }
 
+    res.status(401)
+    throw new Error('User not found')
 
-    res.send(`Succss ${email}, ${password}`)
 
 })
 
