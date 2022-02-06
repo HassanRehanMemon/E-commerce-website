@@ -37,3 +37,27 @@ export interface productDetailAction {
     type: string
     payload?: any
 }
+
+
+
+// ---------------- Cart ---------------
+//// Add to cart reducer
+export interface AddToCartState {
+    cartItems: addToCartPayload[]
+    shippingAddress : {}
+
+}
+
+interface addToCartPayload  {
+    name : string
+    product_id : any
+    image : string
+    price : number
+    countInStock : number
+        
+}
+export interface AddToCartAction {
+    type: string,
+    payload: addToCartPayload
+    
+}
