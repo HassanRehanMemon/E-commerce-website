@@ -6,7 +6,7 @@ import { product } from './interfaces';
 
 console.log(localStorage.getItem('cartItems') ?? "nothing in cart");
 const cartItemFromStorage = localStorage.getItem('cartItems') ?
-    JSON.parse(localStorage.getItem('cartItems') ?? "") : ['hellow ji']
+    JSON.parse(localStorage.getItem('cartItems') ?? "") : []
 
 const initState = {
     productList: {

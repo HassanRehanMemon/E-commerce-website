@@ -5,7 +5,9 @@ import { product } from "../interfaces";
 import { State } from "../reducers";
 
 export const cartAddItemAction = (id: any, qty: number) => async (dispatch: Dispatch, getState: () => State) => {
-    const product = await axios.get(`/api/products/${id}`) as product
+    const res = await axios.get(`/api/products/${id}`)
+    const product = res.data as product
+    console.log(product);
 
     dispatch({
         type: AddToCart.ADD,
@@ -20,5 +22,6 @@ export const cartAddItemAction = (id: any, qty: number) => async (dispatch: Disp
     })
 
     localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems))
+    // localStorage.setItem('cartItems', "")
 
 }

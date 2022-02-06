@@ -54,6 +54,7 @@ interface addToCartPayload  {
     image : string
     price : number
     countInStock : number
+    qty: number
         
 }
 export interface AddToCartAction {
