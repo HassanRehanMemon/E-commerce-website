@@ -24,16 +24,18 @@ export const userSignInAction = (email: string, password: string) => async (disp
         })
 
         localStorage.setItem('UserInfo', JSON.stringify(data))
-    } catch (e: any) {
+    } catch (error: any) {
         dispatch({
             type: UserSingIn.FAIL,
-            payload: e.message
+            payload: error.response && error.response.data.message
+                ? error.response.data.message
+                : error.message,
         })
     }
 };
 
 
-export const userSignUpAction = (name:string, email: string, password: string) => async (dispatch: Dispatch) => {
+export const userSignUpAction = (name: string, email: string, password: string) => async (dispatch: Dispatch) => {
     try {
         dispatch({ type: UserSingUp.REQUEST })
         const config = {
@@ -58,16 +60,18 @@ export const userSignUpAction = (name:string, email: string, password: string) =
         })
 
         localStorage.setItem('UserInfo', JSON.stringify(data))
-    } catch (e: any) {
+    } catch (error: any) {
         dispatch({
             type: UserSingUp.FAIL,
-            payload: e.message
+            payload: error.response && error.response.data.message
+                ? error.response.data.message
+                : error.message,
         })
     }
 };
 
 
-export const signOutAction = () => (dispatch: Dispatch) =>{
+export const signOutAction = () => (dispatch: Dispatch) => {
     localStorage.removeItem('UserInfo')
     dispatch({
         type: UserSingIn.LOGOUT
