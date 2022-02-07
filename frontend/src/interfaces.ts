@@ -1,6 +1,6 @@
 
 export interface product {
-    _id: any
+    _id: string
     name: string,
     image: string,
     description: string,
@@ -10,6 +10,15 @@ export interface product {
     countInStock: number,
     rating: number,
     numReviews: number,
+}
+
+export interface user {
+    _id: string
+    name: string,
+    email: string,
+    isAdmin: string,
+    token: string,
+    
 }
 
 
@@ -61,4 +70,19 @@ export interface AddToCartAction {
     type: string,
     payload: addToCartPayload
     
+}
+
+
+//----------User----------  
+//user login
+
+export interface userSignInState {
+    user: user,
+    error?: string,
+    loading: boolean
+}
+
+export interface userSignInAction {
+    type: string
+    payload?: any
 }

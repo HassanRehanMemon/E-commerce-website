@@ -26,6 +26,11 @@ const initState = {
         cartItems: cartItemFromStorage,
         shippingAddress: {}
     },
+    userSignIn : {
+        user: {},
+        error: "",
+        loading: true
+    }
 }
 const middleware = [thunk]
 

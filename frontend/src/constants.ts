@@ -14,3 +14,11 @@ export enum ProductDetail  {
 export enum AddToCart {
     ADD = "ADD_TO_CART"
 }
+
+
+
+export enum UserSingIn  {
+    REQUEST =  "USER_DETAIL_REQUEST",
+    SUCCESS =  "USER_DETAIL_SUCCESS",
+    FAIL =  "USER_DETAIL_FAIL",
+}
