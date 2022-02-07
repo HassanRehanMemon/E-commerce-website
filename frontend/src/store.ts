@@ -31,7 +31,12 @@ const initState = {
         user: userFromStorage,
         error: "",
         loading: false
-    }
+    },
+    userSignUp: {
+        user: userFromStorage,
+        error: "",
+        loading: false
+    },
 }
 const middleware = [thunk]
 

@@ -37,7 +37,9 @@ const Header = () => {
                                     <NavDropdown.Item onClick={ signOutHandler}>Sign out</NavDropdown.Item>
                                 </NavDropdown>
                                 :
-                                <Nav.Link href="/signIn"><i className="fas fa-user"></i> Sign In</Nav.Link>
+                            <LinkContainer to="/signIn">
+                                <Nav.Link ><i className="fas fa-user"></i> Sign In</Nav.Link>
+                            </LinkContainer>
                             }
                         </Nav>
                     </Navbar.Collapse>

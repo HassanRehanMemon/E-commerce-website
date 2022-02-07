@@ -86,3 +86,15 @@ export interface userSignInAction {
     type: string
     payload?: any
 }
+
+//User Sign UP
+export interface userSignUpState {
+    user: user,
+    error?: string,
+    loading: boolean
+}
+
+export interface userSignUpAction {
+    type: string
+    payload?: any
+}

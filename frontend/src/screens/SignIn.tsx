@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Container, Row, Col, Form, Button, Alert } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router';
+import { Link } from 'react-router-dom';
 import { userSignInAction } from '../actions/userAction';
 import Loader from '../components/Loader';
 import { State } from '../reducers';
@@ -25,7 +26,7 @@ const SignIn = (props: Props) => {
       navigate(redirect ?? '/')
 
     }
-  },[user, redirect, navigate])
+  }, [user, redirect, navigate])
 
 
   console.log('is there any problem');
@@ -58,6 +59,14 @@ const SignIn = (props: Props) => {
               Submit
             </Button>
           </Form>
+          <Row className='py-3'>
+            <Col>
+              Don't have Account?{' '}
+              <Link to={redirect ? `/signUp?redirect=${redirect}` : '/signUp'}>
+                Sign Up
+              </Link>
+            </Col>
+          </Row>
         </Col>
       </Row>
     </Container>

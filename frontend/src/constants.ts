@@ -25,3 +25,11 @@ export enum UserSingIn  {
     SUCCESS =  "USER_DETAIL_SUCCESS",
     FAIL =  "USER_DETAIL_FAIL",
 }
+
+
+export enum UserSingUp  {
+
+    REQUEST =  "USER_SIGN_UP_REQUEST",
+    SUCCESS =  "USER_SIGN_UP_SUCCESS",
+    FAIL =  "USER_SIGN_UP_FAIL",
+}
