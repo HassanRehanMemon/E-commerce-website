@@ -5,13 +5,13 @@ import { userSignInAction, userSignInState, user } from "../interfaces";
 const initUserSignInState: userSignInState = {
     user: {} as user,
     error: "",
-    loading: true
+    loading: false
 
 }
 export const userSignInReducer = (state: userSignInState = initUserSignInState, action: userSignInAction) => {
     switch (action.type) {
         case (UserSingIn.REQUEST):
-            return { ...state, user: {}, error: "", loading: true }
+            return { ...state, loading: true }
 
         case (UserSingIn.SUCCESS):
             return { ...state, user: action.payload, loading: false }

@@ -2,7 +2,7 @@ import { createStore,  applyMiddleware } from 'redux'
 import reducers from './reducers'
 import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
-import { product } from './interfaces';
+import { product, user } from './interfaces';
 
 console.log(localStorage.getItem('cartItems') ?? "nothing in cart");
 const cartItemFromStorage = localStorage.getItem('cartItems') ?
@@ -27,9 +27,9 @@ const initState = {
         shippingAddress: {}
     },
     userSignIn : {
-        user: {},
+        user: null,
         error: "",
-        loading: true
+        loading: false
     }
 }
 const middleware = [thunk]
