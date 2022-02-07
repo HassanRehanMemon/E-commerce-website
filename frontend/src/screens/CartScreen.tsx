@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Row, Col, ListGroup, Image, Form, Button, Card, Alert } from 'react-bootstrap'
+import { Row, Col, ListGroup, Image, Form, Button, Alert } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useParams } from 'react-router';
 import { Link } from 'react-router-dom';
@@ -13,7 +13,7 @@ const CartScreen = (props: Props) => {
   const { search } = useLocation()
   const qty = search.split('=')[1]
   const dispatch = useDispatch();
-  const { cartItems, shippingAddress } = useSelector((state: State) => state.cart)
+  const { cartItems } = useSelector((state: State) => state.cart)
   console.log(cartItems, id, qty);
 
   useEffect(() => {
@@ -21,9 +21,9 @@ const CartScreen = (props: Props) => {
       dispatch(cartAddItemAction(id, Number(qty)))
     }
 
-  }, [dispatch])
+  }, [dispatch, id, qty])
 
-  const removeFromCartHandler = (product: string) =>{
+  const removeFromCartHandler = (product: string) => {
 
   }
 

@@ -19,6 +19,8 @@ export enum AddToCart {
 
 
 export enum UserSingIn  {
+    LOGOUT = 'USER_LOGOUT',
+
     REQUEST =  "USER_DETAIL_REQUEST",
     SUCCESS =  "USER_DETAIL_SUCCESS",
     FAIL =  "USER_DETAIL_FAIL",

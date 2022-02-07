@@ -1,5 +1,6 @@
 import { UserSingIn } from "../constants";
 import { userSignInAction, userSignInState, user } from "../interfaces";
+// import reducers from './index'
 
 
 const initUserSignInState: userSignInState = {
@@ -18,6 +19,11 @@ export const userSignInReducer = (state: userSignInState = initUserSignInState, 
 
         case (UserSingIn.FAIL):
             return { ...state, error: action.payload, loading: false }
+
+        case (UserSingIn.LOGOUT):
+            // return reducers(undefined, action)
+            return { ...state, user: null, error: "", loading: false }
+
 
         default:
             return state

@@ -12,26 +12,24 @@ import SignUp from './screens/SignUp';
 function App() {
   // const logo = require('./logo.svg') as string;
   return (
-    <div className="App">
+    <Router>
       <Header />
       <main className="py-3">
-        <Router>
-          <Container>
-            <Routes>
+        <Container>
+          <Routes>
 
-              <Route path='/' element={<HomeScreen />} />
-              <Route path='/product/:id' element={<ProductScreen />} />
-              <Route path='/cart/' element={<CartScreen />} />
-              <Route path='/cart/:id' element={<CartScreen />} />
-              <Route path='/signIn' element={<SignIn />} />
-              <Route path='/signUp' element={<SignUp />} />
+            <Route path='/' element={<HomeScreen />} />
+            <Route path='/product/:id' element={<ProductScreen />} />
+            <Route path='/cart/' element={<CartScreen />} />
+            <Route path='/cart/:id' element={<CartScreen />} />
+            <Route path='/signIn' element={<SignIn />} />
+            <Route path='/signUp' element={<SignUp />} />
 
-            </Routes>
-          </Container>
-        </Router>
+          </Routes>
+        </Container>
       </main>
       <Footer />
-    </div>
+    </Router>
   );
 }
 

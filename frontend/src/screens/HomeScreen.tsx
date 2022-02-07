@@ -16,12 +16,8 @@ const HomeScreen = () => {
 
     useEffect(() => {
         dispatch(listProducts())
-        // axios.get('/api/products').then(({data})=>{ console.log(data);
-        //     // setProduct(data)
-        // })
 
     }, [dispatch])
-    console.log(products);
 
     return (
         <Container>
