@@ -1,11 +1,10 @@
-import React from 'react';
 import { ProductDetail, ProductList } from '../constants';
 import { product, productDetailAction, ProductDetailState, ProductListAction, ProductListState } from '../interfaces';
 
 
 
 const initProductListState: ProductListState = {
-    products: [],
+    products: [] as product[],
     error: "",
     loading: true
 
@@ -15,7 +14,7 @@ const initProductListState: ProductListState = {
 export const productListReducer = (state: ProductListState = initProductListState, action: ProductListAction) => {
     switch (action.type) {
         case (ProductList.REQUEST):
-            return { ...state, products: [], error: "", loading: true }
+            return { ...state, loading: true }
 
         case (ProductList.SUCCESS):
             return { ...state, products: action.payload, loading: false }
@@ -29,7 +28,7 @@ export const productListReducer = (state: ProductListState = initProductListStat
 };
 
 const initProductDetail: ProductDetailState = {
-    product: <product>{},
+    product: {} as product,
     error: "",
     loading: true
 }
@@ -37,7 +36,7 @@ const initProductDetail: ProductDetailState = {
 export const listProductDetails = (state: ProductDetailState = initProductDetail, action: productDetailAction) => {
     switch (action.type) {
         case (ProductDetail.REQUEST):
-            return { ...state, product: <product>{}, error: "", loading: true }
+            return { ...state, loading: true }
 
         case (ProductDetail.SUCCESS):
             return { ...state, product: action.payload, loading: false }

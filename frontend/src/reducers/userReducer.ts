@@ -3,7 +3,7 @@ import { userSignInAction, userSignInState, user } from "../interfaces";
 
 
 const initUserSignInState: userSignInState = {
-    user: <user>{},
+    user: {} as user,
     error: "",
     loading: true
 

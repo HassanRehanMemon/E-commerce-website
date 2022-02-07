@@ -1,4 +1,3 @@
-import React from 'react';
 import { AddToCart } from '../constants';
 import { AddToCartAction, AddToCartState } from '../interfaces';
 

@@ -1,4 +1,4 @@
-import { createStore, combineReducers, applyMiddleware } from 'redux'
+import { createStore,  applyMiddleware } from 'redux'
 import reducers from './reducers'
 import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
@@ -17,7 +17,7 @@ const initState = {
     },
     productDetail: {
 
-        product: <product>{},
+        product: {} as product,
         error: "",
         loading: true
     },
