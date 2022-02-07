@@ -59,7 +59,7 @@ export interface AddToCartState {
 
 interface addToCartPayload  {
     name : string
-    product_id : any
+    product_id : string
     image : string
     price : number
     countInStock : number

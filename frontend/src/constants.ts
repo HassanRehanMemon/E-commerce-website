@@ -12,7 +12,8 @@ export enum ProductDetail  {
 }
     
 export enum AddToCart {
-    ADD = "ADD_TO_CART"
+    ADD = "ADD_TO_CART",
+    REMOVE = "REMOVE_TO_CART",
 }
 
 

@@ -8,6 +8,8 @@ console.log(localStorage.getItem('cartItems') ?? "nothing in cart");
 const cartItemFromStorage = localStorage.getItem('cartItems') ?
     JSON.parse(localStorage.getItem('cartItems') ?? "") : []
 
+const userFromStorage = localStorage.getItem('UserInfo') ?
+    JSON.parse(localStorage.getItem('UserInfo') ?? "") : null
 const initState = {
     productList: {
 
@@ -27,7 +29,7 @@ const initState = {
         shippingAddress: {}
     },
     userSignIn : {
-        user: null,
+        user: userFromStorage,
         error: "",
         loading: false
     }

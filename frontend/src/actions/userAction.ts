@@ -25,6 +25,8 @@ export const userSignInAction = (email: string, password: string) => async (disp
             type: UserSingIn.SUCCESS,
             payload: data
         })
+        
+        localStorage.setItem('UserInfo', JSON.stringify(data))
 
 
     } catch (e: any) {

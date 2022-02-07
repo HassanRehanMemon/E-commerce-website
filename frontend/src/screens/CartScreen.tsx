@@ -23,6 +23,9 @@ const CartScreen = (props: Props) => {
 
   }, [dispatch])
 
+  const removeFromCartHandler = (product: string) =>{
+
+  }
 
   return (
     <Row>
@@ -65,7 +68,7 @@ const CartScreen = (props: Props) => {
                     <Button
                       type='button'
                       variant='light'
-                      // onClick={() => removeFromCartHandler(item.product)}
+                      onClick={() => removeFromCartHandler(item.product_id)}
                     >
                       <i className='fas fa-trash'></i>
                     </Button>
