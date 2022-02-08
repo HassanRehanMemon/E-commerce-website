@@ -3,26 +3,28 @@ import { Row, Col, ListGroup, Image, Form, Button, Alert, Card, Container } from
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate, useParams } from 'react-router';
 import { Link } from 'react-router-dom';
-import { cartAddItemAction, cartRemoveItemAction } from '../actions/cartAction';
+import { calculatePriceAction, cartAddItemAction, cartRemoveItemAction } from '../actions/cartAction';
 import CheckoutSteps from '../components/CheckoutSteps';
 import { State } from '../reducers';
 
 type Props = {};
 
 const PlaceOrderScreen = (props: Props) => {
-    
-    useEffect(() => {
-        if (!shippingAddress.address) {
-            navigate('/shipping')
-        } else {
-            navigate('/payment')
-        }
-
-    }, [])
 
     const navigate = useNavigate()
     const dispatch = useDispatch();
-    const { cartItems, shippingAddress, paymentMethod } = useSelector((state: State) => state.cart)
+    const { cartItems, shippingAddress, paymentMethod, totalPrice, tax, shippingFee } = useSelector((state: State) => state.cart)
+
+    useEffect(() => {
+        if (!shippingAddress.address) {
+            navigate('/shipping')
+        } else if (paymentMethod == "") {
+            navigate('/payment')
+        }
+        
+        dispatch(calculatePriceAction())
+    }, [])
+
 
 
 
@@ -34,13 +36,23 @@ const PlaceOrderScreen = (props: Props) => {
             <Row className={'justify-content-md-center'}>
                 <CheckoutSteps signIn shipping payment order />
                 <Col xs={12} md={8}>
-                    <h1>Summary</h1>
                     {cartItems.length === 0 ? (
                         <Alert>
                             Your cart is empty <Link to='/'>Go Back</Link>
                         </ Alert>
                     ) : (
                         <ListGroup variant='flush'>
+                            <ListGroup.Item>
+                                <h4>Shipping Address</h4>
+                                {shippingAddress.address}, {shippingAddress.city}, {shippingAddress.country}, {shippingAddress.postalCode}
+
+                            </ListGroup.Item>
+
+                            <ListGroup.Item>
+                                <h4>Payment Method</h4>
+                                Method: {paymentMethod}
+
+                            </ListGroup.Item>
                             {cartItems.map((item) => (
                                 <ListGroup.Item key={item.product_id}>
                                     <Row>
@@ -51,7 +63,7 @@ const PlaceOrderScreen = (props: Props) => {
                                             <Link to={`/product/${item.product_id}`}>{item.name}</Link>
                                         </Col>
                                         <Col md={2}>${item.price}</Col>
-                                    <Col md={2}>
+                                        <Col md={3}>
                                             <Form.Control
                                                 as='select'
                                                 value={item.qty}
@@ -67,15 +79,6 @@ const PlaceOrderScreen = (props: Props) => {
                                                     </option>
                                                 ))}
                                             </Form.Control>
-                                        </Col>
-                                        <Col md={2}>
-                                            <Button
-                                                type='button'
-                                                variant='light'
-                                            // onClick={() => removeFromCartHandler(item.product_id)}
-                                            >
-                                                <i className='fas fa-trash'></i>
-                                            </Button>
                                         </Col>
                                     </Row>
                                 </ListGroup.Item>
@@ -93,17 +96,29 @@ const PlaceOrderScreen = (props: Props) => {
                             </ListGroup.Item>
                             <ListGroup.Item>
                                 <Row>
-                                    <Col>Items: </Col>
-                                    <Col>{cartItems.reduce((acc, item) => acc + item.qty, 0)}</Col>
-                                </Row>
-                            </ListGroup.Item>
-                            <ListGroup.Item>
-                                <Row>
-                                    <Col>Price: </Col>
+                                    <Col>Item Price: </Col>
                                     <Col>${cartItems.reduce((acc, item) => acc + item.qty * item.price, 0).toFixed(2)}</Col>
                                 </Row>
                             </ListGroup.Item>
 
+                            <ListGroup.Item>
+                                <Row>
+                                    <Col>Tax:</Col>
+                                    <Col>${tax}</Col>
+                                </Row>
+                            </ListGroup.Item>
+                            <ListGroup.Item>
+                                <Row>
+                                    <Col>Shipping Fee</Col>
+                                    <Col>${shippingFee}</Col>
+                                </Row>
+                            </ListGroup.Item>
+                            <ListGroup.Item>
+                                <Row>
+                                    <Col>Total</Col>
+                                    <Col>${totalPrice}</Col>
+                                </Row>
+                            </ListGroup.Item>
                             <Button
                                 type={'button'}
                                 className={'btn btn-block'}

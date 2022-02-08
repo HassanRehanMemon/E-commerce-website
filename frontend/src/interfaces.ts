@@ -61,6 +61,9 @@ export interface AddToCartState {
     cartItems: addToCartProduct[]
     shippingAddress : shippingAddressType
     paymentMethod : string
+    shippingFee : number
+    tax : number
+    totalPrice : number
 
 }
 

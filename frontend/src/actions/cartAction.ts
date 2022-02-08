@@ -49,3 +49,16 @@ export const savePaymentAction = (data: string) => (dispatch: Dispatch, getState
     
     
 }
+
+
+export const calculatePriceAction = () => (dispatch: Dispatch, getState: ()=> State) =>{
+    const data = Number(getState().cart.cartItems.reduce((acc, item) => acc + item.price * item.qty, 0).toFixed(2))
+    let arr: number[] = []
+    arr[0] = data > 100 ? 10 : 100  // 0: shipping Fee
+    arr[1] = parseFloat((data * 0.15).toFixed(2)) // tax
+    arr[2] = data + arr[1] + arr[0] //Total
+    console.log(arr);
+    dispatch({type: AddToCart.CALCULATE_PRICE, payload: arr})
+    
+    
+}

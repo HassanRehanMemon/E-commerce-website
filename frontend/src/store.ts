@@ -30,7 +30,10 @@ const initState = {
     cart: {
         cartItems: cartItemFromStorage,
         shippingAddress: shippingAddressStorage,
-        paymentMethod: ""
+        paymentMethod: "",
+        shippingFee: 0,
+        tax: 0,
+        totalPrice: 0,
     },
     userSignIn: {
         user: userFromStorage,
