@@ -3,8 +3,8 @@ import { AddToCartAction, addToCartProduct, AddToCartState, shippingAddressType 
 
 const initState: AddToCartState = {
     cartItems: [],
-    shippingAddress: {} as shippingAddressType
-
+    shippingAddress: {} as shippingAddressType,
+    paymentMethod: ""
 }
 
 const cartReducer = (state: AddToCartState = initState, action: AddToCartAction) => {
@@ -43,10 +43,16 @@ const cartReducer = (state: AddToCartState = initState, action: AddToCartAction)
             }
 
         case AddToCart.SAVE_SHIPPING:
-            console.log(action.payload );
+            console.log(action.payload);
             return {
                 ...state,
                 shippingAddress: action.payload as shippingAddressType
+            }
+
+        case AddToCart.SAVE_PAYMENT:
+            return {
+                ...state,
+                pyamentMethod: action.payload
             }
 
         default:

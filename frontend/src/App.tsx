@@ -10,6 +10,7 @@ import SignIn from './screens/SignIn';
 import SignUp from './screens/SignUp';
 import ShippingScreen from './screens/ShippingScreen';
 import PaymentScreen from './screens/PaymentScreen';
+import PlaceOrderScreen from './screens/PlaceOrderScreen';
 
 function App() {
   // const logo = require('./logo.svg') as string;
@@ -28,6 +29,7 @@ function App() {
             <Route path='/signUp' element={<SignUp />} />
             <Route path='/shipping' element={<ShippingScreen />} />
             <Route path='/payment' element={<PaymentScreen />} />
+            <Route path='/placeOrder' element={<PlaceOrderScreen />} />
 
           </Routes>
         </Container>

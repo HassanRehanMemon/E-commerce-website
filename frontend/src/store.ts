@@ -28,9 +28,9 @@ const initState = {
         loading: true
     },
     cart: {
-
         cartItems: cartItemFromStorage,
-        shippingAddress: shippingAddressStorage
+        shippingAddress: shippingAddressStorage,
+        paymentMethod: ""
     },
     userSignIn: {
         user: userFromStorage,

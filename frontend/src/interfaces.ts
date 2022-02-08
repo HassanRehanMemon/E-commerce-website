@@ -60,6 +60,7 @@ export interface shippingAddressType{
 export interface AddToCartState {
     cartItems: addToCartProduct[]
     shippingAddress : shippingAddressType
+    paymentMethod : string
 
 }
 
