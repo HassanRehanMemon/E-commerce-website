@@ -14,7 +14,7 @@ const CartScreen = (props: Props) => {
   const { search } = useLocation()
   const qty = search.split('=')[1]
   const dispatch = useDispatch();
-  const { cartItems } = useSelector((state: State) => state.cart)
+  const { cartItems  } = useSelector((state: State) => state.cart)
   console.log(cartItems, id, qty);
 
   useEffect(() => {
@@ -34,7 +34,7 @@ const CartScreen = (props: Props) => {
   }
 
   return (
-    <Row>
+      <Row>
       <Col md={8}>
         <h1>Shopping Cart</h1>
         {cartItems.length === 0 ? (

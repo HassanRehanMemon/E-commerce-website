@@ -51,13 +51,19 @@ export interface productDetailAction {
 
 // ---------------- Cart ---------------
 //// Add to cart reducer
+export interface shippingAddressType{
+    address : string,
+    city : string,
+    country : string,
+    postalCode : string,
+}
 export interface AddToCartState {
-    cartItems: addToCartPayload[]
-    shippingAddress : {}
+    cartItems: addToCartProduct[]
+    shippingAddress : shippingAddressType
 
 }
 
-interface addToCartPayload  {
+export interface addToCartProduct  {
     name : string
     product_id : string
     image : string
@@ -68,8 +74,7 @@ interface addToCartPayload  {
 }
 export interface AddToCartAction {
     type: string,
-    payload: addToCartPayload
-    id_toBeRemoved: string
+    payload: any
     
 }
 

@@ -2,13 +2,18 @@ import { createStore, applyMiddleware } from 'redux'
 import reducers from './reducers'
 import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
-import { product } from './interfaces';
+import { product, shippingAddressType } from './interfaces';
 
 const cartItemFromStorage = localStorage.getItem('cartItems') ?
     JSON.parse(localStorage.getItem('cartItems') ?? "") : []
 
 const userFromStorage = localStorage.getItem('UserInfo') ?
     JSON.parse(localStorage.getItem('UserInfo') ?? "") : null
+
+const shippingAddressStorage = localStorage.getItem('shippingAddress') ?
+    JSON.parse(localStorage.getItem('shippingAddress') ?? "") : {} as shippingAddressType
+
+
 const initState = {
     productList: {
 
@@ -25,7 +30,7 @@ const initState = {
     cart: {
 
         cartItems: cartItemFromStorage,
-        shippingAddress: {}
+        shippingAddress: shippingAddressStorage
     },
     userSignIn: {
         user: userFromStorage,

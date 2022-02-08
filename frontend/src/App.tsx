@@ -9,6 +9,7 @@ import CartScreen from './screens/CartScreen';
 import SignIn from './screens/SignIn';
 import SignUp from './screens/SignUp';
 import ShippingScreen from './screens/ShippingScreen';
+import PaymentScreen from './screens/PaymentScreen';
 
 function App() {
   // const logo = require('./logo.svg') as string;
@@ -26,6 +27,7 @@ function App() {
             <Route path='/signIn' element={<SignIn />} />
             <Route path='/signUp' element={<SignUp />} />
             <Route path='/shipping' element={<ShippingScreen />} />
+            <Route path='/payment' element={<PaymentScreen />} />
 
           </Routes>
         </Container>

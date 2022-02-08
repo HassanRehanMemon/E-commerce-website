@@ -1,16 +1,16 @@
 import { AddToCart } from '../constants';
-import { AddToCartAction, AddToCartState } from '../interfaces';
+import { AddToCartAction, addToCartProduct, AddToCartState, shippingAddressType } from '../interfaces';
 
 const initState: AddToCartState = {
     cartItems: [],
-    shippingAddress: {}
+    shippingAddress: {} as shippingAddressType
 
 }
 
 const cartReducer = (state: AddToCartState = initState, action: AddToCartAction) => {
     switch (action.type) {
         case AddToCart.ADD:
-            const item = action.payload
+            const item = action.payload as addToCartProduct
             const existItem = state.cartItems.find((cartItem) =>
                 cartItem.product_id === item.product_id
             )
@@ -34,12 +34,19 @@ const cartReducer = (state: AddToCartState = initState, action: AddToCartAction)
             }
 
         case AddToCart.REMOVE:
-            const id = action.id_toBeRemoved
+            const id = action.payload as string
             return {
                 ...state,
                 cartItems: state.cartItems.filter((item) => {
                     return item.product_id !== id
                 })
+            }
+
+        case AddToCart.SAVE_SHIPPING:
+            console.log(action.payload );
+            return {
+                ...state,
+                shippingAddress: action.payload as shippingAddressType
             }
 
         default:
