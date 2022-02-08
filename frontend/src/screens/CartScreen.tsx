@@ -3,7 +3,7 @@ import { Row, Col, ListGroup, Image, Form, Button, Alert, Card } from 'react-boo
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate, useParams } from 'react-router';
 import { Link } from 'react-router-dom';
-import { cartAddItemAction } from '../actions/cartAction';
+import { cartAddItemAction, cartRemoveItemAction } from '../actions/cartAction';
 import { State } from '../reducers';
 
 type Props = {};
@@ -25,6 +25,7 @@ const CartScreen = (props: Props) => {
   }, [dispatch, id, qty])
 
   const removeFromCartHandler = (product: string) => {
+    dispatch(cartRemoveItemAction(product))
 
   }
   
@@ -101,7 +102,7 @@ const CartScreen = (props: Props) => {
             <ListGroup.Item>
               <Row>
                 <Col>Price: </Col>
-                <Col>{cartItems.reduce((acc, item) => acc + item.qty * item.price, 0).toFixed(2)}</Col>
+                <Col>${cartItems.reduce((acc, item) => acc + item.qty * item.price, 0).toFixed(2)}</Col>
               </Row>
             </ListGroup.Item>
             

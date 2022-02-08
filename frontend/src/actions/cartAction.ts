@@ -25,3 +25,10 @@ export const cartAddItemAction = (id: any, qty: number) => async (dispatch: Disp
     // localStorage.setItem('cartItems', "")
 
 }
+
+export const cartRemoveItemAction = (product_id: string) => (dispatch: Dispatch, getState: ()=> State) =>{
+    dispatch({type: AddToCart.REMOVE, id_toBeRemoved: product_id})
+    
+    localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems))
+    
+}

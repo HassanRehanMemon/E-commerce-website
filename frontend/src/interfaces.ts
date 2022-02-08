@@ -69,6 +69,7 @@ interface addToCartPayload  {
 export interface AddToCartAction {
     type: string,
     payload: addToCartPayload
+    id_toBeRemoved: string
     
 }
 
