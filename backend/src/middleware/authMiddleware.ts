@@ -18,7 +18,7 @@ export const authMiddleware = expressAsyncHandler(async (req: Request, res: Resp
             next()
 
         } catch (e: any) {
-            res.send(401)
+            res.status(401)
             throw new Error('Auth token not found')
 
         }
@@ -26,7 +26,7 @@ export const authMiddleware = expressAsyncHandler(async (req: Request, res: Resp
 
     if (!token) {
 
-        res.send(401)
+        res.status(401)
         throw new Error('Auth token not found')
     }
 

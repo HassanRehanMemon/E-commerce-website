@@ -1,6 +1,5 @@
 import express from 'express'
 import asyncHandler from 'express-async-handler'
-import products from '../data/products'
 import Product from '../models/productModel';
 
 const router = express.Router();

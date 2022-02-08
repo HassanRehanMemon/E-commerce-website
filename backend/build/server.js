@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const productRoutes_1 = __importDefault(require("./routes/productRoutes"));
 const userRoute_1 = __importDefault(require("./routes/userRoute"));
+const orderRoutes_1 = __importDefault(require("./routes/orderRoutes"));
 const dotenv_1 = __importDefault(require("dotenv"));
 const db_1 = __importDefault(require("./config/db"));
 const errorMiddleware_1 = require("./middleware/errorMiddleware");
@@ -20,6 +21,7 @@ app.get('/', (req, res) => {
 });
 app.use('/api/products', productRoutes_1.default);
 app.use('/api/users', userRoute_1.default);
+app.use('/api/orders', orderRoutes_1.default);
 app.use(errorMiddleware_1.notFound);
 app.use(errorMiddleware_1.errorHandler);
 app.listen(5000, () => {
