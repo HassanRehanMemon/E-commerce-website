@@ -8,6 +8,7 @@ import ProductScreen from './screens/ProductScreen';
 import CartScreen from './screens/CartScreen';
 import SignIn from './screens/SignIn';
 import SignUp from './screens/SignUp';
+import ShippingScreen from './screens/ShippingScreen';
 
 function App() {
   // const logo = require('./logo.svg') as string;
@@ -24,6 +25,7 @@ function App() {
             <Route path='/cart/:id' element={<CartScreen />} />
             <Route path='/signIn' element={<SignIn />} />
             <Route path='/signUp' element={<SignUp />} />
+            <Route path='/shipping' element={<ShippingScreen />} />
 
           </Routes>
         </Container>
