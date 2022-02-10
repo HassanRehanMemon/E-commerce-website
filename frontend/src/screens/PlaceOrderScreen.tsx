@@ -8,6 +8,7 @@ import { placeOrderAction } from '../actions/orderAction';
 import CheckoutSteps from '../components/CheckoutSteps';
 import { State } from '../reducers';
 import { AddToCart, PlaceOrder } from '../constants'
+import Loader from '../components/Loader'
 
 type Props = {};
 
@@ -17,7 +18,7 @@ const PlaceOrderScreen = (props: Props) => {
     const dispatch = useDispatch();
     const { cartItems, shippingAddress, paymentMethod, totalPrice, tax, shippingFee } = useSelector((state: State) => state.cart)
     const { user } = useSelector((state: State) => state.userSignIn)
-    const { success, error, order } = useSelector((state: State) => state.orderReducer)
+    const { success, error, order, loading } = useSelector((state: State) => state.orderReducer)
     const checkoutHandler = () => {
         dispatch(placeOrderAction(
             cartItems,
@@ -67,6 +68,12 @@ const PlaceOrderScreen = (props: Props) => {
             <Row className={'justify-content-md-center'}>
                 <CheckoutSteps signIn shipping payment order />
                 <Col xs={12} md={8}>
+          {loading &&
+            <Loader />
+          }
+          {error !== "" &&
+            <Alert variant={'danger'}>{error} </Alert>
+          }
                     {cartItems.length === 0 ? (
                         <Alert>
                             Your cart is empty <Link to='/'>Go Back</Link>

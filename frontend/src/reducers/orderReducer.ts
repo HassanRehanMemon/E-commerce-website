@@ -17,6 +17,7 @@ export const orderReducer = (state: PlaceOrderState = initState, action: PlaceOr
             return {
                 ...state,
                 order: action.payload,
+                loading: false,
                 success: true
             }
 
@@ -24,7 +25,8 @@ export const orderReducer = (state: PlaceOrderState = initState, action: PlaceOr
             return {
                 ...state,
                 error: action.payload,
-                success: false
+                success: false,
+                loading: false,
             }
 
 
