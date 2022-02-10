@@ -7,7 +7,7 @@ import { calculatePriceAction, cartAddItemAction, cartRemoveItemAction } from '.
 import { placeOrderAction } from '../actions/orderAction';
 import CheckoutSteps from '../components/CheckoutSteps';
 import { State } from '../reducers';
-import {PlaceOrder } from '../constants'
+import { AddToCart, PlaceOrder } from '../constants'
 
 type Props = {};
 
@@ -28,7 +28,6 @@ const PlaceOrderScreen = (props: Props) => {
             totalPrice,
             user.token
         ))
-        dispatch({type: PlaceOrder.RESET})
         // console.log(
 
         //     cartItems,
@@ -45,8 +44,14 @@ const PlaceOrderScreen = (props: Props) => {
     useEffect(() => {
         if (success) {
             navigate(`/order/${order._id}`)
+            dispatch({ type: PlaceOrder.RESET })
+            dispatch({ type: AddToCart.RESET })
 
         }
+    }, [success, navigate])
+
+    useEffect(() => {
+
         if (!shippingAddress.address) {
             navigate('/shipping')
         } else if (paymentMethod === "") {
@@ -54,7 +59,7 @@ const PlaceOrderScreen = (props: Props) => {
         }
 
         dispatch(calculatePriceAction())
-    }, [success, navigate])
+    }, [])
 
 
     return (
@@ -134,7 +139,7 @@ const PlaceOrderScreen = (props: Props) => {
                                 type={'button'}
                                 className={'btn btn-block'}
                                 disabled={cartItems.length === 0}
-                            onClick={checkoutHandler}
+                                onClick={checkoutHandler}
                             >
                                 Chekout
                             </Button>

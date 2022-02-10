@@ -67,10 +67,7 @@ const cartReducer = (state: AddToCartState = initState, action: AddToCartAction)
             }
             
         case AddToCart.RESET:
-            return {
-                ...state,
-                
-            }
+            return initState    
 
         default:
             return state

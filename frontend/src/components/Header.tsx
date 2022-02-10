@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { State } from '../reducers';
 import { LinkContainer } from 'react-router-bootstrap';
 import { signOutAction } from '../actions/userAction';
+import { PlaceOrder, AddToCart } from '../constants';
 
 const Header = () => {
 
@@ -12,6 +13,8 @@ const Header = () => {
 
     const signOutHandler = () => {
         dispatch(signOutAction())
+        dispatch({ type: PlaceOrder.RESET })
+        dispatch({ type: AddToCart.RESET })
 
     }
 
@@ -34,12 +37,12 @@ const Header = () => {
                                 <NavDropdown title={user.name} id="navbarScrollingDropdown">
                                     <NavDropdown.Item >Profile</NavDropdown.Item>
                                     <NavDropdown.Divider />
-                                    <NavDropdown.Item onClick={ signOutHandler}>Sign out</NavDropdown.Item>
+                                    <NavDropdown.Item onClick={signOutHandler}>Sign out</NavDropdown.Item>
                                 </NavDropdown>
                                 :
-                            <LinkContainer to="/signIn">
-                                <Nav.Link ><i className="fas fa-user"></i> Sign In</Nav.Link>
-                            </LinkContainer>
+                                <LinkContainer to="/signIn">
+                                    <Nav.Link ><i className="fas fa-user"></i> Sign In</Nav.Link>
+                                </LinkContainer>
                             }
                         </Nav>
                     </Navbar.Collapse>
