@@ -50,3 +50,12 @@ export enum PlaceOrder {
     RESET =  "PLACE_ORDER_RESET",
     
 }
+
+
+export enum OrderDetail {
+    REQUEST =  "ORDER_DETAIL_REQUEST",
+    SUCCESS =  "ORDER_DETAIL_SUCCESS",
+    FAIL =  "ORDER_DETAIL_FAIL",
+    RESET =  "ORDER_DETAIL_RESET",
+    
+}

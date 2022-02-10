@@ -1,6 +1,6 @@
 import axios from "axios"
 import { Dispatch } from "redux"
-import { PlaceOrder } from "../constants"
+import { OrderDetail, PlaceOrder } from "../constants"
 import { addToCartProduct, shippingAddressType } from "../interfaces"
 
 
@@ -28,7 +28,7 @@ export const placeOrderAction =
                 }
             }
 
-            const {data} = await axios.post(
+            const { data } = await axios.post(
                 '/api/orders/',
                 { cartItems, shippingAddress, paymentMethod, shippingFee, tax, totalPrice },
                 config
@@ -47,3 +47,35 @@ export const placeOrderAction =
         }
 
     }
+
+
+export const orderDetailAction = (id: string, token: string) => async (dispatch: Dispatch) => {
+    try {
+        dispatch({ type: OrderDetail.REQUEST })
+
+        const config = {
+            headers: {
+
+                'Content-type': 'application/json',
+                Authorization: `Bearer ${token}`
+            }
+        }
+
+        const { data } = await axios.get(
+            `/api/orders/${id}`,
+            config
+        )
+
+        dispatch({ type: OrderDetail.SUCCESS, payload: data })
+
+    } catch (error: any) {
+        dispatch({
+            type: OrderDetail.FAIL,
+            payload: error.response && error.response.data.message
+                ? error.response.data.message
+                : error.message,
+
+        })
+
+    }
+}

@@ -18,7 +18,7 @@ const PlaceOrderScreen = (props: Props) => {
     const dispatch = useDispatch();
     const { cartItems, shippingAddress, paymentMethod, totalPrice, tax, shippingFee } = useSelector((state: State) => state.cart)
     const { user } = useSelector((state: State) => state.userSignIn)
-    const { success, error, order, loading } = useSelector((state: State) => state.orderReducer)
+    const { success, error, order, loading } = useSelector((state: State) => state.placeOrder)
     const checkoutHandler = () => {
         dispatch(placeOrderAction(
             cartItems,
@@ -49,7 +49,7 @@ const PlaceOrderScreen = (props: Props) => {
             dispatch({ type: AddToCart.RESET })
 
         }
-    }, [success, navigate])
+    }, [success, navigate, dispatch])
 
     useEffect(() => {
 
@@ -60,7 +60,7 @@ const PlaceOrderScreen = (props: Props) => {
         }
 
         dispatch(calculatePriceAction())
-    }, [])
+    }, [dispatch, shippingAddress, paymentMethod, navigate])
 
 
     return (
@@ -68,12 +68,12 @@ const PlaceOrderScreen = (props: Props) => {
             <Row className={'justify-content-md-center'}>
                 <CheckoutSteps signIn shipping payment order />
                 <Col xs={12} md={8}>
-          {loading &&
-            <Loader />
-          }
-          {error !== "" &&
-            <Alert variant={'danger'}>{error} </Alert>
-          }
+                    {loading &&
+                        <Loader />
+                    }
+                    {error !== "" &&
+                        <Alert variant={'danger'}>{error} </Alert>
+                    }
                     {cartItems.length === 0 ? (
                         <Alert>
                             Your cart is empty <Link to='/'>Go Back</Link>
@@ -139,7 +139,7 @@ const PlaceOrderScreen = (props: Props) => {
                             <ListGroup.Item>
                                 <Row>
                                     <Col>Total</Col>
-                                    <Col>${totalPrice}</Col>
+                                    <Col>${(totalPrice).toFixed(2)}</Col>
                                 </Row>
                             </ListGroup.Item>
                             <Button

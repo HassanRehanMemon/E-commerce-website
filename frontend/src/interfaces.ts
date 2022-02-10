@@ -137,3 +137,32 @@ export interface PlaceOrderAction {
     type: string
     payload?: any
 }
+
+//Order Detail by Id
+export interface FetchedOrderType {
+        user: {
+            name:string,
+            email:string,
+        },
+        orderItems: addToCartProduct[],
+        shippingAddress : shippingAddressType
+        paymentMethod :string,
+        shippingFee: number,
+        tax: number,
+        totalPrice :number
+        isPaid: boolean
+        isDelivered: boolean
+        paidAt: string
+}
+export interface OrderDetailState {
+    order: FetchedOrderType,
+    error?: string,
+    loading: boolean
+    success: boolean
+
+}
+
+export interface OrderDetailAction {
+    type: string
+    payload?: any
+}

@@ -47,9 +47,7 @@ export const placeOrder = expressAsyncHandler(async (req: Request, res: Response
 
 
 export const getOrderbyId = expressAsyncHandler(async (req: Request, res: Response) => {
-    console.log('should be here')
-    const order = await Order.findById(req.params.id)
-    console.log(order, req.params.id, 'hereeeeeee')
+    const order = await Order.findById(req.params.id).populate('user', 'name email')
     if (!order) {
         res.status(404)
         throw new Error('Order Not found')
