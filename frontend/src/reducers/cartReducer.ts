@@ -65,6 +65,12 @@ const cartReducer = (state: AddToCartState = initState, action: AddToCartAction)
                 tax: action.payload[1],
                 totalPrice: action.payload[2],
             }
+            
+        case AddToCart.RESET:
+            return {
+                ...state,
+                
+            }
 
         default:
             return state

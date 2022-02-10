@@ -4,8 +4,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate, useParams } from 'react-router';
 import { Link } from 'react-router-dom';
 import { calculatePriceAction, cartAddItemAction, cartRemoveItemAction } from '../actions/cartAction';
+import { placeOrderAction } from '../actions/orderAction';
 import CheckoutSteps from '../components/CheckoutSteps';
 import { State } from '../reducers';
+import {PlaceOrder } from '../constants'
 
 type Props = {};
 
@@ -14,21 +16,45 @@ const PlaceOrderScreen = (props: Props) => {
     const navigate = useNavigate()
     const dispatch = useDispatch();
     const { cartItems, shippingAddress, paymentMethod, totalPrice, tax, shippingFee } = useSelector((state: State) => state.cart)
+    const { user } = useSelector((state: State) => state.userSignIn)
+    const { success, error, order } = useSelector((state: State) => state.orderReducer)
+    const checkoutHandler = () => {
+        dispatch(placeOrderAction(
+            cartItems,
+            shippingAddress,
+            paymentMethod,
+            shippingFee,
+            tax,
+            totalPrice,
+            user.token
+        ))
+        dispatch({type: PlaceOrder.RESET})
+        // console.log(
+
+        //     cartItems,
+        //     shippingAddress,
+        //     paymentMethod,
+        //     shippingFee,
+        //     tax,
+        //     totalPrice,
+        //     user.token
+        // );
+
+    }
 
     useEffect(() => {
+        if (success) {
+            navigate(`/order/${order._id}`)
+
+        }
         if (!shippingAddress.address) {
             navigate('/shipping')
-        } else if (paymentMethod == "") {
+        } else if (paymentMethod === "") {
             navigate('/payment')
         }
-        
+
         dispatch(calculatePriceAction())
-    }, [])
-
-
-
-
-
+    }, [success, navigate])
 
 
     return (
@@ -59,26 +85,11 @@ const PlaceOrderScreen = (props: Props) => {
                                         <Col md={2}>
                                             <Image src={item.image} alt={item.name} fluid rounded />
                                         </Col>
-                                        <Col md={3}>
+                                        <Col md={6}>
                                             <Link to={`/product/${item.product_id}`}>{item.name}</Link>
                                         </Col>
-                                        <Col md={2}>${item.price}</Col>
-                                        <Col md={3}>
-                                            <Form.Control
-                                                as='select'
-                                                value={item.qty}
-                                                onChange={(e) =>
-                                                    dispatch(
-                                                        cartAddItemAction(item.product_id, Number(e.target.value))
-                                                    )
-                                                }
-                                            >
-                                                {[...Array(item.countInStock).keys()].map((x) => (
-                                                    <option key={x + 1} value={x + 1}>
-                                                        {x + 1}
-                                                    </option>
-                                                ))}
-                                            </Form.Control>
+                                        <Col md={4}>
+                                            ${item.price} * {item.qty} = ${(item.price * item.qty).toFixed(2)}
                                         </Col>
                                     </Row>
                                 </ListGroup.Item>
@@ -123,7 +134,7 @@ const PlaceOrderScreen = (props: Props) => {
                                 type={'button'}
                                 className={'btn btn-block'}
                                 disabled={cartItems.length === 0}
-                            // onClick={checkoutHandler}
+                            onClick={checkoutHandler}
                             >
                                 Chekout
                             </Button>

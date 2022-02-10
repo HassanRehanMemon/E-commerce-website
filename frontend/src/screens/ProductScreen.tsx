@@ -45,7 +45,7 @@ const ProductScreen = () => {
                                 <ListGroup variant="flush">
                                     <ListGroup.Item><h3>{product.name}</h3></ListGroup.Item>
                                     <ListGroup.Item><Rating rating={product.rating} text={`${product.numReviews} reviews`} /></ListGroup.Item>
-                                    <ListGroup.Item>Price ${product.price}</ListGroup.Item>
+                                    <ListGroup.Item>Price ${parseFloat(product.price).toFixed(2)}</ListGroup.Item>
                                     <ListGroup.Item>{product.description}</ListGroup.Item>
                                 </ListGroup>
                             </Col>
@@ -57,7 +57,7 @@ const ProductScreen = () => {
                                         <ListGroup.Item>
                                             <Row>
                                                 <Col>Price: </Col>
-                                                <Col>${product.price * qty}</Col>
+                                                <Col>${(Number(product.price) * qty).toFixed(2)}</Col>
                                             </Row>
                                         </ListGroup.Item>
                                         <ListGroup.Item>

@@ -108,3 +108,32 @@ export interface userSignUpAction {
     type: string
     payload?: any
 }
+
+
+
+
+//----------ORDER----------  
+//place an order
+
+
+export interface orderType {
+        user_id: string
+        cartItems: string,
+        shippingAddress : shippingAddressType
+        paymentMethod :string,
+        shippingFee: number,
+        tax: number,
+        totalPrice :number
+}
+export interface PlaceOrderState {
+    order: orderType
+    error?: string,
+    loading: boolean
+    success: boolean
+
+}
+
+export interface PlaceOrderAction {
+    type: string
+    payload?: any
+}
