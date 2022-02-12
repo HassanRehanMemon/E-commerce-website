@@ -1,5 +1,5 @@
-import { OrderDetail, PlaceOrder } from "../constants"
-import { FetchedOrderType, OrderDetailAction, OrderDetailState, orderType, PlaceOrderAction, PlaceOrderState } from "../interfaces"
+import { OrderDetail, OrderList, PlaceOrder } from "../constants"
+import { FetchedOrderType, OrderDetailAction, OrderDetailState, OrderListAction, OrderListState, orderType, PlaceOrderAction, PlaceOrderState } from "../interfaces"
 
 const initState: PlaceOrderState = {
     order: {} as orderType,
@@ -50,7 +50,7 @@ const initOrderDetailState = {
     order: {} as FetchedOrderType,
     error: "",
     loading: true,
-    success: true,
+    success: false,
 }
 
 export const orderDetailReducer = (state: OrderDetailState = initOrderDetailState, action: OrderDetailAction) => {
@@ -80,6 +80,50 @@ export const orderDetailReducer = (state: OrderDetailState = initOrderDetailStat
 
         case OrderDetail.RESET:
             return initOrderDetailState
+
+        default:
+            return state
+    }
+
+}
+
+
+
+const initOrderListState = {
+    orders: null as unknown as FetchedOrderType[],
+    error: "",
+    loading: true,
+    success: false,
+}
+
+
+export const orderListReducer = (state: OrderListState = initOrderListState, action: OrderListAction) => {
+
+    switch (action.type){
+
+
+        case OrderList.REQUEST:
+            return { ...state, loading: true, error: "" }
+
+        case OrderList.SUCCESS:
+            return {
+                ...state,
+                orders: action.payload as FetchedOrderType[],
+                loading: false,
+                success: true
+            }
+
+        case OrderList.FAIL:
+            return {
+                ...state,
+                error: action.payload,
+                success: false,
+                loading: false,
+            }
+
+
+        case OrderList.RESET:
+            return initOrderListState
 
         default:
             return state

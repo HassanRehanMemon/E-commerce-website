@@ -35,7 +35,9 @@ const Header = () => {
                             {user !== null
                                 ?
                                 <NavDropdown title={user.name} id="navbarScrollingDropdown">
-                                    <NavDropdown.Item >Profile</NavDropdown.Item>
+                                    <LinkContainer to="/profile">
+                                        <NavDropdown.Item >Profile</NavDropdown.Item>
+                                    </LinkContainer>
                                     <NavDropdown.Divider />
                                     <NavDropdown.Item onClick={signOutHandler}>Sign out</NavDropdown.Item>
                                 </NavDropdown>

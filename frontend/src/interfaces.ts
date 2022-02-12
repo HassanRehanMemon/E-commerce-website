@@ -140,6 +140,7 @@ export interface PlaceOrderAction {
 
 //Order Detail by Id
 export interface FetchedOrderType {
+        _id : string,
         user: {
             name:string,
             email:string,
@@ -153,6 +154,8 @@ export interface FetchedOrderType {
         isPaid: boolean
         isDelivered: boolean
         paidAt: string
+        createdAt: string
+        deliveredAt: string
 }
 export interface OrderDetailState {
     order: FetchedOrderType,
@@ -163,6 +166,21 @@ export interface OrderDetailState {
 }
 
 export interface OrderDetailAction {
+    type: string
+    payload?: any
+}
+
+
+
+export interface OrderListState {
+    orders?: FetchedOrderType[],
+    error?: string,
+    loading: boolean
+    success: boolean
+
+}
+
+export interface OrderListAction {
     type: string
     payload?: any
 }
