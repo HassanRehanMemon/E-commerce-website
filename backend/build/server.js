@@ -22,6 +22,9 @@ app.get('/', (req, res) => {
 app.use('/api/products', productRoutes_1.default);
 app.use('/api/users', userRoute_1.default);
 app.use('/api/orders', orderRoutes_1.default);
+app.use('/api/config/paypal', (req, res) => {
+    res.send(process.env.PAYPAL_CLIENT_ID);
+});
 app.use(errorMiddleware_1.notFound);
 app.use(errorMiddleware_1.errorHandler);
 app.listen(5000, () => {
