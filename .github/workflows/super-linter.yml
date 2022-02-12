@@ -21,7 +21,7 @@ jobs:
           # Full git history is needed to get a proper list of changed files within `super-linter`
           fetch-depth: 0
       - run: npm ci
-      - run: npm run dev
+      - run: npm run build
 
       - name: Lint Code Base
         uses: github/super-linter@v4
