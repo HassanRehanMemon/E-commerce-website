@@ -1,5 +1,5 @@
-import { OrderDetail, OrderList, PlaceOrder } from "../constants"
-import { FetchedOrderType, OrderDetailAction, OrderDetailState, OrderListAction, OrderListState, orderType, PlaceOrderAction, PlaceOrderState } from "../interfaces"
+import { OrderDetail, OrderList, OrderPaid, PlaceOrder } from "../constants"
+import { FetchedOrderType, OrderDetailAction, OrderDetailState, OrderListAction, OrderListState, OrderPaidAction, OrderPaidState, orderType, PlaceOrderAction, PlaceOrderState } from "../interfaces"
 
 const initState: PlaceOrderState = {
     order: {} as orderType,
@@ -55,7 +55,7 @@ const initOrderDetailState = {
 
 export const orderDetailReducer = (state: OrderDetailState = initOrderDetailState, action: OrderDetailAction) => {
 
-    switch (action.type){
+    switch (action.type) {
 
 
         case OrderDetail.REQUEST:
@@ -99,7 +99,7 @@ const initOrderListState = {
 
 export const orderListReducer = (state: OrderListState = initOrderListState, action: OrderListAction) => {
 
-    switch (action.type){
+    switch (action.type) {
 
 
         case OrderList.REQUEST:
@@ -124,6 +124,45 @@ export const orderListReducer = (state: OrderListState = initOrderListState, act
 
         case OrderList.RESET:
             return initOrderListState
+
+        default:
+            return state
+    }
+
+}
+
+
+const initOrderPaidState = {
+
+    error: "",
+    loading: true,
+    success: false,
+}
+
+
+export const orderPaidReducer = (state: OrderPaidState = initOrderListState, action: OrderPaidAction) => {
+
+    switch (action.type) {
+
+
+        case OrderPaid.REQUEST:
+            return { ...state, loading: true, error: "" }
+
+        case OrderPaid.SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                success: true
+            }
+
+        case OrderPaid.FAIL:
+            return {
+                ...state,
+                error: action.payload,
+                success: false,
+                loading: false,
+            }
+
 
         default:
             return state

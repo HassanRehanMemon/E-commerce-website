@@ -1,6 +1,6 @@
 import axios from "axios"
 import { Dispatch } from "redux"
-import { OrderDetail, OrderList, PlaceOrder } from "../constants"
+import { OrderDetail, OrderList, OrderPaid, PlaceOrder } from "../constants"
 import { addToCartProduct, shippingAddressType } from "../interfaces"
 
 
@@ -104,6 +104,40 @@ export const orderListAction = (token: string) => async (dispatch: Dispatch) => 
     } catch (error: any) {
         dispatch({
             type: OrderList.FAIL,
+            payload: error.response && error.response.data.message
+                ? error.response.data.message
+                : error.message,
+
+        })
+
+    }
+}
+
+
+
+export const orderPaidAction = (id: string, token: string, paymentResult: any) => async (dispatch: Dispatch) => {
+    try {
+        dispatch({ type: OrderPaid.REQUEST })
+
+        const config = {
+            headers: {
+
+                'Content-type': 'application/json',
+                Authorization: `Bearer ${token}`
+            }
+        }
+
+        const { data } = await axios.put(
+            `/api/orders/${id}`,
+            paymentResult,
+            config
+        )
+
+        dispatch({ type: OrderPaid.SUCCESS})
+
+    } catch (error: any) {
+        dispatch({
+            type: OrderPaid.FAIL,
             payload: error.response && error.response.data.message
                 ? error.response.data.message
                 : error.message,

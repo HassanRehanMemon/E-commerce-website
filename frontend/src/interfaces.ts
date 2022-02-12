@@ -184,3 +184,18 @@ export interface OrderListAction {
     type: string
     payload?: any
 }
+
+
+
+
+export interface OrderPaidState {
+    error?: string,
+    loading: boolean
+    success: boolean
+
+}
+
+export interface OrderPaidAction {
+    type: string
+    payload?: any
+}

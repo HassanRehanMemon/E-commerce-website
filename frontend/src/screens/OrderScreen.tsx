@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router'
 import { State } from '../reducers'
@@ -7,10 +7,14 @@ import CheckoutSteps from '../components/CheckoutSteps'
 import Loader from '../components/Loader'
 import { orderDetailAction } from '../actions/orderAction'
 import { Link } from 'react-router-dom'
+import { PayPalButton } from 'react-paypal-button-v2'
+import axios from 'axios'
 
 type Props = {}
 
 const OrderScreen = (props: Props) => {
+
+  const [payPalSDK, setPayPalSDK] = useState(false)
 
   const dispatch = useDispatch()
   const { order, loading: orderLoading, error: orderError, success } = useSelector((state: State) => state.orderDetail)
@@ -19,13 +23,48 @@ const OrderScreen = (props: Props) => {
   console.log(order);
 
   useEffect(() => {
-    if (user.token && id) {
+
+    const payPalScript = async () => {
+      const client_id = await axios.get('/api/config/paypal')
+
+      console.log(client_id);
+      //script
+      const script = document.createElement('script')
+      script.type = 'text/javascript'
+      script.src = `https://www.paypal.com/sdk/js?client-id=${client_id.data}`
+      script.async = true
+      console.log(payPalSDK);
+      script.addEventListener('load', () => {
+
+        console.log('should be here');
+        setPayPalSDK(true)
+      })
+      // script.onload = () => {
+      //   console.log('should be here');
+      //   setPayPalSDK(true)
+      //   console.log(payPalSDK);
+      // }
+      document.body.appendChild(script)
+
+    }
+
+
+    if (user.token && id && !order.totalPrice) {
 
       dispatch(orderDetailAction(id, user.token))
-    } else {
+    } else if (!order.isPaid) {
+      if (!window.paypal) {
+        payPalScript()
+      }
+    }
+    else {
       console.log('something went wrong');
     }
-  }, [dispatch, id, user])
+  }, [dispatch, id, user, order])
+
+  const payPalResultHandler = (result: any) => {
+    console.log(result);
+  }
 
   return (
     // <div>{order.orderItems}</div>
@@ -58,7 +97,7 @@ const OrderScreen = (props: Props) => {
                     {order.shippingAddress.address}, {order.shippingAddress.city}, {order.shippingAddress.country}, {order.shippingAddress.postalCode}
                   </p>
                   {
-                    !order.isDelivered && 
+                    !order.isDelivered &&
                     <Alert variant={'danger'}>Not Delivered</Alert>
                   }
                 </ListGroup.Item>
@@ -66,9 +105,9 @@ const OrderScreen = (props: Props) => {
                 <ListGroup.Item>
                   <h4>Payment Method</h4>
                   Method: {order.paymentMethod}
-                  
+
                   {
-                    !order.isPaid && 
+                    !order.isPaid &&
                     <Alert variant={'danger'}> Not Paid</Alert>
                   }
 
@@ -123,6 +162,12 @@ const OrderScreen = (props: Props) => {
                     <Col>Total</Col>
                     <Col>${(order.totalPrice).toFixed(2)}</Col>
                   </Row>
+                </ListGroup.Item>
+
+                <ListGroup.Item>
+                  {!payPalSDK ? <Loader /> :
+                    <PayPalButton amount={order.totalPrice} onSuccess={payPalResultHandler} />
+                  }
                 </ListGroup.Item>
 
               </ListGroup>

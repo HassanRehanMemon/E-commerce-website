@@ -67,6 +67,7 @@ const cartReducer = (state: AddToCartState = initState, action: AddToCartAction)
             }
             
         case AddToCart.RESET:
+            localStorage.setItem('cartItems', "")
             return initState    
 
         default:

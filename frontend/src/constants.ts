@@ -69,3 +69,11 @@ export enum OrderList {
     RESET = "ORDER_LIST_RESET",
 
 }
+    
+
+export enum OrderPaid {
+    REQUEST = "ORDER_PAID_REQUEST",
+    SUCCESS = "ORDER_PAID_SUCCESS",
+    FAIL = "ORDER_PAID_FAIL",
+
+}
