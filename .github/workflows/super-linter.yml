@@ -20,6 +20,8 @@ jobs:
         with:
           # Full git history is needed to get a proper list of changed files within `super-linter`
           fetch-depth: 0
+          node-version: 17
+          
       - run: npm ci
       - run: npm install
       - run: npm run build --prefix frontend
