@@ -84,3 +84,70 @@ export const getUserProfile = expressAsyncHandler(async (req, res) => {
 
 
 
+export const getUsersAsAdmin = expressAsyncHandler(async (req, res) => {
+    // res.send('Success')
+    const users = await User.find({}).select('-password')
+
+    // console.log('made it');
+    if (users) {
+        res.status(200).json(users)
+    } else {
+        res.status(404)
+        throw new Error('Could not fetch users')
+    }
+})
+
+
+
+export const getUserByIdAsAdmin = expressAsyncHandler(async (req, res) => {
+    // res.send('Success')
+    const user = await User.findById(req.params.id).select('-password')
+
+    // console.log('made it');
+    if (user) {
+        res.status(200).json(user)
+    } else {
+        res.status(404)
+        throw new Error('Could not fetch users')
+    }
+})
+
+
+export const updateUserAsAdmin = expressAsyncHandler(async (req, res) => {
+    // res.send('Success')
+    const user = await User.findById(req.params.id)
+
+    // console.log('made it');
+    if (user) {
+        console.log(req.body.name + " " + req.body.email + " " + req.body.isAdmin)
+        user.name = req.body.name || user.name
+        user.email = req.body.email || user.email
+        if(typeof req.body.isAdmin !== "undefined"){
+
+            user.isAdmin = req.body.isAdmin
+            console.log('here')
+        }
+        
+        const updatedUser = await user.save()
+        res.status(200).json(updatedUser)
+    } else {
+        res.status(404)
+        throw new Error('Could not update')
+    }
+})
+
+
+
+export const deleteUserAsAdmin = expressAsyncHandler(async (req, res) => {
+    // res.send('Success')
+    const user = await User.findById(req.params.id)
+
+    // console.log('made it');
+    if (user) {
+        await user.delete()
+        res.status(200).json({message: 'User Deleted Successfully'})
+    } else {
+        res.status(404)
+        throw new Error('Could not delete')
+    }
+})

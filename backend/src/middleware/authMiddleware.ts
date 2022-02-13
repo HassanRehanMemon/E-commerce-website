@@ -31,3 +31,15 @@ export const authMiddleware = expressAsyncHandler(async (req: Request, res: Resp
     }
 
 })
+
+
+
+export const adminMiddleware = expressAsyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+    if (req.body.user && req.body.user.isAdmin) {
+        next()
+        
+    }else{
+        res.status(401)
+        throw new Error("Unauthorized access denided") 
+    }
+})
