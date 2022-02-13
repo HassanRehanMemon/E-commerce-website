@@ -51,13 +51,23 @@ export interface productDetailAction {
 
 // ---------------- Cart ---------------
 //// Add to cart reducer
+export interface shippingAddressType{
+    address : string,
+    city : string,
+    country : string,
+    postalCode : string,
+}
 export interface AddToCartState {
-    cartItems: addToCartPayload[]
-    shippingAddress : {}
+    cartItems: addToCartProduct[]
+    shippingAddress : shippingAddressType
+    paymentMethod : string
+    shippingFee : number
+    tax : number
+    totalPrice : number
 
 }
 
-interface addToCartPayload  {
+export interface addToCartProduct  {
     name : string
     product_id : string
     image : string
@@ -68,7 +78,7 @@ interface addToCartPayload  {
 }
 export interface AddToCartAction {
     type: string,
-    payload: addToCartPayload
+    payload: any
     
 }
 
@@ -95,6 +105,102 @@ export interface userSignUpState {
 }
 
 export interface userSignUpAction {
+    type: string
+    payload?: any
+}
+
+
+
+
+//----------ORDER----------  
+//place an order
+
+
+export interface orderType {
+        user_id: string
+        cartItems: string,
+        shippingAddress : shippingAddressType
+        paymentMethod :string,
+        shippingFee: number,
+        tax: number,
+        totalPrice :number
+}
+export interface PlaceOrderState {
+    order: orderType
+    error?: string,
+    loading: boolean
+    success: boolean
+
+}
+
+export interface PlaceOrderAction {
+    type: string
+    payload?: any
+}
+
+//Order Detail by Id
+export interface FetchedOrderType {
+        _id : string,
+        user: {
+            name:string,
+            email:string,
+        },
+        orderItems: addToCartProduct[],
+        shippingAddress : shippingAddressType
+        paymentMethod : {
+            id: string,
+            status: string,
+            update_time: string,
+            email_address: string
+        },
+        shippingFee: number,
+        tax: number,
+        totalPrice :number
+        isPaid: boolean
+        isDelivered: boolean
+        paidAt: string
+        createdAt: string
+        deliveredAt: string
+}
+export interface OrderDetailState {
+    order: FetchedOrderType,
+    error?: string,
+    loading: boolean
+    success: boolean
+
+}
+
+export interface OrderDetailAction {
+    type: string
+    payload?: any
+}
+
+
+
+export interface OrderListState {
+    orders?: FetchedOrderType[],
+    error?: string,
+    loading: boolean
+    success: boolean
+
+}
+
+export interface OrderListAction {
+    type: string
+    payload?: any
+}
+
+
+
+
+export interface OrderPaidState {
+    error?: string,
+    loading: boolean
+    success: boolean
+
+}
+
+export interface OrderPaidAction {
     type: string
     payload?: any
 }

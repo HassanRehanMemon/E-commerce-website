@@ -23,6 +23,7 @@ const SignIn = (props: Props) => {
   useEffect(() => {
 
     if (user !== null) {
+      console.log(redirect);
       navigate(redirect ?? '/')
 
     }

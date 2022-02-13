@@ -1,6 +1,7 @@
-import express from "express";
+import express, { Request, Response } from "express";
 import prodcutRoutes from './routes/productRoutes'
 import userRoutes from './routes/userRoute'
+import orderRoutes from './routes/orderRoutes'
 import mongoose from 'mongoose'
 import dotenv from "dotenv";
 import connectDB from "./config/db";
@@ -20,6 +21,10 @@ app.get('/', (req, res) => {
 
 app.use('/api/products' ,prodcutRoutes)
 app.use('/api/users',  userRoutes)
+app.use('/api/orders',  orderRoutes)
+app.use('/api/config/paypal',  (req: Request, res:Response) => {
+    res.send(process.env.PAYPAL_CLIENT_ID )
+})
 
 app.use(notFound)
 app.use(errorHandler)
