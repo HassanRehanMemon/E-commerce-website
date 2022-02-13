@@ -2,13 +2,13 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router'
 import { State } from '../reducers'
-import { Container, Row, Col, Alert, ListGroup, Image, Card, Button } from 'react-bootstrap'
-import CheckoutSteps from '../components/CheckoutSteps'
+import { Container, Row, Col, Alert, ListGroup, Image, Card } from 'react-bootstrap'
 import Loader from '../components/Loader'
-import { orderDetailAction } from '../actions/orderAction'
+import { orderDetailAction, orderPaidAction } from '../actions/orderAction'
 import { Link } from 'react-router-dom'
 import { PayPalButton } from 'react-paypal-button-v2'
 import axios from 'axios'
+import { OrderPaid } from '../constants'
 
 type Props = {}
 
@@ -17,8 +17,9 @@ const OrderScreen = (props: Props) => {
   const [payPalSDK, setPayPalSDK] = useState(false)
 
   const dispatch = useDispatch()
-  const { order, loading: orderLoading, error: orderError, success } = useSelector((state: State) => state.orderDetail)
-  const { user, loading: userLoading, error: userError } = useSelector((state: State) => state.userSignIn)
+  const { order, loading: orderLoading, error: orderError } = useSelector((state: State) => state.orderDetail)
+  const { user, } = useSelector((state: State) => state.userSignIn)
+  const { loading: payLoading, success: PaySuccess, error: payError } = useSelector((state: State) => state.orderPaid)
   const { id } = useParams()
   console.log(order);
 
@@ -39,37 +40,40 @@ const OrderScreen = (props: Props) => {
         console.log('should be here');
         setPayPalSDK(true)
       })
-      // script.onload = () => {
-      //   console.log('should be here');
-      //   setPayPalSDK(true)
-      //   console.log(payPalSDK);
-      // }
       document.body.appendChild(script)
 
     }
 
 
-    if (user.token && id && !order.totalPrice) {
+    if ((user.token && id) && (!order.totalPrice || PaySuccess || order._id !== id)) {
 
+      dispatch({ type: OrderPaid.RESET })
+      console.log(`fetching ${id}`);
       dispatch(orderDetailAction(id, user.token))
     } else if (!order.isPaid) {
       if (!window.paypal) {
         payPalScript()
+      } else {
+        setPayPalSDK(true)
       }
     }
     else {
       console.log('something went wrong');
     }
-  }, [dispatch, id, user, order])
+  }, [dispatch, id, user, order, PaySuccess])
 
   const payPalResultHandler = (result: any) => {
-    console.log(JSON.stringify(result));
+    if (id) {
+      dispatch(orderPaidAction(id, user.token, result))
+    }
+
   }
 
   return (
     // <div>{order.orderItems}</div>
 
     <Container>
+      {payError !== "" && <Alert variant={'danger'}>{payError}</Alert>}
       {orderLoading ? <Loader /> : (
         <Row className={'justify-content-md-center'}>
           <Col xs={12} md={8}>
@@ -107,8 +111,10 @@ const OrderScreen = (props: Props) => {
                   Method: {order.paymentMethod}
 
                   {
-                    !order.isPaid &&
-                    <Alert variant={'danger'}> Not Paid</Alert>
+                    !order.isPaid ?
+                      <Alert variant={'danger'}> Not Paid</Alert>
+                      :
+                      <Alert variant={'success'}>Paid</Alert>
                   }
 
                 </ListGroup.Item>
@@ -164,12 +170,17 @@ const OrderScreen = (props: Props) => {
                   </Row>
                 </ListGroup.Item>
 
-                <ListGroup.Item>
-                  {!payPalSDK ? <Loader /> :
-                    <PayPalButton amount={order.totalPrice} onSuccess={payPalResultHandler} />
-                  }
-                </ListGroup.Item>
+                {
+                  !order.isPaid && (
 
+                    <ListGroup.Item>
+                      {!payPalSDK ? <Loader /> :
+                        <PayPalButton amount={order.totalPrice} onSuccess={payPalResultHandler} />
+                      }
+                    </ListGroup.Item>
+                  )
+
+                }
               </ListGroup>
             </Card>
           </Col>

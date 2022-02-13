@@ -10,7 +10,7 @@ const router = express.Router();
 router.route('/').post(authMiddleware, placeOrder)
 router.route('/userOrders').get(authMiddleware, getOrders)
 router.route('/:id').get(authMiddleware, getOrderbyId)
-router.route('/:id/pay').get(authMiddleware, updateOrderPaid)
+router.route('/:id/pay').put(authMiddleware, updateOrderPaid)
 
 export default router
 

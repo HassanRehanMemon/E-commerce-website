@@ -75,5 +75,6 @@ export enum OrderPaid {
     REQUEST = "ORDER_PAID_REQUEST",
     SUCCESS = "ORDER_PAID_SUCCESS",
     FAIL = "ORDER_PAID_FAIL",
+    RESET = "ORDER_PAID_RESET",
 
 }

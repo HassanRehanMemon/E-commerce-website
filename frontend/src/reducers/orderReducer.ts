@@ -135,7 +135,7 @@ export const orderListReducer = (state: OrderListState = initOrderListState, act
 const initOrderPaidState = {
 
     error: "",
-    loading: true,
+    loading: false,
     success: false,
 }
 
@@ -162,6 +162,9 @@ export const orderPaidReducer = (state: OrderPaidState = initOrderListState, act
                 success: false,
                 loading: false,
             }
+            
+        case OrderPaid.RESET :
+            return initOrderPaidState
 
 
         default:

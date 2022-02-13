@@ -40,12 +40,12 @@ const orderSchema = new mongoose_1.default.Schema({
         update_time: { type: String },
         email_address: { type: String },
     },
-    taxPrice: {
+    tax: {
         type: Number,
         required: true,
         default: 0.0,
     },
-    shippingPrice: {
+    shippingFee: {
         type: Number,
         required: true,
         default: 0.0,
