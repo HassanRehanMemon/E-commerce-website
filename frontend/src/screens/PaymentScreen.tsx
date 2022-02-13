@@ -10,12 +10,6 @@ type Props = {};
 
 const PaymentScreen = (props: Props) => {
 
-  useEffect(() => {
-
-    if (!shippingAddress.address) {
-      navigate('/shipping')
-    }
-  }, []);
 
 
   const [paymentMethod, setPaymentMethod] = useState('PayPal')
@@ -23,6 +17,12 @@ const PaymentScreen = (props: Props) => {
   const dispatch = useDispatch()
   const { shippingAddress } = useSelector((state: State) => state.cart)
 
+  useEffect(() => {
+
+    if (!shippingAddress.address) {
+      navigate('/shipping')
+    }
+  }, [navigate, shippingAddress.address]);
 
 
 
