@@ -128,7 +128,7 @@ export const orderPaidAction = (id: string, token: string, paymentResult: any) =
         }
 
         const { data } = await axios.put(
-            `/api/orders/${id}`,
+            `/api/orders/${id}/pay`,
             paymentResult,
             config
         )

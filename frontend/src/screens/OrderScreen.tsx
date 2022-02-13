@@ -63,7 +63,7 @@ const OrderScreen = (props: Props) => {
   }, [dispatch, id, user, order])
 
   const payPalResultHandler = (result: any) => {
-    console.log(result);
+    console.log(JSON.stringify(result));
   }
 
   return (

@@ -147,7 +147,12 @@ export interface FetchedOrderType {
         },
         orderItems: addToCartProduct[],
         shippingAddress : shippingAddressType
-        paymentMethod :string,
+        paymentMethod : {
+            id: string,
+            status: string,
+            update_time: string,
+            email_address: string
+        },
         shippingFee: number,
         tax: number,
         totalPrice :number
