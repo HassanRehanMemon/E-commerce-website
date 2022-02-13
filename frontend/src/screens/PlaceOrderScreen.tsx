@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
-import { Row, Col, ListGroup, Image, Form, Button, Alert, Card, Container } from 'react-bootstrap'
+import { Row, Col, ListGroup, Image,  Button, Alert, Card, Container } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux';
-import { useLocation, useNavigate, useParams } from 'react-router';
+import { useLocation, useNavigate, } from 'react-router';
 import { Link } from 'react-router-dom';
-import { calculatePriceAction, cartAddItemAction, cartRemoveItemAction } from '../actions/cartAction';
+import { calculatePriceAction, } from '../actions/cartAction';
 import { placeOrderAction } from '../actions/orderAction';
 import CheckoutSteps from '../components/CheckoutSteps';
 import { State } from '../reducers';
@@ -49,7 +49,7 @@ const PlaceOrderScreen = (props: Props) => {
             dispatch({ type: AddToCart.RESET })
 
         }
-    }, [success, navigate, dispatch])
+    }, [success, navigate, dispatch, order._id])
 
     useEffect(() => {
 

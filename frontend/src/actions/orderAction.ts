@@ -133,7 +133,7 @@ export const orderPaidAction = (id: string, token: string, paymentResult: any) =
             config
         )
 
-        dispatch({ type: OrderPaid.SUCCESS})
+        dispatch({ type: OrderPaid.SUCCESS, payload: data})
 
     } catch (error: any) {
         dispatch({

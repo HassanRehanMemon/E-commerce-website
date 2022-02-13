@@ -18,7 +18,7 @@ const ProfileScreen = (props: Props) => {
         if (!orders)
             dispatch(orderListAction(user.token))
 
-    }, [])
+    }, [dispatch, orders, user.token])
 
 
     return (

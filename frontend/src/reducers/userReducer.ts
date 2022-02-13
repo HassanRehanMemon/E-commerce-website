@@ -38,7 +38,7 @@ const initUserSignUpState: userSignUpState = {
     loading: false
 
 }
-export const userSignUpReducer = (state: userSignUpState = initUserSignInState, action: userSignUpAction) => {
+export const userSignUpReducer = (state: userSignUpState = initUserSignUpState, action: userSignUpAction) => {
     switch (action.type) {
         case (UserSingUp.REQUEST):
             return { ...state, loading: true }

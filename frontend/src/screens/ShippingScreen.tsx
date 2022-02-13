@@ -1,5 +1,5 @@
-import React, {  useState } from 'react';
-import { Container, Row, Col, Form, Button, Alert } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { saveShippingAddressAction } from '../actions/cartAction';
@@ -31,7 +31,7 @@ const ShippingScreen = (props: Props) => {
         <Container>
             <Row className={'justify-content-md-center'}>
                 <Col xs={12} md={8}>
-                    <CheckoutSteps signIn  shipping/>
+                    <CheckoutSteps signIn shipping />
                     <Form onSubmit={shipFormHandler}>
                         <Form.Group className="mb-3" controlId="formBasicEmail">
                             <Form.Label>Address</Form.Label>

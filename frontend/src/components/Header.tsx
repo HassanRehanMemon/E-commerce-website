@@ -9,7 +9,7 @@ const Header = () => {
 
 
     const dispatch = useDispatch()
-    const { user, loading, error } = useSelector((state: State) => state.userSignIn)
+    const { user } = useSelector((state: State) => state.userSignIn)
 
     const signOutHandler = () => {
         dispatch(signOutAction())

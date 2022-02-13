@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Button, Row, Col, Image, ListGroup, Card, Alert, Form } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux';
@@ -21,7 +20,7 @@ const ProductScreen = () => {
         dispatch(listDetailProduct(id))
 
 
-    }, [])
+    }, [dispatch, id])
     
 
     const addToCartHandler = () =>{

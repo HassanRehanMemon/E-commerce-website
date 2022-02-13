@@ -3,7 +3,7 @@ import { Container, Row, Col, Form, Button, Alert } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
-import { userSignInAction, userSignUpAction } from '../actions/userAction';
+import {  userSignUpAction } from '../actions/userAction';
 import Loader from '../components/Loader';
 import { State } from '../reducers';
 

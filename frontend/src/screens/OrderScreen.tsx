@@ -19,7 +19,7 @@ const OrderScreen = (props: Props) => {
   const dispatch = useDispatch()
   const { order, loading: orderLoading, error: orderError } = useSelector((state: State) => state.orderDetail)
   const { user, } = useSelector((state: State) => state.userSignIn)
-  const { loading: payLoading, success: PaySuccess, error: payError } = useSelector((state: State) => state.orderPaid)
+  const {  success: PaySuccess, error: payError } = useSelector((state: State) => state.orderPaid)
   const { id } = useParams()
   console.log(order);
 
@@ -60,7 +60,7 @@ const OrderScreen = (props: Props) => {
     else {
       console.log('something went wrong');
     }
-  }, [dispatch, id, user, order, PaySuccess])
+  }, [dispatch, id, user, order, PaySuccess, payPalSDK])
 
   const payPalResultHandler = (result: any) => {
     if (id) {
