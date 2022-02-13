@@ -13,6 +13,7 @@ const HomeScreen = () => {
     const productList = useSelector((state: State) => state.productList)
     // const [products, setProduct] = useState<any[]>([]);
     const { products, error, loading } = productList
+    console.log(products);
 
     useEffect(() => {
         dispatch(listProducts())
@@ -29,7 +30,7 @@ const HomeScreen = () => {
                     :
                     <Row>
                         {
-
+                            products &&
                             products.map((product: { _id: React.Key | null | undefined; }) => {
                                 return (
                                     <Col key={product._id} sm={12} md={6} lg={4} xl={3}>

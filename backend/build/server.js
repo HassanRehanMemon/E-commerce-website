@@ -11,22 +11,33 @@ const dotenv_1 = __importDefault(require("dotenv"));
 const db_1 = __importDefault(require("./config/db"));
 const errorMiddleware_1 = require("./middleware/errorMiddleware");
 const body_parser_1 = __importDefault(require("body-parser"));
+const path_1 = __importDefault(require("path"));
 const app = (0, express_1.default)();
 dotenv_1.default.config();
 (0, db_1.default)();
 app.use(body_parser_1.default.json());
 app.use(body_parser_1.default.urlencoded({ extended: true }));
-app.get('/', (req, res) => {
-    res.send('Api is running');
-});
 app.use('/api/products', productRoutes_1.default);
 app.use('/api/users', userRoute_1.default);
 app.use('/api/orders', orderRoutes_1.default);
 app.use('/api/config/paypal', (req, res) => {
     res.send(process.env.PAYPAL_CLIENT_ID);
 });
+if (process.env.NODE_ENV === "production") {
+    const __dirname = path_1.default.resolve();
+    app.use(express_1.default.static(path_1.default.join(__dirname, '/frontend/build')));
+    app.get('*', (req, res) => {
+        res.sendFile(path_1.default.resolve(__dirname, 'frontend', 'build', 'index.html'));
+    });
+}
+else {
+    app.get('/', (req, res) => {
+        res.send('Api is running ' + __dirname);
+    });
+}
 app.use(errorMiddleware_1.notFound);
 app.use(errorMiddleware_1.errorHandler);
-app.listen(5000, () => {
-    console.log('api is running ');
+const PORT = process.env.port || 5000;
+app.listen(PORT, () => {
+    console.log('starting listening');
 });
