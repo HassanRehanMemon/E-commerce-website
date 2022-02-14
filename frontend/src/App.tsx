@@ -13,6 +13,7 @@ import PaymentScreen from './screens/PaymentScreen';
 import PlaceOrderScreen from './screens/PlaceOrderScreen';
 import OrderScreen from './screens/OrderScreen';
 import ProfileScreen from './screens/ProfileScreen';
+import UserListScreen from './screens/UserListScreen';
 
 function App() {
   // const logo = require('./logo.svg') as string;
@@ -34,6 +35,7 @@ function App() {
             <Route path='/placeOrder' element={<PlaceOrderScreen />} />
             <Route path='/order/:id' element={<OrderScreen />} />
             <Route path='/profile' element={<ProfileScreen />} />
+            <Route path='/admin/users' element={<UserListScreen />} />
 
           </Routes>
         </Container>

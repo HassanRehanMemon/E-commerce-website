@@ -46,8 +46,17 @@ const Header = () => {
                                     <Nav.Link ><i className="fas fa-user"></i> Sign In</Nav.Link>
                                 </LinkContainer>
                             }
+                            {(user !== null && user.isAdmin ) && 
+                                
+                                <NavDropdown title={"Admin"} id="navbarScrollingDropdown">
+                                    <LinkContainer to="/admin/users">
+                                        <NavDropdown.Item >User List</NavDropdown.Item>
+                                    </LinkContainer>
+                                </NavDropdown>
+                            }
                         </Nav>
                     </Navbar.Collapse>
+
                 </Container>
             </Navbar>
         </header>

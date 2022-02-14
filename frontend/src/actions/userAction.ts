@@ -1,6 +1,7 @@
 import axios from "axios";
 import { Dispatch } from "redux";
-import { UserSingIn, UserSingUp } from "../constants";
+import { UserList, UserSingIn, UserSingUp } from "../constants";
+import { State } from "../reducers";
 
 
 export const userSignInAction = (email: string, password: string) => async (dispatch: Dispatch) => {
@@ -78,3 +79,33 @@ export const signOutAction = () => (dispatch: Dispatch) => {
     })
     console.log('over hesre');
 }
+
+
+
+export const userListAction = () => async (dispatch: Dispatch, getState: () => State) => {
+    try {
+        dispatch({ type: UserList.REQUEST })
+        const config = {
+            headers: {
+                Authorization: `Bearer ${getState().userSignIn.user.token}`
+            }
+        }
+        const { data } = await axios.get(
+            '/api/users/',
+            config
+        )
+
+        dispatch({
+            type: UserList.SUCCESS,
+            payload: data
+        })
+
+    } catch (error: any) {
+        dispatch({
+            type: UserList.FAIL,
+            payload: error.response && error.response.data.message
+                ? error.response.data.message
+                : error.message,
+        })
+    }
+};

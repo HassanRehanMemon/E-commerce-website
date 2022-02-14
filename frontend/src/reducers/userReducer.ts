@@ -1,5 +1,5 @@
-import { UserSingIn, UserSingUp } from "../constants";
-import { userSignInAction, userSignInState, user, userSignUpState, userSignUpAction } from "../interfaces";
+import { UserList, UserSingIn, UserSingUp } from "../constants";
+import { userSignInAction, userSignInState, user, userSignUpState, userSignUpAction, UserListState, UserListAction } from "../interfaces";
 // import reducers from './index'
 
 
@@ -52,6 +52,35 @@ export const userSignUpReducer = (state: userSignUpState = initUserSignUpState, 
         case (UserSingIn.LOGOUT):
             // return reducers(undefined, action)
             return { ...state, user: null, error: "", loading: false }
+
+        default:
+            return state
+    }
+};
+
+
+const initUserListState: UserListState = {
+    users : [] as user[],
+    loading: false,
+    error: "",
+    
+}
+
+export const userListReducer = (state: UserListState = initUserListState, action: UserListAction) => {
+    switch (action.type) {
+        case (UserList.REQUEST):
+            return { ...state, loading: true, error: "" }
+
+        case (UserList.SUCCESS):
+            return { ...state, users: action.payload, loading: false }
+
+        case (UserList.FAIL):
+            return { ...state, error: action.payload, loading: false }
+
+        case (UserList.RESET):
+            // return reducers(undefined, action)
+            return initUserListState
+
 
         default:
             return state

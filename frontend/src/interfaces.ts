@@ -204,3 +204,15 @@ export interface OrderPaidAction {
     type: string
     payload?: any
 }
+
+
+export interface UserListState {
+    error: string,
+    loading: boolean,
+    users : user[]
+}
+
+export interface UserListAction {
+    type: string,
+    payload: any
+}

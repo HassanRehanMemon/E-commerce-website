@@ -78,3 +78,14 @@ export enum OrderPaid {
     RESET = "ORDER_PAID_RESET",
 
 }
+    
+
+//---------------Admin
+    
+export enum UserList {
+    REQUEST = "USER_LIST_REQUEST",
+    SUCCESS = "USER_LIST_SUCCESS",
+    FAIL = "USER_LIST_FAIL",
+    RESET = "USER_LIST_RESET",
+
+}
