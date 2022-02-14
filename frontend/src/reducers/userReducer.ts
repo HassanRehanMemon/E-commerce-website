@@ -1,5 +1,5 @@
-import { UserEdit, UserEditDetail, UserList, UserSingIn, UserSingUp } from "../constants";
-import { userSignInAction, userSignInState, user, userSignUpState, userSignUpAction, UserListState, UserListAction, UserEditState, UserEditAction, UserEditDetailState, UserEditDetailAction } from "../interfaces";
+import { UserDelete, UserEdit, UserEditDetail, UserList, UserSingIn, UserSingUp } from "../constants";
+import { userSignInAction, userSignInState, user, userSignUpState, userSignUpAction, UserListState, UserListAction, UserEditState, UserEditAction, UserEditDetailState, UserEditDetailAction, UserDeleteState, UserDeleteAction } from "../interfaces";
 // import reducers from './index'
 
 
@@ -59,10 +59,10 @@ export const userSignUpReducer = (state: userSignUpState = initUserSignUpState, 
 
 
 const initUserListState: UserListState = {
-    users : [] as user[],
+    users: [] as user[],
     loading: false,
     error: "",
-    
+
 }
 
 export const userListReducer = (state: UserListState = initUserListState, action: UserListAction) => {
@@ -86,9 +86,9 @@ export const userListReducer = (state: UserListState = initUserListState, action
 };
 
 
-const initUserEditState : UserEditState = {
+const initUserEditState: UserEditState = {
     success: false,
-    error : "",
+    error: "",
     loading: false
 }
 
@@ -115,23 +115,44 @@ export const userEditReducer = (state: UserEditState = initUserEditState, action
 
 
 
-const initUserEditDetailState : UserEditDetailState = {
+const initUserEditDetailState: UserEditDetailState = {
     user: {} as user,
-    error : "",
+    error: "",
     loading: false
 }
 
 export const userDetailsReducer = (state: UserEditDetailState = initUserEditDetailState, action: UserEditDetailAction) => {
     switch (action.type) {
-      case UserEditDetail.REQUEST:
-        return { ...state, loading: true }
-      case UserEditDetail.SUCCESS:
-        return { ...state, loading: false, user: action.payload }
-      case UserEditDetail.FAIL:
-        return { ...state, loading: false, error: action.payload }
-      case UserEditDetail.RESET:
-        return initUserEditDetailState
-      default:
-        return state
+        case UserEditDetail.REQUEST:
+            return { ...state, loading: true }
+        case UserEditDetail.SUCCESS:
+            return { ...state, loading: false, user: action.payload }
+        case UserEditDetail.FAIL:
+            return { ...state, loading: false, error: action.payload }
+        case UserEditDetail.RESET:
+            return initUserEditDetailState
+        default:
+            return state
     }
-  }
+}
+
+
+
+const initUserDeleteState: UserDeleteState = {
+    success: false,
+    error: "",
+    loading: false
+}
+
+export const userDeleteReducer = (state: UserDeleteState = initUserDeleteState, action: UserDeleteAction) => {
+    switch (action.type) {
+        case UserDelete.REQUEST:
+            return {  loading: true,  }
+        case UserDelete.SUCCESS:
+            return {  loading: false, success: true}
+        case UserDelete.FAIL:
+            return {  loading: false, error: action.payload }
+        default:
+            return state
+    }
+}

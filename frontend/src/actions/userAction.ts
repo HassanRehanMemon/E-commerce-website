@@ -1,6 +1,6 @@
 import axios from "axios";
 import { Dispatch } from "redux";
-import { UserEdit, UserEditDetail, UserList, UserSingIn, UserSingUp } from "../constants";
+import { UserDelete, UserEdit, UserEditDetail, UserList, UserSingIn, UserSingUp } from "../constants";
 import { State } from "../reducers";
 
 
@@ -112,7 +112,7 @@ export const userListAction = () => async (dispatch: Dispatch, getState: () => S
 
 
 
-export const userEditAction = (id: string,name: string, email: string, isAdmin: boolean) => async (dispatch: Dispatch, getState: () => State) => {
+export const userEditAction = (id: string, name: string, email: string, isAdmin: boolean) => async (dispatch: Dispatch, getState: () => State) => {
     try {
         dispatch({ type: UserEdit.REQUEST })
         const config = {
@@ -122,7 +122,7 @@ export const userEditAction = (id: string,name: string, email: string, isAdmin: 
         }
         const { data } = await axios.put(
             `/api/users/${id}`,
-            {name, email, isAdmin},
+            { name, email, isAdmin },
             config
         )
 
@@ -166,6 +166,35 @@ export const userEditDetailAction = (id: string) => async (dispatch: Dispatch, g
     } catch (error: any) {
         dispatch({
             type: UserEditDetail.FAIL,
+            payload: error.response && error.response.data.message
+                ? error.response.data.message
+                : error.message,
+        })
+    }
+};
+
+
+
+export const userDeleteAction = (id: string) => async (dispatch: Dispatch, getState: () => State) => {
+    try {
+        dispatch({ type: UserDelete.REQUEST })
+        const config = {
+            headers: {
+                Authorization: `Bearer ${getState().userSignIn.user.token}`
+            }
+        }
+        const { data } = await axios.delete(
+            `/api/users/${id}`,
+            config
+        )
+
+        dispatch({
+            type: UserDelete.SUCCESS,
+        })
+
+    } catch (error: any) {
+        dispatch({
+            type: UserDelete.FAIL,
             payload: error.response && error.response.data.message
                 ? error.response.data.message
                 : error.message,

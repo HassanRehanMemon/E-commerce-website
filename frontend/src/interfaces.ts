@@ -242,3 +242,16 @@ export interface UserEditDetailAction {
     type: string,
     payload: any
 }
+
+
+
+export interface UserDeleteState {
+    error: string,
+    loading: boolean,
+    success: boolean
+}
+
+export interface UserDeleteAction {
+    type: string,
+    payload: any
+}

@@ -107,3 +107,13 @@ export enum UserEditDetail {
     RESET = "USER_EDIT_DETAIL_RESET",
 
 }
+    
+
+
+export enum UserDelete {
+
+    REQUEST = "USER_DELETE_REQUEST",
+    SUCCESS = "USER_DELETE_SUCCESS",
+    FAIL = "USER_DELETE_FAIL",
+}
+

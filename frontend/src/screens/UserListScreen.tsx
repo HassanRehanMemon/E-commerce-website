@@ -3,7 +3,7 @@ import { Alert, Button, Container, Table } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router'
 import { LinkContainer } from 'react-router-bootstrap'
-import { userListAction } from '../actions/userAction'
+import { userDeleteAction, userListAction } from '../actions/userAction'
 import Loader from '../components/Loader'
 import { State } from '../reducers'
 
@@ -13,21 +13,22 @@ const UserListScreen = (props: Props) => {
 
     const dispatch = useDispatch()
     const { users, loading, error } = useSelector((state: State) => state.userList)
-    const {user} = useSelector((state: State) => state.userSignIn)
+    const { user } = useSelector((state: State) => state.userSignIn)
+    const { success: successDelete } = useSelector((state: State) => state.userDelete)
     const navigate = useNavigate()
 
     useEffect(() => {
-        if(!user){
+        if (!user) {
             navigate('/signIn')
-        } else if(!user.isAdmin) {
+        } else if (!user.isAdmin) {
             navigate('/')
         }
         dispatch(userListAction())
-    }, [dispatch, navigate, user])
-    
+    }, [dispatch, navigate, user, successDelete])
 
-    const deleteHandler =(id: string) =>{
-        
+
+    const deleteHandler = (id: string) => {
+        dispatch(userDeleteAction(id))
     }
 
     return (
@@ -72,7 +73,7 @@ const UserListScreen = (props: Props) => {
                                             <Button
                                                 variant='danger'
                                                 className='btn-sm'
-                                            onClick={() => deleteHandler(user._id)}
+                                                onClick={() => deleteHandler(user._id)}
                                             >
                                                 <i className='fas fa-trash'></i>
                                             </Button>
