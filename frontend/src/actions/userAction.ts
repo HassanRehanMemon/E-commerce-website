@@ -1,6 +1,6 @@
 import axios from "axios";
 import { Dispatch } from "redux";
-import { UserList, UserSingIn, UserSingUp } from "../constants";
+import { UserEdit, UserEditDetail, UserList, UserSingIn, UserSingUp } from "../constants";
 import { State } from "../reducers";
 
 
@@ -103,6 +103,68 @@ export const userListAction = () => async (dispatch: Dispatch, getState: () => S
     } catch (error: any) {
         dispatch({
             type: UserList.FAIL,
+            payload: error.response && error.response.data.message
+                ? error.response.data.message
+                : error.message,
+        })
+    }
+};
+
+
+
+export const userEditAction = () => async (dispatch: Dispatch, getState: () => State) => {
+    try {
+        dispatch({ type: UserEdit.REQUEST })
+        const config = {
+            headers: {
+                Authorization: `Bearer ${getState().userSignIn.user.token}`
+            }
+        }
+        const { data } = await axios.get(
+            '/api/users/',
+            config
+        )
+
+        dispatch({
+            type: UserEdit.SUCCESS,
+            payload: data
+        })
+
+    } catch (error: any) {
+        dispatch({
+            type: UserEdit.FAIL,
+            payload: error.response && error.response.data.message
+                ? error.response.data.message
+                : error.message,
+        })
+    }
+};
+
+
+
+
+export const userEditDetailAction = (id: string) => async (dispatch: Dispatch, getState: () => State) => {
+    try {
+        dispatch({ type: UserEditDetail.REQUEST })
+        const config = {
+            headers: {
+                'Content-type': 'application/json',
+                Authorization: `Bearer ${getState().userSignIn.user.token}`
+            }
+        }
+        const { data } = await axios.get(
+            `/api/users/${id}`,
+            config
+        )
+
+        dispatch({
+            type: UserEditDetail.SUCCESS,
+            payload: data
+        })
+
+    } catch (error: any) {
+        dispatch({
+            type: UserEditDetail.FAIL,
             payload: error.response && error.response.data.message
                 ? error.response.data.message
                 : error.message,

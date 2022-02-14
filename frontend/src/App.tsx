@@ -14,6 +14,7 @@ import PlaceOrderScreen from './screens/PlaceOrderScreen';
 import OrderScreen from './screens/OrderScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import UserListScreen from './screens/UserListScreen';
+import UserEditScreen from './screens/UserEditScreen';
 
 function App() {
   // const logo = require('./logo.svg') as string;
@@ -36,6 +37,7 @@ function App() {
             <Route path='/order/:id' element={<OrderScreen />} />
             <Route path='/profile' element={<ProfileScreen />} />
             <Route path='/admin/users' element={<UserListScreen />} />
+            <Route path='/admin/user/:id/edit' element={<UserEditScreen />} />
 
           </Routes>
         </Container>

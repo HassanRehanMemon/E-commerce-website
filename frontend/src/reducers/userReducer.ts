@@ -1,5 +1,5 @@
-import { UserList, UserSingIn, UserSingUp } from "../constants";
-import { userSignInAction, userSignInState, user, userSignUpState, userSignUpAction, UserListState, UserListAction } from "../interfaces";
+import { UserEdit, UserEditDetail, UserList, UserSingIn, UserSingUp } from "../constants";
+import { userSignInAction, userSignInState, user, userSignUpState, userSignUpAction, UserListState, UserListAction, UserEditState, UserEditAction, UserEditDetailState, UserEditDetailAction } from "../interfaces";
 // import reducers from './index'
 
 
@@ -50,7 +50,6 @@ export const userSignUpReducer = (state: userSignUpState = initUserSignUpState, 
             return { ...state, error: action.payload, loading: false }
 
         case (UserSingIn.LOGOUT):
-            // return reducers(undefined, action)
             return { ...state, user: null, error: "", loading: false }
 
         default:
@@ -78,7 +77,6 @@ export const userListReducer = (state: UserListState = initUserListState, action
             return { ...state, error: action.payload, loading: false }
 
         case (UserList.RESET):
-            // return reducers(undefined, action)
             return initUserListState
 
 
@@ -86,3 +84,54 @@ export const userListReducer = (state: UserListState = initUserListState, action
             return state
     }
 };
+
+
+const initUserEditState : UserEditState = {
+    user: {} as user,
+    error : "",
+    loading: false
+}
+
+
+export const userEditReducer = (state: UserEditState = initUserEditState, action: UserEditAction) => {
+    switch (action.type) {
+        case (UserEdit.REQUEST):
+            return { ...state, loading: true, error: "" }
+
+        case (UserEdit.SUCCESS):
+            return { ...state, user: action.payload, loading: false }
+
+        case (UserEdit.FAIL):
+            return { ...state, error: action.payload, loading: false }
+
+        case (UserEdit.RESET):
+            return initUserListState
+
+
+        default:
+            return state
+    }
+};
+
+
+
+const initUserEditDetailState : UserEditDetailState = {
+    user: {} as user,
+    error : "",
+    loading: false
+}
+
+export const userDetailsReducer = (state: UserEditDetailState = initUserEditDetailState, action: UserEditDetailAction) => {
+    switch (action.type) {
+      case UserEditDetail.REQUEST:
+        return { ...state, loading: true }
+      case UserEditDetail.SUCCESS:
+        return { ...state, loading: false, user: action.payload }
+      case UserEditDetail.FAIL:
+        return { ...state, loading: false, error: action.payload }
+      case UserEditDetail.RESET:
+        return initUserEditDetailState
+      default:
+        return state
+    }
+  }

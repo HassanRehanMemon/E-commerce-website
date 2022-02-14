@@ -216,3 +216,29 @@ export interface UserListAction {
     type: string,
     payload: any
 }
+
+
+
+export interface UserEditState {
+    error: string,
+    loading: boolean,
+    user : user
+}
+
+export interface UserEditAction {
+    type: string,
+    payload: any
+}
+
+
+
+export interface UserEditDetailState {
+    error: string,
+    loading: boolean,
+    user : user
+}
+
+export interface UserEditDetailAction {
+    type: string,
+    payload: any
+}

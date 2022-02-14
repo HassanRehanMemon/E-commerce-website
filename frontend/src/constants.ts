@@ -89,3 +89,21 @@ export enum UserList {
     RESET = "USER_LIST_RESET",
 
 }
+
+    
+
+export enum UserEdit {
+    REQUEST = "USER_EDIT_REQUEST",
+    SUCCESS = "USER_EDIT_SUCCESS",
+    FAIL = "USER_EDIT_FAIL",
+    RESET = "USER_EDIT_RESET",
+
+}
+
+export enum UserEditDetail {
+    REQUEST = "USER_EDIT_DETAIL_REQUEST",
+    SUCCESS = "USER_EDIT_DETAIL_SUCCESS",
+    FAIL = "USER_EDIT_DETAIL_FAIL",
+    RESET = "USER_EDIT_DETAIL_RESET",
+
+}
