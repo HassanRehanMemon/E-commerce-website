@@ -3,8 +3,9 @@ import { Alert, Button, Container, Form, Row, Col } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router'
 import { Link } from 'react-router-dom'
-import { userEditDetailAction } from '../actions/userAction'
+import { userEditAction, userEditDetailAction } from '../actions/userAction'
 import Loader from '../components/Loader'
+import { UserEdit } from '../constants'
 import { State } from '../reducers'
 
 type Props = {}
@@ -19,6 +20,7 @@ const UserEditScreen = (props: Props) => {
     const dispatch = useDispatch()
     const { user: userDetail, loading: loadingDetail, error: errorDetail } = useSelector((state: State) => state.userDetail)
     const { user } = useSelector((state: State) => state.userSignIn)
+    const { success } = useSelector((state: State) => state.userEdit)
     const navigate = useNavigate()
 
 
@@ -29,21 +31,27 @@ const UserEditScreen = (props: Props) => {
         } else if (!user.isAdmin) {
             navigate('/')
         }
-
-        if (id && (!userDetail.name || userDetail._id !== id)) {
-            dispatch(userEditDetailAction(id))
+        if (success) {
+            dispatch({ type: UserEdit.RESET })
+            navigate('/admin/users')
         } else {
-            setName(userDetail.name)
-            setEmail(userDetail.email)
-            setIsAdmin(userDetail.isAdmin)
 
+            if (id && (!userDetail.name || userDetail._id !== id)) {
+                dispatch(userEditDetailAction(id))
+            } else {
+                setName(userDetail.name)
+                setEmail(userDetail.email)
+                setIsAdmin(userDetail.isAdmin)
+
+            }
         }
 
-    }, [user, navigate, dispatch, userDetail, id])
+
+    }, [user, navigate, dispatch, userDetail, id, success])
 
     const submitHandler = (e: React.FormEvent) => {
         e.preventDefault()
-
+        dispatch(userEditAction(userDetail._id, name, email, isAdmin))
     }
 
 

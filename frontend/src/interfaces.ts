@@ -18,7 +18,7 @@ export interface user {
     email: string,
     isAdmin: string,
     token: string,
-    
+
 }
 
 
@@ -51,35 +51,35 @@ export interface productDetailAction {
 
 // ---------------- Cart ---------------
 //// Add to cart reducer
-export interface shippingAddressType{
-    address : string,
-    city : string,
-    country : string,
-    postalCode : string,
+export interface shippingAddressType {
+    address: string,
+    city: string,
+    country: string,
+    postalCode: string,
 }
 export interface AddToCartState {
     cartItems: addToCartProduct[]
-    shippingAddress : shippingAddressType
-    paymentMethod : string
-    shippingFee : number
-    tax : number
-    totalPrice : number
+    shippingAddress: shippingAddressType
+    paymentMethod: string
+    shippingFee: number
+    tax: number
+    totalPrice: number
 
 }
 
-export interface addToCartProduct  {
-    name : string
-    product_id : string
-    image : string
-    price : number
-    countInStock : number
+export interface addToCartProduct {
+    name: string
+    product_id: string
+    image: string
+    price: number
+    countInStock: number
     qty: number
-        
+
 }
 export interface AddToCartAction {
     type: string,
     payload: any
-    
+
 }
 
 
@@ -117,13 +117,13 @@ export interface userSignUpAction {
 
 
 export interface orderType {
-        user_id: string
-        cartItems: string,
-        shippingAddress : shippingAddressType
-        paymentMethod :string,
-        shippingFee: number,
-        tax: number,
-        totalPrice :number
+    user_id: string
+    cartItems: string,
+    shippingAddress: shippingAddressType
+    paymentMethod: string,
+    shippingFee: number,
+    tax: number,
+    totalPrice: number
 }
 export interface PlaceOrderState {
     order: orderType
@@ -140,27 +140,27 @@ export interface PlaceOrderAction {
 
 //Order Detail by Id
 export interface FetchedOrderType {
-        _id : string,
-        user: {
-            name:string,
-            email:string,
-        },
-        orderItems: addToCartProduct[],
-        shippingAddress : shippingAddressType
-        paymentMethod : {
-            id: string,
-            status: string,
-            update_time: string,
-            email_address: string
-        },
-        shippingFee: number,
-        tax: number,
-        totalPrice :number
-        isPaid: boolean
-        isDelivered: boolean
-        paidAt: string
-        createdAt: string
-        deliveredAt: string
+    _id: string,
+    user: {
+        name: string,
+        email: string,
+    },
+    orderItems: addToCartProduct[],
+    shippingAddress: shippingAddressType
+    paymentMethod: {
+        id: string,
+        status: string,
+        update_time: string,
+        email_address: string
+    },
+    shippingFee: number,
+    tax: number,
+    totalPrice: number
+    isPaid: boolean
+    isDelivered: boolean
+    paidAt: string
+    createdAt: string
+    deliveredAt: string
 }
 export interface OrderDetailState {
     order: FetchedOrderType,
@@ -209,7 +209,7 @@ export interface OrderPaidAction {
 export interface UserListState {
     error: string,
     loading: boolean,
-    users : user[]
+    users: user[]
 }
 
 export interface UserListAction {
@@ -222,7 +222,7 @@ export interface UserListAction {
 export interface UserEditState {
     error: string,
     loading: boolean,
-    user : user
+    success: boolean
 }
 
 export interface UserEditAction {
@@ -235,7 +235,7 @@ export interface UserEditAction {
 export interface UserEditDetailState {
     error: string,
     loading: boolean,
-    user : user
+    user: user
 }
 
 export interface UserEditDetailAction {

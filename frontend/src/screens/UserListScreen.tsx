@@ -24,6 +24,11 @@ const UserListScreen = (props: Props) => {
         }
         dispatch(userListAction())
     }, [dispatch, navigate, user])
+    
+
+    const deleteHandler =(id: string) =>{
+        
+    }
 
     return (
         <Container>
@@ -67,7 +72,7 @@ const UserListScreen = (props: Props) => {
                                             <Button
                                                 variant='danger'
                                                 className='btn-sm'
-                                            // onClick={() => deleteHandler(user._id)}
+                                            onClick={() => deleteHandler(user._id)}
                                             >
                                                 <i className='fas fa-trash'></i>
                                             </Button>

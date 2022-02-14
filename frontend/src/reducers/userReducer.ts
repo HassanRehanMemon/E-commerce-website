@@ -87,7 +87,7 @@ export const userListReducer = (state: UserListState = initUserListState, action
 
 
 const initUserEditState : UserEditState = {
-    user: {} as user,
+    success: false,
     error : "",
     loading: false
 }
@@ -96,10 +96,10 @@ const initUserEditState : UserEditState = {
 export const userEditReducer = (state: UserEditState = initUserEditState, action: UserEditAction) => {
     switch (action.type) {
         case (UserEdit.REQUEST):
-            return { ...state, loading: true, error: "" }
+            return { ...state, loading: true, error: "", success: false }
 
         case (UserEdit.SUCCESS):
-            return { ...state, user: action.payload, loading: false }
+            return { ...state, success: true, loading: false }
 
         case (UserEdit.FAIL):
             return { ...state, error: action.payload, loading: false }

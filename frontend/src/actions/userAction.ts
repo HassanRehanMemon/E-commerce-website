@@ -112,7 +112,7 @@ export const userListAction = () => async (dispatch: Dispatch, getState: () => S
 
 
 
-export const userEditAction = () => async (dispatch: Dispatch, getState: () => State) => {
+export const userEditAction = (id: string,name: string, email: string, isAdmin: boolean) => async (dispatch: Dispatch, getState: () => State) => {
     try {
         dispatch({ type: UserEdit.REQUEST })
         const config = {
@@ -120,8 +120,9 @@ export const userEditAction = () => async (dispatch: Dispatch, getState: () => S
                 Authorization: `Bearer ${getState().userSignIn.user.token}`
             }
         }
-        const { data } = await axios.get(
-            '/api/users/',
+        const { data } = await axios.put(
+            `/api/users/${id}`,
+            {name, email, isAdmin},
             config
         )
 
