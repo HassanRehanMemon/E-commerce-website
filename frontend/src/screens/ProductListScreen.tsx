@@ -1,23 +1,23 @@
 import React, { useEffect } from 'react'
 import { Alert, Button, Container, Table } from 'react-bootstrap'
-import { useDispatch, useSelector  } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router'
 import { LinkContainer } from 'react-router-bootstrap'
-import { userDeleteAction, userListAction } from '../actions/userAction'
+import { deleteProductAction, listProducts } from '../actions/productAction'
 import Loader from '../components/Loader'
 import { State } from '../reducers'
-import {product} from '../interfaces'
+import { product } from '../interfaces'
 
 type Props = {}
 
 const ProductListScreen = (props: Props) => {
 
     const dispatch = useDispatch()
-    const { products, error, loading } = useSelector((state:State) => state.productList)
-    
+    const { products, error, loading } = useSelector((state: State) => state.productList)
+
     // const { users, loading, error } = useSelector((state: State) => state.userList)
     const { user } = useSelector((state: State) => state.userSignIn)
-    // const { success: successDelete } = useSelector((state: State) => state.userDelete)
+    const { success: successDelete } = useSelector((state: State) => state.delteProduct)
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -26,12 +26,12 @@ const ProductListScreen = (props: Props) => {
         } else if (!user.isAdmin) {
             navigate('/')
         }
-        // dispatch(userListAction())
-    }, [dispatch, navigate, user ])
+        dispatch(listProducts())
+    }, [dispatch, navigate, user, successDelete])
 
 
     const deleteHandler = (id: string) => {
-        // dispatch(userDeleteAction(id))
+        dispatch(deleteProductAction(id))
     }
 
     return (

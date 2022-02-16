@@ -48,6 +48,16 @@ export interface productDetailAction {
 }
 
 
+export interface ProductDeleteState {
+    error?: string,
+    loading: boolean,
+    success: boolean,
+}
+
+export interface productDeleteAction {
+    type: string
+    payload?: any
+}
 
 // ---------------- Cart ---------------
 //// Add to cart reducer

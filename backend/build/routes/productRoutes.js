@@ -8,7 +8,8 @@ const productController_1 = require("../controllers/productController");
 const authMiddleware_1 = require("../middleware/authMiddleware");
 const router = express_1.default.Router();
 router.route('/')
-    .get(productController_1.listProduct);
+    .get(productController_1.listProduct)
+    .post(authMiddleware_1.authMiddleware, authMiddleware_1.adminMiddleware, productController_1.createProductAsAdmin);
 router.route('/:id')
     .get(productController_1.getProductById)
     .delete(authMiddleware_1.authMiddleware, authMiddleware_1.adminMiddleware, productController_1.deleteProductAsAdmin);

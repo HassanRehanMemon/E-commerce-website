@@ -10,6 +10,13 @@ export enum ProductDetail {
     SUCCESS = "PRODUCT_DETAIL_SUCCESS",
     FAIL = "PRODUCT_DETAIL_FAIL",
 }
+    
+
+export enum ProductDelete {
+    REQUEST = "PRODUCT_DELETE_REQUEST",
+    SUCCESS = "PRODUCT_DELETE_SUCCESS",
+    FAIL = "PRODUCT_DELETE_FAIL",
+}
 
 export enum AddToCart {
     ADD = "ADD_TO_CART",

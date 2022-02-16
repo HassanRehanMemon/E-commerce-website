@@ -1,5 +1,5 @@
-import { ProductDetail, ProductList } from '../constants';
-import { product, productDetailAction, ProductDetailState, ProductListAction, ProductListState } from '../interfaces';
+import { ProductDelete, ProductDetail, ProductList } from '../constants';
+import { product, ProductDeleteState, productDetailAction, ProductDetailState, ProductListAction, ProductListState } from '../interfaces';
 
 
 
@@ -42,6 +42,29 @@ export const listProductDetails = (state: ProductDetailState = initProductDetail
             return { ...state, product: action.payload, loading: false }
 
         case (ProductDetail.FAIL):
+            return { ...state, error: action.payload, loading: false }
+
+        default:
+            return state
+    }
+
+}
+
+const initProductDelete : ProductDeleteState  = {
+    error: "",
+    loading: false,
+    success: false
+}
+
+export const deleteProductReducer = (state: ProductDeleteState = initProductDelete, action: productDetailAction) => {
+    switch (action.type) {
+        case (ProductDelete.REQUEST):
+            return { ...state, loading: true }
+
+        case (ProductDelete.SUCCESS):
+            return { ...state, success: true, loading: false }
+
+        case (ProductDelete.FAIL):
             return { ...state, error: action.payload, loading: false }
 
         default:

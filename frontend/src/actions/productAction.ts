@@ -1,7 +1,8 @@
 import { Dispatch } from "redux";
-import { ProductDetail, ProductList } from "../constants";
+import { ProductDelete, ProductDetail, ProductList } from "../constants";
 import axios from 'axios'
 import { product } from "../interfaces";
+import { State } from "../reducers";
 
 
 export const listProducts = () => async (dispatch: Dispatch) => {
@@ -32,6 +33,34 @@ export const listDetailProduct = (id: any) => async (dispatch: Dispatch) => {
     } catch (error: any) {
         dispatch({
             type: ProductDetail.FAIL,
+            payload: error.response && error.response.data.message
+                ? error.response.data.message
+                : error.message,
+        })
+
+    }
+}
+
+
+
+export const deleteProductAction = (id: any) => async (dispatch: Dispatch, getState: () => State) => {
+    try {
+        dispatch({ type: ProductDelete.REQUEST })
+        const config = {
+            headers: {
+                Authorization: `Bearer ${getState().userSignIn.user.token}`
+            }
+        }
+        const product = await axios.delete(
+            `/api/products/${id}`,
+            config
+        )
+        dispatch({
+            type: ProductDelete.SUCCESS
+        })
+    } catch (error: any) {
+        dispatch({
+            type: ProductDelete.FAIL,
             payload: error.response && error.response.data.message
                 ? error.response.data.message
                 : error.message,
