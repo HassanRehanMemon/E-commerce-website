@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react'
-import { Alert, Button, Container, Table } from 'react-bootstrap'
+import { Alert, Button, Col, Container, Row, Table } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router'
 import { LinkContainer } from 'react-router-bootstrap'
-import { deleteProductAction, listProducts } from '../actions/productAction'
+import { createProductAction, deleteProductAction, listProducts } from '../actions/productAction'
 import Loader from '../components/Loader'
 import { State } from '../reducers'
 import { product } from '../interfaces'
+import { ProductCreate } from '../constants'
 
 type Props = {}
 
@@ -15,7 +16,7 @@ const ProductListScreen = (props: Props) => {
     const dispatch = useDispatch()
     const { products, error, loading } = useSelector((state: State) => state.productList)
 
-    // const { users, loading, error } = useSelector((state: State) => state.userList)
+    const { product, success: successCreated } = useSelector((state: State) => state.createProduct)
     const { user } = useSelector((state: State) => state.userSignIn)
     const { success: successDelete } = useSelector((state: State) => state.delteProduct)
     const navigate = useNavigate()
@@ -26,16 +27,36 @@ const ProductListScreen = (props: Props) => {
         } else if (!user.isAdmin) {
             navigate('/')
         }
+        
+        if (successCreated){
+            navigate(`/admin/product/${product._id}/edit`)
+            dispatch({type: ProductCreate.RESET})
+        }
         dispatch(listProducts())
-    }, [dispatch, navigate, user, successDelete])
+    }, [dispatch, navigate, user, successDelete, successCreated])
 
 
     const deleteHandler = (id: string) => {
         dispatch(deleteProductAction(id))
     }
+    const createProductHandler = () => {
+        dispatch(createProductAction())
+
+    }
 
     return (
         <Container>
+
+            <Row className='align-items-center'>
+                <Col>
+                    <h1>Products</h1>
+                </Col>
+                <Col className='text-right'>
+                    <Button className='my-3' onClick={createProductHandler}>
+                        <i className='fas fa-plus'></i> Create Product
+                    </Button>
+                </Col>
+            </Row>
 
             {
                 loading

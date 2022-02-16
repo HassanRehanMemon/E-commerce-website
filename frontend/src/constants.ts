@@ -10,12 +10,20 @@ export enum ProductDetail {
     SUCCESS = "PRODUCT_DETAIL_SUCCESS",
     FAIL = "PRODUCT_DETAIL_FAIL",
 }
-    
+
 
 export enum ProductDelete {
     REQUEST = "PRODUCT_DELETE_REQUEST",
     SUCCESS = "PRODUCT_DELETE_SUCCESS",
     FAIL = "PRODUCT_DELETE_FAIL",
+}
+
+
+export enum ProductCreate {
+    REQUEST = "PRODUCT_CREATE_REQUEST",
+    SUCCESS = "PRODUCT_CREATE_SUCCESS",
+    FAIL = "PRODUCT_CREATE_FAIL",
+    RESET = "PRODUCT_CREATE_RESET",
 }
 
 export enum AddToCart {
@@ -76,7 +84,7 @@ export enum OrderList {
     RESET = "ORDER_LIST_RESET",
 
 }
-    
+
 
 export enum OrderPaid {
     REQUEST = "ORDER_PAID_REQUEST",
@@ -85,10 +93,10 @@ export enum OrderPaid {
     RESET = "ORDER_PAID_RESET",
 
 }
-    
+
 
 //---------------Admin
-    
+
 export enum UserList {
     REQUEST = "USER_LIST_REQUEST",
     SUCCESS = "USER_LIST_SUCCESS",
@@ -97,7 +105,7 @@ export enum UserList {
 
 }
 
-    
+
 
 export enum UserEdit {
     REQUEST = "USER_EDIT_REQUEST",
@@ -114,7 +122,7 @@ export enum UserEditDetail {
     RESET = "USER_EDIT_DETAIL_RESET",
 
 }
-    
+
 
 
 export enum UserDelete {

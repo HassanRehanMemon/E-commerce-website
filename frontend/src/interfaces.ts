@@ -48,6 +48,19 @@ export interface productDetailAction {
 }
 
 
+export interface ProductCreateState {
+    product: product,
+    error?: string,
+    loading: boolean,
+    success: boolean
+}
+
+export interface productCraeteAction {
+    type: string
+    payload?: any
+}
+
+//Delete Product
 export interface ProductDeleteState {
     error?: string,
     loading: boolean,
