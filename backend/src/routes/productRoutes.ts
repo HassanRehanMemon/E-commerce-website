@@ -1,28 +1,17 @@
 import express from 'express'
 import asyncHandler from 'express-async-handler'
+import { deleteProductAsAdmin, getProductById, listProduct } from '../controllers/productController';
+import { adminMiddleware, authMiddleware } from '../middleware/authMiddleware';
 import Product from '../models/productModel';
 
 const router = express.Router();
 
-router.get('/', asyncHandler(async (req, res) => {
-    // throw new Error('just an error')
-    res.send(await Product.find())
-}))
+router.route('/')
+    .get(listProduct)
 
-router.get('/:id', asyncHandler(async (req, res) => {
-    const id = req.params.id
-    const product = await Product.findById({ _id: id })
-    if (product) {
-        // throw new Error('just an error')
-        res.send(product)
-
-    } else {
-        res.status(404).json({
-            message: "Product not found"
-        })
-    }
-
-}))
+router.route('/:id')
+    .get(getProductById)
+    .delete(authMiddleware, adminMiddleware, deleteProductAsAdmin)
 
 export default router
 
