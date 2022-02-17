@@ -72,6 +72,20 @@ export interface productDeleteAction {
     payload?: any
 }
 
+
+
+export interface ProductEditState {
+    error: string,
+    loading: boolean,
+    success: boolean
+}
+
+export interface ProductEditAction {
+    type: string,
+    payload: any
+}
+
+
 // ---------------- Cart ---------------
 //// Add to cart reducer
 export interface shippingAddressType {

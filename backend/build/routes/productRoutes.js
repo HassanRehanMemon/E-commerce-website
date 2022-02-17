@@ -12,5 +12,6 @@ router.route('/')
     .post(authMiddleware_1.authMiddleware, authMiddleware_1.adminMiddleware, productController_1.createProductAsAdmin);
 router.route('/:id')
     .get(productController_1.getProductById)
+    .put(authMiddleware_1.authMiddleware, authMiddleware_1.adminMiddleware, productController_1.updateProductAsAdmin)
     .delete(authMiddleware_1.authMiddleware, authMiddleware_1.adminMiddleware, productController_1.deleteProductAsAdmin);
 exports.default = router;

@@ -4,8 +4,9 @@ import { Alert, Button, Container, Form, Row, Col } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router'
 import { Link } from 'react-router-dom'
-import { listDetailProduct } from '../actions/productAction'
+import { listDetailProduct, ProductEditAction } from '../actions/productAction'
 import Loader from '../components/Loader'
+import { ProductDetail, ProductEdit } from '../constants'
 import { State } from '../reducers'
 
 type Props = {}
@@ -26,7 +27,7 @@ const ProductEditScreen = (props: Props) => {
 
     // const { user: userDetail, loading: loadingDetail, error: errorDetail } = useSelector((state: State) => state.userDetail)
     const { user } = useSelector((state: State) => state.userSignIn)
-    // const { success } = useSelector((state: State) => state.userEdit)
+    const { success: successEdit } = useSelector((state: State) => state.productEdit)
     const navigate = useNavigate()
 
 
@@ -37,10 +38,11 @@ const ProductEditScreen = (props: Props) => {
         } else if (!user.isAdmin) {
             navigate('/')
         }
-        // if (success) {
-        //     dispatch({ type: UserEdit.RESET })
-        //     navigate('/admin/users')
-        // } else {
+        if (successEdit) {
+            dispatch({ type: ProductDetail.RESET })
+            dispatch({ type: ProductEdit.RESET })
+            navigate('/admin/products')
+        } else {
 
             if (id && (!product.name || product._id !== id)) {
                 dispatch(listDetailProduct(id))
@@ -54,14 +56,24 @@ const ProductEditScreen = (props: Props) => {
                 setCountInStock(Number(product.countInStock))
                 setDescription(product.description)
             }
-        // }
+        }
 
 
-    }, [user, navigate, dispatch, product])
+    }, [user, navigate, dispatch, product, successEdit])
 
     const submitHandler = (e: React.FormEvent) => {
-        // e.preventDefault()
-        // dispatch(userEditAction(userDetail._id, name, email, isAdmin))
+        e.preventDefault()
+        if (id)
+            dispatch(ProductEditAction(
+                id,
+                name,
+                price,
+                description,
+                // image,
+                brand,
+                category,
+                countInStock,
+            ))
     }
 
 

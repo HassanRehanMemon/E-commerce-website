@@ -1,5 +1,5 @@
 import { Dispatch } from "redux";
-import { ProductCreate, ProductDelete, ProductDetail, ProductList } from "../constants";
+import { ProductCreate, ProductDelete, ProductDetail, ProductEdit, ProductList } from "../constants";
 import axios from 'axios'
 import { product } from "../interfaces";
 import { State } from "../reducers";
@@ -79,7 +79,7 @@ export const createProductAction = () => async (dispatch: Dispatch, getState: ()
                 Authorization: `Bearer ${getState().userSignIn.user.token}`
             }
         }
-        const {data} = await axios.post(
+        const { data } = await axios.post(
             `/api/products/`,
             {},
             config
@@ -98,3 +98,52 @@ export const createProductAction = () => async (dispatch: Dispatch, getState: ()
 
     }
 }
+
+
+
+export const ProductEditAction = (
+    id: string,
+    name: string,
+    price: number,
+    description: string,
+    // image,
+    brand: string,
+    category: string,
+    countInStock: number,
+) => async (dispatch: Dispatch, getState: () => State) => {
+    try {
+        dispatch({ type: ProductEdit.REQUEST })
+        const config = {
+            headers: {
+                Authorization: `Bearer ${getState().userSignIn.user.token}`
+            }
+        }
+        const { data } = await axios.put(
+            `/api/products/${id}`,
+            {
+
+                name,
+                price,
+                description,
+                // image,
+                brand,
+                category,
+                countInStock,
+            },
+            config
+        )
+
+        dispatch({
+            type: ProductEdit.SUCCESS,
+            payload: data
+        })
+
+    } catch (error: any) {
+        dispatch({
+            type: ProductEdit.FAIL,
+            payload: error.response && error.response.data.message
+                ? error.response.data.message
+                : error.message,
+        })
+    }
+};

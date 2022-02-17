@@ -9,6 +9,7 @@ export enum ProductDetail {
     REQUEST = "PRODUCT_DETAIL_REQUEST",
     SUCCESS = "PRODUCT_DETAIL_SUCCESS",
     FAIL = "PRODUCT_DETAIL_FAIL",
+    RESET = "PRODUCT_DETAIL_RESET",
 }
 
 
@@ -24,6 +25,16 @@ export enum ProductCreate {
     SUCCESS = "PRODUCT_CREATE_SUCCESS",
     FAIL = "PRODUCT_CREATE_FAIL",
     RESET = "PRODUCT_CREATE_RESET",
+}
+    
+
+
+export enum ProductEdit {
+    REQUEST = "PRODUCT_EDIT_REQUEST",
+    SUCCESS = "PRODUCT_EDIT_SUCCESS",
+    FAIL = "PRODUCT_EDIT_FAIL",
+    RESET = "PRODUCT_EDIT_RESET",
+
 }
 
 export enum AddToCart {
