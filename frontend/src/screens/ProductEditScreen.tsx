@@ -1,4 +1,5 @@
 
+import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Alert, Button, Container, Form, Row, Col } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
@@ -21,6 +22,7 @@ const ProductEditScreen = (props: Props) => {
     const [price, setPrice] = useState(0)
     const [countInStock, setCountInStock] = useState(0)
     const [image, setImage] = useState('')
+    const [uploading, setUploading] = useState(false)
 
     const dispatch = useDispatch()
     const { product, error: productError, loading: productLoading } = useSelector((state: State) => state.productDetail)
@@ -59,21 +61,68 @@ const ProductEditScreen = (props: Props) => {
         }
 
 
-    }, [user, navigate, dispatch, product, successEdit])
+    }, [user, navigate, dispatch, product, successEdit, id])
+
+
+    const uploadFileHandler = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        // if (e.target instanceof HTMLInputElement)
+        const file = e.target.files
+        if (!file) return
+        const formData = new FormData()
+        setImage(file[0].name)
+        formData.append('image', file[0], file[0].name)
+        setUploading(true)
+
+        try {
+            const config = {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            }
+
+            const { data } = await axios.post('/api/upload', formData, config)
+
+            setImage(data)
+            setUploading(false)
+        } catch (error) {
+            console.error(error)
+            setUploading(false)
+        }
+        console.log(uploading);
+    }
 
     const submitHandler = (e: React.FormEvent) => {
+        // console.log((e.target as HTMLInputElement).dataset)
+        // const form = document.querySelector('form')
+        // if (e.target instanceof HTMLInputElement)
+        //     console.log(e.target);
+        // const formData = new FormData(e.target)
         e.preventDefault()
-        if (id)
+        if (id) {
+            // const formData = new FormData()
+            // formData.append("image", image)
+            // formData.append("id", id)
+            // formData.append("name", name)
+            // formData.append("price", price.toString())
+            // formData.append("description", description)
+            // formData.append("brand", brand)
+            // formData.append("category", category)
+            // formData.append("countInStock", countInStock.toString())
+
+            // // console.log(formData);
+            // formData.forEach((key, value) => console.log(key, value))
+
             dispatch(ProductEditAction(
                 id,
                 name,
                 price,
                 description,
-                // image,
+                image,
                 brand,
                 category,
                 countInStock,
             ))
+        }
     }
 
 
@@ -95,7 +144,7 @@ const ProductEditScreen = (props: Props) => {
                         ) : productError ? (
                             <Alert variant='danger'>{productError}</Alert>
                         ) : (
-                            <Form onSubmit={submitHandler}>
+                            <Form onSubmit={submitHandler} >
                                 <Form.Group controlId='name'>
                                     <Form.Label>Name</Form.Label>
                                     <Form.Control
@@ -119,11 +168,20 @@ const ProductEditScreen = (props: Props) => {
                                 <Form.Group controlId='formFile'>
                                     <Form.Label>Image</Form.Label>
                                     <Form.Control
+                                        type='text'
+                                        // placeholder=''
+                                        value={image}
+                                    onChange={(e) => setImage((e.target.value))}
+                                    ></Form.Control>
+                                    <Form.Control
                                         type='file'
+                                        name='image-file'
                                         placeholder='Enter image url'
                                         defaultValue={image}
+                                        // label={image}
                                         // value={image}
-                                        onChange={(e) => setImage(e.target.value)}
+                                        // onChange={(e) => setImage(e.target.value)}
+                                        onChange={uploadFileHandler}
                                     ></Form.Control>
                                     {/* <Form.File
                                         id='image-file'
@@ -131,7 +189,7 @@ const ProductEditScreen = (props: Props) => {
                                         custom
                                         // onChange={uploadFileHandler}
                                     ></Form.File> */}
-                                    {/* {uploading && <Loader />} */}
+                                    {uploading && <Loader />}
                                 </Form.Group>
 
                                 <Form.Group controlId='brand'>

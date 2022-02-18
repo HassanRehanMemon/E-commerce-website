@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const productRoutes_1 = __importDefault(require("./routes/productRoutes"));
 const userRoute_1 = __importDefault(require("./routes/userRoute"));
+const uploadRoutes_1 = __importDefault(require("./routes/uploadRoutes"));
 const orderRoutes_1 = __importDefault(require("./routes/orderRoutes"));
 const dotenv_1 = __importDefault(require("dotenv"));
 const db_1 = __importDefault(require("./config/db"));
@@ -20,9 +21,11 @@ app.use(body_parser_1.default.urlencoded({ extended: true }));
 app.use('/api/products', productRoutes_1.default);
 app.use('/api/users', userRoute_1.default);
 app.use('/api/orders', orderRoutes_1.default);
+app.use('/api/upload', uploadRoutes_1.default);
 app.use('/api/config/paypal', (req, res) => {
     res.send(process.env.PAYPAL_CLIENT_ID);
 });
+app.use('/uploads', express_1.default.static(path_1.default.join(__dirname, '/uploads')));
 if (process.env.NODE_ENV === "production") {
     const __dirname = path_1.default.resolve();
     app.use(express_1.default.static(path_1.default.join(__dirname, '/frontend/build')));

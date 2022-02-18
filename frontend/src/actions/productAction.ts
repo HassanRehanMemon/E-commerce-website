@@ -106,7 +106,7 @@ export const ProductEditAction = (
     name: string,
     price: number,
     description: string,
-    // image,
+    image: string,
     brand: string,
     category: string,
     countInStock: number,
@@ -115,17 +115,17 @@ export const ProductEditAction = (
         dispatch({ type: ProductEdit.REQUEST })
         const config = {
             headers: {
-                Authorization: `Bearer ${getState().userSignIn.user.token}`
+                // 'Content-Type': 'multipart/form-data',
+                Authorization: `Bearer ${getState().userSignIn.user.token}`,
             }
         }
         const { data } = await axios.put(
             `/api/products/${id}`,
             {
-
                 name,
                 price,
                 description,
-                // image,
+                image,
                 brand,
                 category,
                 countInStock,

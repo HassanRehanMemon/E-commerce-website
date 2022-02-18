@@ -143,3 +143,11 @@ export enum UserDelete {
     FAIL = "USER_DELETE_FAIL",
 }
 
+
+export enum OrderListAsAdmin {
+
+    REQUEST = "ORDER_LIST_ADMIN_REQUEST",
+    SUCCESS = "ORDER_LIST_ADMIN_SUCCESS",
+    FAIL = "ORDER_LIST_ADMIN_FAIL",
+}
+

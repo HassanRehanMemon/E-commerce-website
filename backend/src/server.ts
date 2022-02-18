@@ -1,6 +1,7 @@
 import express, { Request, Response } from "express";
 import prodcutRoutes from './routes/productRoutes'
 import userRoutes from './routes/userRoute'
+import uploadRoutes from './routes/uploadRoutes'
 import orderRoutes from './routes/orderRoutes'
 import mongoose from 'mongoose'
 import dotenv from "dotenv";
@@ -21,10 +22,12 @@ app.use(bp.urlencoded({ extended: true }))
 app.use('/api/products', prodcutRoutes)
 app.use('/api/users', userRoutes)
 app.use('/api/orders', orderRoutes)
+app.use('/api/upload', uploadRoutes)
 app.use('/api/config/paypal', (req: Request, res: Response) => {
     res.send(process.env.PAYPAL_CLIENT_ID)
 })
 
+app.use('/uploads', express.static(path.join(__dirname, '/uploads')))
 
 if (process.env.NODE_ENV === "production") {
     const __dirname = path.resolve()

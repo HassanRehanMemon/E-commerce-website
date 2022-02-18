@@ -1,11 +1,9 @@
 import express from 'express'
-import multer from 'multer';
-import path from 'path';
-import { createProductAsAdmin, deleteProductAsAdmin, getProductById, listProduct, updateProductAsAdmin } from '../controllers/productController';
-import { adminMiddleware, authMiddleware } from '../middleware/authMiddleware';
+import multer from "multer"
+import path from "path"
 
-const router = express.Router();
 
+const router = express.Router()
 type DestinationCallback = (error: Error | null, destination: string) => void
 type FileNameCallback = (error: Error | null, filename: string) => void
 
@@ -21,6 +19,7 @@ const storage = multer.diskStorage({
         )
     },
 })
+
 
 function checkFileType(file: Express.Multer.File, cb: any) {
     const filetypes = /jpg|jpeg|png/
@@ -43,16 +42,12 @@ const upload = multer({
     },
 })
 
-router.route('/')
-    .get(listProduct)
-    .post(authMiddleware, adminMiddleware, createProductAsAdmin)
 
-router.route('/:id')
-    .get(getProductById)
-    .put(authMiddleware, adminMiddleware, updateProductAsAdmin)
-    .delete(authMiddleware, adminMiddleware, deleteProductAsAdmin)
+router.route('/')
+    .post(upload.single('image'), (req, res) => {
+        console.log(`/${req.file?.path}`);
+        res.send(`/${req.file?.path}`)
+    })
+
 
 export default router
-
-
-

@@ -80,3 +80,15 @@ export const updateOrderPaid = expressAsyncHandler(async (req: Request, res: Res
 
     }
 })
+
+
+
+export const listOrdersAsAdmin = expressAsyncHandler(async (req: Request, res: Response) => {
+    const order = await Order.find({})
+    if (!order) {
+        res.status(404)
+        throw new Error('Order Not found')
+    }
+
+    res.json(order)
+})

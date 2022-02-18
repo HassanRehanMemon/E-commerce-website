@@ -75,18 +75,20 @@ export const updateProductAsAdmin = expressAsyncHandler(async (req, res) => {
         name,
         price,
         description,
-        // image,
+        image,
         brand,
         category,
         countInStock,
     } = req.body
+    
+    // console.log('image' , req.file)
 
     console.log(product)
     if (product) {
         product.name = name
         product.price = price
         product.description = description
-        // product.image = image
+        product.image = image
         product.brand = brand
         product.category = category
         product.countInStock = countInStock

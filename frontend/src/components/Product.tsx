@@ -9,7 +9,7 @@ interface Props {
     product: product
 }
 const Product: React.FC<Props> = ({ product }) => {
-    // console.log(product)
+    console.log(product.image)
     return (
         <Card className="my-3 py-3 rounded">
 
