@@ -195,13 +195,13 @@ export const orderDeliverAction = (id: string) => async (dispatch: Dispatch, get
             }
         }
 
-        const { data } = await axios.put(
+        await axios.put(
             `/api/orders/${id}/deliver`,
             {},
             config
         )
 
-        dispatch({ type: OrderDeliver.SUCCESS})
+        dispatch({ type: OrderDeliver.SUCCESS })
 
     } catch (error: any) {
         dispatch({
