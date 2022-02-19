@@ -18,9 +18,8 @@ const OrderListScreen = (props: Props) => {
     const dispatch = useDispatch()
     const { orders, error, loading } = useSelector((state: State) => state.orderListAsAdmin)
 
-    const { product, success: successCreated } = useSelector((state: State) => state.createProduct)
     const { user } = useSelector((state: State) => state.userSignIn)
-    const { success: successDelete } = useSelector((state: State) => state.delteProduct)
+
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -30,12 +29,8 @@ const OrderListScreen = (props: Props) => {
             navigate('/')
         }
 
-        if (successCreated) {
-            navigate(`/admin/product/${product._id}/edit`)
-            dispatch({ type: ProductCreate.RESET })
-        }
         dispatch(orderListAsAdminAction())
-    }, [dispatch, navigate, user, successDelete, successCreated])
+    }, [dispatch, navigate, user])
 
 
     const deleteHandler = (id: string) => {

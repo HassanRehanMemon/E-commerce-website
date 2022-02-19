@@ -69,11 +69,11 @@ export const updateOrderPaid = expressAsyncHandler(async (req: Request, res: Res
         order.isPaid = true
         order.paidAt = Date.now()
         order.paymentResult = {
-            id : req.body.id,
+            id: req.body.id,
             status: req.body.status,
             update_time: req.body.update_time,
             email_address: req.body.payer.email_address
-            
+
         }
         const updated = await order.save()
         res.json(updated)
@@ -92,3 +92,24 @@ export const listOrdersAsAdmin = expressAsyncHandler(async (req: Request, res: R
 
     res.json(order)
 })
+
+
+
+export const deliverOrdersAsAdmin = expressAsyncHandler(async (req: Request, res: Response) => {
+    const order = await Order.findById(req.params.id)
+    
+    order.deliveredAt = Date.now()
+    order.isDelivered = true
+    
+    const updatedOrder = await order.save()
+
+    if (!order) {
+        res.status(404)
+        throw new Error('Order Not found')
+    } else {
+
+        res.json(updatedOrder)
+    }
+
+})
+

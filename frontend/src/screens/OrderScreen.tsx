@@ -19,7 +19,7 @@ const OrderScreen = (props: Props) => {
   const dispatch = useDispatch()
   const { order, loading: orderLoading, error: orderError } = useSelector((state: State) => state.orderDetail)
   const { user, } = useSelector((state: State) => state.userSignIn)
-  const {  success: PaySuccess, error: payError } = useSelector((state: State) => state.orderPaid)
+  const { success: PaySuccess, error: payError } = useSelector((state: State) => state.orderPaid)
   const { id } = useParams()
   console.log(order);
 
@@ -101,8 +101,11 @@ const OrderScreen = (props: Props) => {
                     {order.shippingAddress.address}, {order.shippingAddress.city}, {order.shippingAddress.country}, {order.shippingAddress.postalCode}
                   </p>
                   {
-                    !order.isDelivered &&
-                    <Alert variant={'danger'}>Not Delivered</Alert>
+                    !order.isDelivered
+
+                      ? <Alert variant={'danger'}>Not Delivered</Alert>
+                      : <Alert variant={'success'}>Deliverd</Alert>
+
                   }
                 </ListGroup.Item>
 
@@ -181,6 +184,7 @@ const OrderScreen = (props: Props) => {
                   )
 
                 }
+                
               </ListGroup>
             </Card>
           </Col>
