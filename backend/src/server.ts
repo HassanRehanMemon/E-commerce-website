@@ -55,5 +55,5 @@ app.use(errorHandler)
 const PORT = parseInt(process.env.port as string, 10) || 5000
 
 app.listen(PORT as number, '0.0.0.0', () => {
-    console.log('starting listening')
+    console.log(`starting listening on ${PORT}`)
 })
