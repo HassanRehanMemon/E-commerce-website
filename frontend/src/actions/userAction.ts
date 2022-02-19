@@ -192,7 +192,7 @@ export const userDeleteAction = (id: string) => async (dispatch: Dispatch, getSt
                 Authorization: `Bearer ${getState().userSignIn.user.token}`
             }
         }
-        const { data } = await axios.delete(
+        await axios.delete(
             `/api/users/${id}`,
             config
         )

@@ -30,7 +30,7 @@ const ProductScreen = () => {
         }
 
 
-    }, [dispatch, id, reviewSuccess])
+    }, [dispatch, id, reviewSuccess, product._id])
 
     const submitHandler = (e: React.FormEvent) => {
         if (id) {

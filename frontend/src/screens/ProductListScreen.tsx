@@ -27,14 +27,14 @@ const ProductListScreen = (props: Props) => {
         } else if (!user.isAdmin) {
             navigate('/')
         }
-        
-        if (successCreated){
+
+        if (successCreated) {
             navigate(`/admin/product/${product._id}/edit`)
-            dispatch({type: ProductCreate.RESET})
+            dispatch({ type: ProductCreate.RESET })
         }
         dispatch(listProducts())
-        dispatch({type: ProductDelete.RESET})
-    }, [dispatch, navigate, user, successDelete, successCreated])
+        dispatch({ type: ProductDelete.RESET })
+}, [dispatch, navigate, user, successDelete, successCreated, product._id])
 
 
     const deleteHandler = (id: string) => {
