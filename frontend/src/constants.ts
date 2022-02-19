@@ -152,5 +152,13 @@ export enum OrderListAsAdmin {
     RESET = "ORDER_LIST_ADMIN_RESET",
 }
 
+export enum OrderDeliver {
+
+    REQUEST = "ORDER_DELIVER_REQUEST",
+    SUCCESS = "ORDER_DELIVER_SUCCESS",
+    FAIL = "ORDER_DELIVER_FAIL",
+    RESET = "ORDER_DELIVER_RESET",
+}
+
 
     

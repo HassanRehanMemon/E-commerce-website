@@ -237,6 +237,14 @@ export interface OrderPaidState {
 
 }
 
+
+export interface OrderDeliverState {
+    error?: string,
+    loading: boolean
+    success: boolean
+
+}
+
 export interface OrderPaidAction {
     type: string
     payload?: any
@@ -289,6 +297,12 @@ export interface UserDeleteState {
 }
 
 export interface UserDeleteAction {
+    type: string,
+    payload: any
+}
+
+
+export interface typeAction {
     type: string,
     payload: any
 }

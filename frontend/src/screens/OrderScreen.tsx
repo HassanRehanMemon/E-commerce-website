@@ -2,13 +2,13 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router'
 import { State } from '../reducers'
-import { Container, Row, Col, Alert, ListGroup, Image, Card } from 'react-bootstrap'
+import { Container, Row, Col, Alert, ListGroup, Image, Card, Button } from 'react-bootstrap'
 import Loader from '../components/Loader'
-import { orderDetailAction, orderPaidAction } from '../actions/orderAction'
+import { orderDeliverAction, orderDetailAction, orderPaidAction } from '../actions/orderAction'
 import { Link } from 'react-router-dom'
 import { PayPalButton } from 'react-paypal-button-v2'
 import axios from 'axios'
-import { OrderPaid } from '../constants'
+import { OrderDeliver, OrderPaid } from '../constants'
 
 type Props = {}
 
@@ -18,6 +18,8 @@ const OrderScreen = (props: Props) => {
 
   const dispatch = useDispatch()
   const { order, loading: orderLoading, error: orderError } = useSelector((state: State) => state.orderDetail)
+  const { loading: deliverLoading, error: deliverError, success: deliverSuccess } = useSelector((state: State) => state.orderDeliver)
+
   const { user, } = useSelector((state: State) => state.userSignIn)
   const { success: PaySuccess, error: payError } = useSelector((state: State) => state.orderPaid)
   const { id } = useParams()
@@ -45,9 +47,10 @@ const OrderScreen = (props: Props) => {
     }
 
 
-    if ((user.token && id) && (!order.totalPrice || PaySuccess || order._id !== id)) {
+    if ((user.token && id) && (!order.totalPrice || PaySuccess || deliverSuccess || order._id !== id)) {
 
       dispatch({ type: OrderPaid.RESET })
+      dispatch({ type: OrderDeliver.RESET })
       console.log(`fetching ${id}`);
       dispatch(orderDetailAction(id, user.token))
     } else if (!order.isPaid) {
@@ -60,7 +63,7 @@ const OrderScreen = (props: Props) => {
     else {
       console.log('something went wrong');
     }
-  }, [dispatch, id, user, order, PaySuccess, payPalSDK])
+  }, [dispatch, id, user, order, PaySuccess, payPalSDK, deliverSuccess])
 
   const payPalResultHandler = (result: any) => {
     if (id) {
@@ -69,11 +72,18 @@ const OrderScreen = (props: Props) => {
 
   }
 
+  const deliverHandler = () => {
+    if (id) {
+      dispatch(orderDeliverAction(id))
+    }
+  }
+
   return (
     // <div>{order.orderItems}</div>
 
     <Container>
       {payError !== "" && <Alert variant={'danger'}>{payError}</Alert>}
+      {deliverError !== "" && <Alert variant={'danger'}>{deliverError}</Alert>}
       {orderLoading ? <Loader /> : (
         <Row className={'justify-content-md-center'}>
           <Col xs={12} md={8}>
@@ -184,7 +194,18 @@ const OrderScreen = (props: Props) => {
                   )
 
                 }
-                
+                {
+                  user && user.isAdmin && order.isPaid && !order.isDelivered
+                  && (
+                    deliverLoading ? <Loader /> :
+                      <Button 
+                      className='btn btn-block'
+                      onClick={deliverHandler}
+                      >
+                        Mark as Deliver
+                      </Button>
+                  )
+                }
               </ListGroup>
             </Card>
           </Col>
