@@ -4,11 +4,9 @@ import { Alert, Button, Col, Container, Row, Table } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router'
 import { LinkContainer } from 'react-router-bootstrap'
-import { createProductAction, deleteProductAction, listProducts } from '../actions/productAction'
+import { createProductAction, deleteProductAction, } from '../actions/productAction'
 import Loader from '../components/Loader'
 import { State } from '../reducers'
-import { product } from '../interfaces'
-import { ProductCreate } from '../constants'
 import { orderListAsAdminAction } from '../actions/orderAction'
 
 type Props = {}
@@ -33,13 +31,13 @@ const OrderListScreen = (props: Props) => {
     }, [dispatch, navigate, user])
 
 
-    const deleteHandler = (id: string) => {
-        dispatch(deleteProductAction(id))
-    }
-    const createProductHandler = () => {
-        dispatch(createProductAction())
+    // const deleteHandler = (id: string) => {
+    //     dispatch(deleteProductAction(id))
+    // }
+    // const createProductHandler = () => {
+    //     dispatch(createProductAction())
 
-    }
+    // }
 
     return (
         <Container>
