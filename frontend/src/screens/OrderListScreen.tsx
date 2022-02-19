@@ -9,13 +9,14 @@ import Loader from '../components/Loader'
 import { State } from '../reducers'
 import { product } from '../interfaces'
 import { ProductCreate } from '../constants'
+import { orderListAsAdminAction } from '../actions/orderAction'
 
 type Props = {}
 
 const OrderListScreen = (props: Props) => {
 
     const dispatch = useDispatch()
-    const { products, error, loading } = useSelector((state: State) => state.productList)
+    const { orders, error, loading } = useSelector((state: State) => state.orderListAsAdmin)
 
     const { product, success: successCreated } = useSelector((state: State) => state.createProduct)
     const { user } = useSelector((state: State) => state.userSignIn)
@@ -28,12 +29,12 @@ const OrderListScreen = (props: Props) => {
         } else if (!user.isAdmin) {
             navigate('/')
         }
-        
-        if (successCreated){
+
+        if (successCreated) {
             navigate(`/admin/product/${product._id}/edit`)
-            dispatch({type: ProductCreate.RESET})
+            dispatch({ type: ProductCreate.RESET })
         }
-        dispatch(listProducts())
+        dispatch(orderListAsAdminAction())
     }, [dispatch, navigate, user, successDelete, successCreated])
 
 
@@ -50,12 +51,7 @@ const OrderListScreen = (props: Props) => {
 
             <Row className='align-items-center'>
                 <Col>
-                    <h1>Products</h1>
-                </Col>
-                <Col className='text-right'>
-                    <Button className='my-3' onClick={createProductHandler}>
-                        <i className='fas fa-plus'></i> Create Product
-                    </Button>
+                    <h1>Orders</h1>
                 </Col>
             </Row>
 
@@ -69,37 +65,40 @@ const OrderListScreen = (props: Props) => {
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>NAME</th>
-                                    <th>PRICE</th>
-                                    <th>CATEGORY</th>
-                                    <th>BRAND</th>
+                                    <th>DATE</th>
+                                    <th>TOTAL</th>
+                                    <th>PAID</th>
+                                    <th>DELIVERED</th>
                                     <th></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {products && products.map((product: product) => (
-                                    <tr key={product._id}>
-                                        <td>{product._id}</td>
-                                        <td>{product.name}</td>
-                                        <td>{product.price}</td>
-                                        <td>{product.category}</td>
-                                        <td>{product.brand}</td>
-
+                                {orders?.map((order) => (
+                                    <tr key={order._id}>
+                                        <td>{order._id}</td>
+                                        <td>{order.createdAt.substring(0, 10)}</td>
+                                        <td>{order.totalPrice.toFixed(2)}</td>
                                         <td>
-                                            <LinkContainer to={`/admin/product/${product._id}/edit`}>
-                                                <Button variant='light' className='btn-sm'>
-                                                    <i className='fas fa-edit'></i>
+                                            {order.isPaid ? (
+                                                order.paidAt.substring(0, 10)
+                                            ) : (
+                                                <i className='fas fa-times' style={{ color: 'red' }}></i>
+                                            )}
+                                        </td>
+                                        <td>
+                                            {order.isDelivered ? (
+                                                order.deliveredAt.substring(0, 10)
+                                            ) : (
+                                                <i className='fas fa-times' style={{ color: 'red' }}></i>
+                                            )}
+                                        </td>
+                                        <td>
+                                            <LinkContainer to={`/order/${order._id}`}>
+                                                <Button className='btn-sm' variant='light'>
+                                                    Details
                                                 </Button>
                                             </LinkContainer>
-                                            <Button
-                                                variant='danger'
-                                                className='btn-sm'
-                                                onClick={() => deleteHandler(product._id)}
-                                            >
-                                                <i className='fas fa-trash'></i>
-                                            </Button>
                                         </td>
-
                                     </tr>
                                 ))}
                             </tbody>

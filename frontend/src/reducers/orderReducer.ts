@@ -1,4 +1,4 @@
-import { OrderDetail, OrderList, OrderPaid, PlaceOrder } from "../constants"
+import { OrderDetail, OrderList, OrderListAsAdmin, OrderPaid, PlaceOrder } from "../constants"
 import { FetchedOrderType, OrderDetailAction, OrderDetailState, OrderListAction, OrderListState, OrderPaidAction, OrderPaidState, orderType, PlaceOrderAction, PlaceOrderState } from "../interfaces"
 
 const initState: PlaceOrderState = {
@@ -162,10 +162,53 @@ export const orderPaidReducer = (state: OrderPaidState = initOrderListState, act
                 success: false,
                 loading: false,
             }
-            
-        case OrderPaid.RESET :
+
+        case OrderPaid.RESET:
             return initOrderPaidState
 
+
+        default:
+            return state
+    }
+
+}
+
+
+const initOrderListAsAdmin: OrderListState = {
+
+    orders: null as unknown as FetchedOrderType[],
+    error: "",
+    loading: true,
+    success: false,
+
+}
+export const orderListAsAdminReducer = (state: OrderListState = initOrderListAsAdmin, action: OrderListAction) => {
+
+    switch (action.type) {
+
+
+        case OrderListAsAdmin.REQUEST:
+            return { ...state, loading: true, error: "" }
+
+        case OrderListAsAdmin.SUCCESS:
+            return {
+                ...state,
+                orders: action.payload as FetchedOrderType[],
+                loading: false,
+                success: true
+            }
+
+        case OrderListAsAdmin.FAIL:
+            return {
+                ...state,
+                error: action.payload,
+                success: false,
+                loading: false,
+            }
+
+
+        case OrderListAsAdmin.RESET:
+            return initOrderListAsAdmin
 
         default:
             return state

@@ -1,7 +1,8 @@
 import axios from "axios"
 import { Dispatch } from "redux"
-import { OrderDetail, OrderList, OrderPaid, PlaceOrder } from "../constants"
+import { OrderDetail, OrderList, OrderListAsAdmin, OrderPaid, PlaceOrder } from "../constants"
 import { addToCartProduct, shippingAddressType } from "../interfaces"
+import { State } from "../reducers"
 
 
 export const placeOrderAction =
@@ -133,11 +134,44 @@ export const orderPaidAction = (id: string, token: string, paymentResult: any) =
             config
         )
 
-        dispatch({ type: OrderPaid.SUCCESS, payload: data})
+        dispatch({ type: OrderPaid.SUCCESS, payload: data })
 
     } catch (error: any) {
         dispatch({
             type: OrderPaid.FAIL,
+            payload: error.response && error.response.data.message
+                ? error.response.data.message
+                : error.message,
+
+        })
+
+    }
+}
+
+
+
+export const orderListAsAdminAction = () => async (dispatch: Dispatch, getState: () => State) => {
+    try {
+        dispatch({ type: OrderListAsAdmin.REQUEST })
+
+        const config = {
+            headers: {
+
+                'Content-type': 'application/json',
+                Authorization: `Bearer ${getState().userSignIn.user.token}`
+            }
+        }
+
+        const { data } = await axios.get(
+            '/api/orders',
+            config
+        )
+
+        dispatch({ type: OrderListAsAdmin.SUCCESS, payload: data })
+
+    } catch (error: any) {
+        dispatch({
+            type: OrderListAsAdmin.FAIL,
             payload: error.response && error.response.data.message
                 ? error.response.data.message
                 : error.message,
