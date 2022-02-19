@@ -17,8 +17,8 @@ connectDB()
 app.use(bp.json())
 app.use(bp.urlencoded({ extended: true }))
 
-if (process.env.NODE_ENV !== "production"){
-app.use(morgan('dev'))
+if (process.env.NODE_ENV !== "production") {
+    app.use(morgan('dev'))
 }
 
 
@@ -54,6 +54,6 @@ app.use(errorHandler)
 
 const PORT = parseInt(process.env.port as string, 10) || 5000
 
-app.listen(PORT, () => {
+app.listen(PORT as number, '0.0.0.0', () => {
     console.log('starting listening')
 })
