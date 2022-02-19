@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { State } from '../reducers';
 import { LinkContainer } from 'react-router-bootstrap';
 import { signOutAction } from '../actions/userAction';
-import { PlaceOrder, AddToCart } from '../constants';
 
 const Header = () => {
 
@@ -13,8 +12,6 @@ const Header = () => {
 
     const signOutHandler = () => {
         dispatch(signOutAction())
-        dispatch({ type: PlaceOrder.RESET })
-        dispatch({ type: AddToCart.RESET })
 
     }
 
@@ -46,8 +43,8 @@ const Header = () => {
                                     <Nav.Link ><i className="fas fa-user"></i> Sign In</Nav.Link>
                                 </LinkContainer>
                             }
-                            {(user !== null && user.isAdmin ) && 
-                                
+                            {(user !== null && user.isAdmin) &&
+
                                 <NavDropdown title={"Admin"} id="navbarScrollingDropdown">
                                     <LinkContainer to="/admin/users">
                                         <NavDropdown.Item >User List</NavDropdown.Item>

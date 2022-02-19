@@ -1,6 +1,6 @@
 import axios from "axios";
 import { Dispatch } from "redux";
-import { UserDelete, UserEdit, UserEditDetail, UserList, UserSingIn, UserSingUp } from "../constants";
+import { AddToCart, OrderDeliver, OrderList, OrderListAsAdmin, PlaceOrder, UserDelete, UserEdit, UserEditDetail, UserList, UserSingIn, UserSingUp } from "../constants";
 import { State } from "../reducers";
 
 
@@ -77,6 +77,15 @@ export const signOutAction = () => (dispatch: Dispatch) => {
     dispatch({
         type: UserSingIn.LOGOUT
     })
+
+    dispatch({ type: PlaceOrder.RESET })
+    dispatch({ type: AddToCart.RESET })
+    dispatch({ type: OrderList.RESET })
+    dispatch({ type: UserList.RESET })
+    dispatch({ type: UserEdit.RESET })
+    dispatch({ type: UserEditDetail.RESET })
+    dispatch({ type: OrderListAsAdmin.RESET })
+    dispatch({ type: OrderDeliver.RESET })
     console.log('over hesre');
 }
 
