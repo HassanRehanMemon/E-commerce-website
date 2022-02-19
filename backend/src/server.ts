@@ -3,7 +3,6 @@ import prodcutRoutes from './routes/productRoutes'
 import userRoutes from './routes/userRoute'
 import uploadRoutes from './routes/uploadRoutes'
 import orderRoutes from './routes/orderRoutes'
-import mongoose from 'mongoose'
 import dotenv from "dotenv";
 import connectDB from "./config/db";
 import { errorHandler, notFound } from "./middleware/errorMiddleware";
@@ -53,7 +52,7 @@ if (process.env.NODE_ENV === "production") {
 app.use(notFound)
 app.use(errorHandler)
 
-const PORT = process.env.port || 5000
+const PORT = parseInt(process.env.port as string, 10) || 5000
 
 app.listen(PORT, () => {
     console.log('starting listening')
