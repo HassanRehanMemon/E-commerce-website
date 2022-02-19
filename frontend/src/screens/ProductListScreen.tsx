@@ -7,7 +7,7 @@ import { createProductAction, deleteProductAction, listProducts } from '../actio
 import Loader from '../components/Loader'
 import { State } from '../reducers'
 import { product } from '../interfaces'
-import { ProductCreate } from '../constants'
+import { ProductCreate, ProductDelete } from '../constants'
 
 type Props = {}
 
@@ -33,6 +33,7 @@ const ProductListScreen = (props: Props) => {
             dispatch({type: ProductCreate.RESET})
         }
         dispatch(listProducts())
+        dispatch({type: ProductDelete.RESET})
     }, [dispatch, navigate, user, successDelete, successCreated])
 
 

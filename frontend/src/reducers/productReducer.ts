@@ -70,6 +70,9 @@ export const deleteProductReducer = (state: ProductDeleteState = initProductDele
         case (ProductDelete.FAIL):
             return { ...state, error: action.payload, loading: false }
 
+        case (ProductDelete.RESET):
+            return initProductDelete
+
         default:
             return state
     }

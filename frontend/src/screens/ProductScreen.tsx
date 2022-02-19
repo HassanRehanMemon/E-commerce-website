@@ -33,7 +33,6 @@ const ProductScreen = () => {
     }, [dispatch, id, reviewSuccess])
 
     const submitHandler = (e: React.FormEvent) => {
-        e.preventDefault()
         if (id) {
 
             dispatch(AddReivewAction(id, rating, comment))
@@ -122,8 +121,8 @@ const ProductScreen = () => {
                                         </ListGroup>
                                     </Col>
                                 </Row>
-                                <Row>
-                                    <Col md={6}>
+                                <Row className='justify-content-md-center mt-5'>
+                                    <Col md={8} lg={8}>
                                         <h2>Reviews</h2>
                                         {product.reviews.length === 0 && <Alert>No Reviews</Alert>}
                                         <ListGroup variant='flush'>
@@ -150,7 +149,7 @@ const ProductScreen = () => {
                                                     <Form onSubmit={submitHandler}>
                                                         <Form.Group controlId='rating'>
                                                             <Form.Label>Rating</Form.Label>
-                                                            <Form.Control
+<Form.Control
                                                                 as='select'
                                                                 value={rating}
                                                                 onChange={(e) => setRating(e.target.value)}
