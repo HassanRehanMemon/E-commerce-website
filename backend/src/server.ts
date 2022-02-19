@@ -9,6 +9,7 @@ import connectDB from "./config/db";
 import { errorHandler, notFound } from "./middleware/errorMiddleware";
 import bp from "body-parser";
 import path from "path";
+import morgan from 'morgan'
 
 const app = express();
 dotenv.config()
@@ -16,6 +17,10 @@ connectDB()
 
 app.use(bp.json())
 app.use(bp.urlencoded({ extended: true }))
+
+if (process.env.NODE_ENV !== "production"){
+app.use(morgan('dev'))
+}
 
 
 

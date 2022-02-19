@@ -13,11 +13,15 @@ const db_1 = __importDefault(require("./config/db"));
 const errorMiddleware_1 = require("./middleware/errorMiddleware");
 const body_parser_1 = __importDefault(require("body-parser"));
 const path_1 = __importDefault(require("path"));
+const morgan_1 = __importDefault(require("morgan"));
 const app = (0, express_1.default)();
 dotenv_1.default.config();
 (0, db_1.default)();
 app.use(body_parser_1.default.json());
 app.use(body_parser_1.default.urlencoded({ extended: true }));
+if (process.env.NODE_ENV !== "production") {
+    app.use((0, morgan_1.default)('dev'));
+}
 app.use('/api/products', productRoutes_1.default);
 app.use('/api/users', userRoute_1.default);
 app.use('/api/orders', orderRoutes_1.default);

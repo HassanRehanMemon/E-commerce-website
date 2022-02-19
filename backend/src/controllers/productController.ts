@@ -80,7 +80,7 @@ export const updateProductAsAdmin = expressAsyncHandler(async (req, res) => {
         category,
         countInStock,
     } = req.body
-    
+
     // console.log('image' , req.file)
 
     console.log(product)
@@ -93,6 +93,45 @@ export const updateProductAsAdmin = expressAsyncHandler(async (req, res) => {
         product.category = category
         product.countInStock = countInStock
 
+        const updatedProduct = await product.save()
+        res.json(updatedProduct)
+    } else {
+        res.status(404)
+        throw new Error('Could not update product')
+    }
+})
+
+export const addReview = expressAsyncHandler(async (req, res) => {
+    // res.send('Success')
+    const product = await Product.findById(req.params.id)
+    const {
+        rating, comment
+    } = req.body
+
+    // console.log('image' , req.file)
+
+    // console.log(product)
+    if (product) {
+
+        //check if already reviewd
+        const reviewd = product.reviews.find((review: any) =>
+            review.user.toString() === req.body.user._id.toString()
+        )
+        if (reviewd) {
+            res.status(404)
+            throw new Error("Already reviewd")
+        }
+
+
+        product.reviews.push({
+            name: req.body.user.name,
+            rating, comment,
+            user: req.body.user._id
+        })
+        product.numReviews = product.reviews.length
+        product.rating = product.reviews.reduce((acc: any, review: { rating: any; }) =>
+            acc + review.rating, 0
+        ) / product.reviews.length
         const updatedProduct = await product.save()
         res.json(updatedProduct)
     } else {

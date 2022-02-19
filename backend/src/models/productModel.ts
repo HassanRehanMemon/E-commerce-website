@@ -1,8 +1,9 @@
 import mongoose from 'mongoose'
 
-const reviewSchema = new mongoose.Schema({
+export const reviewSchema = new mongoose.Schema({
    name: { type: String, required: true },
    rating: { type: Number, required: true },
+   comment: { type: String, required: true },
    user: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
@@ -25,7 +26,7 @@ const productSchema = new mongoose.Schema({
    price: { type: Number, required: true, default: 0.0 },
    countInStock: { type: Number, required: true, default: 0.0 },
    rating: { type: Number, required: true, default: 0.0 },
-   numReiviews: { type: Number, required: true, default: 0.0 },
+   numReviews: { type: Number, required: true, default: 0.0 },
 
    reviews: [reviewSchema],
 

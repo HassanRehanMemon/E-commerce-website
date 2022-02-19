@@ -42,4 +42,6 @@ router.route('/:id')
     .get(productController_1.getProductById)
     .put(authMiddleware_1.authMiddleware, authMiddleware_1.adminMiddleware, productController_1.updateProductAsAdmin)
     .delete(authMiddleware_1.authMiddleware, authMiddleware_1.adminMiddleware, productController_1.deleteProductAsAdmin);
+router.route('/:id/review')
+    .post(authMiddleware_1.authMiddleware, productController_1.addReview);
 exports.default = router;
