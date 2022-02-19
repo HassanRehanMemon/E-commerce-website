@@ -86,6 +86,12 @@ export interface ProductEditAction {
 }
 
 
+export interface AddReviewState {
+    error: string,
+    loading: boolean,
+    success: boolean
+}
+
 // ---------------- Cart ---------------
 //// Add to cart reducer
 export interface shippingAddressType {

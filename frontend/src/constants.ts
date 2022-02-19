@@ -26,7 +26,7 @@ export enum ProductCreate {
     FAIL = "PRODUCT_CREATE_FAIL",
     RESET = "PRODUCT_CREATE_RESET",
 }
-    
+
 
 
 export enum ProductEdit {
@@ -34,6 +34,15 @@ export enum ProductEdit {
     SUCCESS = "PRODUCT_EDIT_SUCCESS",
     FAIL = "PRODUCT_EDIT_FAIL",
     RESET = "PRODUCT_EDIT_RESET",
+
+}
+
+
+export enum AddReview {
+    REQUEST = "ADD_REVIEW_REQUEST",
+    SUCCESS = "ADD_REVIEW_SUCCESS",
+    FAIL = "ADD_REVIEW_FAIL",
+    RESET = "ADD_REVIEW_RESET",
 
 }
 
@@ -161,4 +170,4 @@ export enum OrderDeliver {
 }
 
 
-    
+

@@ -1,5 +1,5 @@
 import { Dispatch } from "redux";
-import { ProductCreate, ProductDelete, ProductDetail, ProductEdit, ProductList } from "../constants";
+import { AddReview, ProductCreate, ProductDelete, ProductDetail, ProductEdit, ProductList } from "../constants";
 import axios from 'axios'
 import { product } from "../interfaces";
 import { State } from "../reducers";
@@ -141,6 +141,44 @@ export const ProductEditAction = (
     } catch (error: any) {
         dispatch({
             type: ProductEdit.FAIL,
+            payload: error.response && error.response.data.message
+                ? error.response.data.message
+                : error.message,
+        })
+    }
+};
+
+
+
+export const AddReivewAction = (
+    id: string,
+    rating: string,
+    comment: string
+) => async (dispatch: Dispatch, getState: () => State) => {
+    try {
+        dispatch({ type: AddReview.REQUEST })
+        const config = {
+            headers: {
+                // 'Content-Type': 'multipart/form-data',
+                Authorization: `Bearer ${getState().userSignIn.user.token}`,
+            }
+        }
+        const { data } = await axios.post(
+            `/api/products/${id}/review`,
+            {
+                rating, comment
+            },
+            config
+        )
+
+        dispatch({
+            type: AddReview.SUCCESS,
+            payload: data
+        })
+
+    } catch (error: any) {
+        dispatch({
+            type: AddReview.FAIL,
             payload: error.response && error.response.data.message
                 ? error.response.data.message
                 : error.message,

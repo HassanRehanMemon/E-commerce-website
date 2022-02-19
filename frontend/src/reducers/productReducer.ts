@@ -1,5 +1,5 @@
-import { ProductCreate, ProductDelete, ProductDetail, ProductEdit, ProductList } from '../constants';
-import { product, ProductCreateState, ProductDeleteState, productDetailAction, ProductDetailState, ProductEditAction, ProductEditState, ProductListAction, ProductListState } from '../interfaces';
+import { AddReview, ProductCreate, ProductDelete, ProductDetail, ProductEdit, ProductList } from '../constants';
+import { AddReviewState, product, ProductCreateState, ProductDeleteState, productDetailAction, ProductDetailState, ProductEditAction, ProductEditState, ProductListAction, ProductListState, typeAction } from '../interfaces';
 
 
 
@@ -53,7 +53,7 @@ export const listProductDetails = (state: ProductDetailState = initProductDetail
 
 }
 
-const initProductDelete : ProductDeleteState  = {
+const initProductDelete: ProductDeleteState = {
     error: "",
     loading: false,
     success: false
@@ -76,7 +76,7 @@ export const deleteProductReducer = (state: ProductDeleteState = initProductDele
 
 }
 
-const initProductCreate : ProductCreateState  = {
+const initProductCreate: ProductCreateState = {
     error: "",
     loading: false,
     success: false,
@@ -93,7 +93,7 @@ export const createProductReducer = (state: ProductCreateState = initProductCrea
 
         case (ProductCreate.FAIL):
             return { ...state, error: action.payload, loading: false }
-            
+
         case (ProductCreate.RESET):
             return initProductCreate
 
@@ -125,6 +125,34 @@ export const ProductEditReducer = (state: ProductEditState = initProductEditStat
 
         case (ProductEdit.RESET):
             return initProductListState
+
+
+        default:
+            return state
+    }
+};
+
+
+const initAddReviewState: AddReviewState = {
+    success: false,
+    error: "",
+    loading: false
+}
+
+
+export const AddReviewReducer = (state: AddReviewState = initAddReviewState, action: typeAction) => {
+    switch (action.type) {
+        case (AddReview.REQUEST):
+            return { ...state, loading: true, error: "", success: false }
+
+        case (AddReview.SUCCESS):
+            return { ...state, success: true, loading: false }
+
+        case (AddReview.FAIL):
+            return { ...state, error: action.payload, loading: false }
+
+        case (AddReview.RESET):
+            return initAddReviewState
 
 
         default:
