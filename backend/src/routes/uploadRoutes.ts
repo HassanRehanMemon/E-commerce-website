@@ -1,7 +1,7 @@
 import express from 'express'
 import multer from "multer"
 import path from "path"
-
+import fs from 'fs'
 
 const router = express.Router()
 type DestinationCallback = (error: Error | null, destination: string) => void
@@ -10,6 +10,10 @@ type FileNameCallback = (error: Error | null, filename: string) => void
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
+        const dir = 'uploads/'
+        if (!fs.existsSync(dir)){
+            fs.mkdirSync(dir);
+        }
         cb(null, 'uploads/')
     },
     filename: (req, file, cb) => {

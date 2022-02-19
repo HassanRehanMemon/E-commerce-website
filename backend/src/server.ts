@@ -27,7 +27,7 @@ app.use('/api/config/paypal', (req: Request, res: Response) => {
     res.send(process.env.PAYPAL_CLIENT_ID)
 })
 
-app.use('/uploads', express.static(path.join(__dirname, '/uploads')))
+app.use('/uploads', express.static(path.join(__dirname, '/../../uploads/')))
 
 if (process.env.NODE_ENV === "production") {
     const __dirname = path.resolve()
@@ -39,7 +39,8 @@ if (process.env.NODE_ENV === "production") {
 } else {
 
     app.get('/', (req, res) => {
-        res.send('Api is running ' + __dirname)
+        res.sendFile(path.join(__dirname + '/../../uploads/image-1645260047444.png'))
+        // res.send('Api is running ' + __dirname)
     })
 }
 

@@ -25,7 +25,7 @@ app.use('/api/upload', uploadRoutes_1.default);
 app.use('/api/config/paypal', (req, res) => {
     res.send(process.env.PAYPAL_CLIENT_ID);
 });
-app.use('/uploads', express_1.default.static(path_1.default.join(__dirname, '/uploads')));
+app.use('/uploads', express_1.default.static(path_1.default.join(__dirname, '/../../uploads/')));
 if (process.env.NODE_ENV === "production") {
     const __dirname = path_1.default.resolve();
     app.use(express_1.default.static(path_1.default.join(__dirname, '/frontend/build')));
@@ -35,7 +35,8 @@ if (process.env.NODE_ENV === "production") {
 }
 else {
     app.get('/', (req, res) => {
-        res.send('Api is running ' + __dirname);
+        res.sendFile(path_1.default.join(__dirname + '/../../uploads/image-1645260047444.png'));
+        // res.send('Api is running ' + __dirname)
     });
 }
 app.use(errorMiddleware_1.notFound);
