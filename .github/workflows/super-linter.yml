@@ -30,9 +30,9 @@ jobs:
       - run: npm ci --prefix frontend
       - run: npm run build --prefix frontend
 
-      - name: Lint Code Base
-        uses: github/super-linter@v4
-        env:
-          VALIDATE_ALL_CODEBASE: false
-          DEFAULT_BRANCH: master
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#       - name: Lint Code Base
+#         uses: github/super-linter@v4
+#         env:
+#           VALIDATE_ALL_CODEBASE: false
+#           DEFAULT_BRANCH: master
+#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
