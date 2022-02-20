@@ -4,8 +4,6 @@ import path from 'path'
 import fs from 'fs'
 
 const router = express.Router()
-type DestinationCallback = (error: Error | null, destination: string) => void
-type FileNameCallback = (error: Error | null, filename: string) => void
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -18,7 +16,7 @@ const storage = multer.diskStorage({
   filename: (req, file, cb) => {
     cb(
       null,
-            `${file.fieldname}-${Date.now()}${path.extname(file.originalname)}`
+      `${file.fieldname}-${Date.now()}${path.extname(file.originalname)}`
     )
   }
 })

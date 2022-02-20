@@ -20,7 +20,7 @@ const importData = async () => {
       return { ...product, user: admin }
     })
 
-    const uploaded = await Product.insertMany(sampleProducts)
+    await Product.insertMany(sampleProducts)
     console.log('Data inserted succefully')
 
     process.exit()
@@ -43,7 +43,7 @@ const deleteData = async () => {
   }
 }
 
-if (process.argv[2] == '-d') {
+if (process.argv[2] === '-d') {
   deleteData()
 } else {
   importData()

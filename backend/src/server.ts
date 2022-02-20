@@ -40,7 +40,7 @@ if (process.env.NODE_ENV === 'production') {
   })
 } else {
   app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname + '/../../uploads/image-1645260047444.png'))
+    res.sendFile(path.join(__dirname , 'uploads/image-1645260047444.png'))
     // res.send('Api is running ' + __dirname)
   })
 }

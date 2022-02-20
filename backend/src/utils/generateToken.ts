@@ -1,4 +1,3 @@
-import React from 'react'
 import jwt from 'jsonwebtoken'
 
 export const generateToken = (user_id: any) => {
