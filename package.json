@@ -4,6 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
+    "test": "standard --fix backend/src/server.ts",
     "start:ts": "tsc -w",
     "start:js": "nodemon backend/build/server.js",
     "server": "concurrently npm:start:*",
