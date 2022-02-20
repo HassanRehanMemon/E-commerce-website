@@ -45,7 +45,7 @@ else {
 }
 app.use(errorMiddleware_1.notFound);
 app.use(errorMiddleware_1.errorHandler);
-const PORT = parseInt(process.env.port, 10) || 5000;
-app.listen(PORT, '0.0.0.0', () => {
-    console.log(`starting listening on ${PORT}`);
+const PORT = parseInt(process.env.PORT, 10) || 5000;
+app.listen(PORT, () => {
+    console.log(`starting listening on ${PORT} :-> ${process.env.PORT} ${process.env.NODE_ENV}`);
 });
