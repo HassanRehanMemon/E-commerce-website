@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { State } from '../reducers'
 import { listProducts } from '../actions/productAction';
 import Loader from '../components/Loader';
+import Meta from '../components/Meta';
 
 const HomeScreen = () => {
 
@@ -22,6 +23,7 @@ const HomeScreen = () => {
 
     return (
         <Container>
+            <Meta title={'HR-store'} description={'Portfolio'} />
 
             {loading ? <Loader />
                 : error !== ""

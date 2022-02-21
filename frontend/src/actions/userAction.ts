@@ -86,7 +86,6 @@ export const signOutAction = () => (dispatch: Dispatch) => {
     dispatch({ type: UserEditDetail.RESET })
     dispatch({ type: OrderListAsAdmin.RESET })
     dispatch({ type: OrderDeliver.RESET })
-    console.log('over hesre');
 }
 
 

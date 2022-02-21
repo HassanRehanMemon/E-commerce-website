@@ -8,6 +8,7 @@ import Rating from '../components/Rating';
 import { State } from '../reducers';
 import { useNavigate } from 'react-router-dom'
 import { AddReview } from '../constants';
+import Meta from '../components/Meta';
 
 const ProductScreen = () => {
     const { id } = useParams();
@@ -55,6 +56,7 @@ const ProductScreen = () => {
                         <Alert variant='danger'>{error}</Alert>
                         : (
                             <>
+                                <Meta title={`${product.name}`} description={''} />
                                 <Row>
                                     <Col md={6}>
                                         <Image src={product.image} fluid />
@@ -149,7 +151,7 @@ const ProductScreen = () => {
                                                     <Form onSubmit={submitHandler}>
                                                         <Form.Group controlId='rating'>
                                                             <Form.Label>Rating</Form.Label>
-<Form.Control
+                                                            <Form.Control
                                                                 as='select'
                                                                 value={rating}
                                                                 onChange={(e) => setRating(e.target.value)}
@@ -181,7 +183,7 @@ const ProductScreen = () => {
                                                     </Form>
                                                 ) : (
                                                     <Alert>
-                                                        Please <Link to='/login'>sign in</Link> to write a review{' '}
+                                                        Please <Link to={`/signIn?redirect=/product/${id}`}>sign in</Link> to write a review{' '}
                                                     </Alert>
                                                 )}
                                             </ListGroup.Item>

@@ -3,16 +3,18 @@ import { useDispatch, useSelector } from 'react-redux';
 import { State } from '../reducers';
 import { LinkContainer } from 'react-router-bootstrap';
 import { signOutAction } from '../actions/userAction';
+import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
 
 
+    const navigate = useNavigate()
     const dispatch = useDispatch()
     const { user } = useSelector((state: State) => state.userSignIn)
 
     const signOutHandler = () => {
         dispatch(signOutAction())
-
+        navigate('/')
     }
 
     return (

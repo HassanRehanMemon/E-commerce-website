@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react'
-import { Alert, Button, Col, Table, Row } from 'react-bootstrap'
+import React, { useEffect, useState } from 'react'
+import { Alert, Button, Col, Table, Row, Form } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { LinkContainer } from 'react-router-bootstrap'
+import { useNavigate } from 'react-router-dom'
 import { orderListAction } from '../actions/orderAction'
 import Loader from '../components/Loader'
 import { State } from '../reducers'
@@ -9,23 +10,80 @@ import { State } from '../reducers'
 type Props = {}
 
 const ProfileScreen = (props: Props) => {
+    const [name, setName] = useState('')
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [confirmPassword, setConfirmPassword] = useState('')
+    const navigate = useNavigate()
     const dispatch = useDispatch()
     const { orders, loading: orderLoading, error: orderError } = useSelector((state: State) => state.orderList)
     const { user } = useSelector((state: State) => state.userSignIn)
     console.log(orders);
 
     useEffect(() => {
+        if (!user) {
+            navigate('/')
+        }
         if (!orders)
             dispatch(orderListAction(user.token))
 
-    }, [dispatch, orders, user.token])
+    }, [dispatch, orders, user, user.token])
+
+    const submitHandler = (e: React.FormEvent) => {
+        e.preventDefault()
+        window.alert('Have not developed update yet ....')
+    }
 
 
     return (
         <>
             <Row>
                 <Col md={3}>
-                    Under Construction
+                    <Form onSubmit={submitHandler}>
+                        <Form.Group controlId='name'>
+                            <Form.Label>Name</Form.Label>
+                            <Form.Control
+                                type='name'
+                                placeholder='Enter name'
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
+                            ></Form.Control>
+                        </Form.Group>
+
+                        <Form.Group controlId='email'>
+                            <Form.Label>Email Address</Form.Label>
+                            <Form.Control
+                                type='email'
+                                placeholder='Enter email'
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                            ></Form.Control>
+                        </Form.Group>
+
+                        <Form.Group controlId='password'>
+                            <Form.Label>Password</Form.Label>
+                            <Form.Control
+                                type='password'
+                                placeholder='Enter password'
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                            ></Form.Control>
+                        </Form.Group>
+
+                        <Form.Group controlId='confirmPassword'>
+                            <Form.Label>Confirm Password</Form.Label>
+                            <Form.Control
+                                type='password'
+                                placeholder='Confirm password'
+                                value={confirmPassword}
+                                onChange={(e) => setConfirmPassword(e.target.value)}
+                            ></Form.Control>
+                        </Form.Group>
+
+                        <Button type='submit' variant='primary'>
+                            Update
+                        </Button>
+                    </Form>
                 </Col>
                 <Col md={9}>
                     {
