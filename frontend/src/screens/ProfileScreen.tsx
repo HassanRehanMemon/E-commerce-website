@@ -27,7 +27,7 @@ const ProfileScreen = (props: Props) => {
         if (!orders)
             dispatch(orderListAction(user.token))
 
-    }, [dispatch, orders, user, user.token])
+    }, [dispatch, orders, user, user.token, navigate])
 
     const submitHandler = (e: React.FormEvent) => {
         e.preventDefault()
