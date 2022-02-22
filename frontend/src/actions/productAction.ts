@@ -5,11 +5,11 @@ import { product } from "../interfaces";
 import { State } from "../reducers";
 
 
-export const listProducts = () => async (dispatch: Dispatch) => {
+export const listProducts = (keyword: string = '') => async (dispatch: Dispatch) => {
 
     try {
         dispatch({ type: ProductList.REQUEST })
-        const data = await axios.get('/api/products')
+        const data = await axios.get(`/api/products?keyword=${keyword}`)
         dispatch({ type: ProductList.SUCCESS, payload: data.data as product[] })
 
 

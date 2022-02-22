@@ -4,6 +4,7 @@ import { State } from '../reducers';
 import { LinkContainer } from 'react-router-bootstrap';
 import { signOutAction } from '../actions/userAction';
 import { useNavigate } from 'react-router-dom';
+import SearchBar from './SearchBar';
 
 const Header = () => {
 
@@ -27,6 +28,7 @@ const Header = () => {
                     </LinkContainer>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
+                        <SearchBar />
                         <Nav className="me-auto">
                             <LinkContainer to="/cart">
                                 <Nav.Link ><i className="fas fa-shopping-cart"></i> Cart</Nav.Link>
@@ -47,7 +49,7 @@ const Header = () => {
                             }
                             {(user !== null && user.isAdmin) &&
 
-                                <NavDropdown title={"Admin"} id="navbarScrollingDropdown">
+                                <NavDropdown title={"Admin"} >
                                     <LinkContainer to="/admin/users">
                                         <NavDropdown.Item >User List</NavDropdown.Item>
                                     </LinkContainer>

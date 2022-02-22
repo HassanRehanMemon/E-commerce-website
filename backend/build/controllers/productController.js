@@ -16,8 +16,15 @@ exports.addReview = exports.updateProductAsAdmin = exports.createProductAsAdmin 
 const express_async_handler_1 = __importDefault(require("express-async-handler"));
 const productModel_1 = __importDefault(require("../models/productModel"));
 exports.listProduct = (0, express_async_handler_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const keyword = req.query.keyword ?
+        {
+            name: {
+                $regex: req.query.keyword,
+                $options: 'i', // for case insensitive
+            }
+        } : {};
     // throw new Error('just an error')
-    res.send(yield productModel_1.default.find());
+    res.send(yield productModel_1.default.find(Object.assign({}, keyword)));
 }));
 exports.getProductById = (0, express_async_handler_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const id = req.params.id;

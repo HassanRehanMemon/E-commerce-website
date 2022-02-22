@@ -3,8 +3,15 @@ import Product from '../models/productModel'
 import { Response, Request } from 'express'
 
 export const listProduct = expressAsyncHandler(async (req: Request, res: Response) => {
+  const keyword = req.query.keyword ?
+    {
+      name: {
+        $regex: req.query.keyword,
+        $options: 'i', // for case insensitive
+      }
+    } : {}
   // throw new Error('just an error')
-  res.send(await Product.find())
+  res.send(await Product.find({ ...keyword }))
 })
 
 export const getProductById = expressAsyncHandler(async (req, res) => {
