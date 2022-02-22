@@ -27,9 +27,9 @@ const Header = () => {
                         <Navbar.Brand >SHOP</Navbar.Brand>
                     </LinkContainer>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                    <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
+                    <Navbar.Collapse id="basic-navbar-nav" className="">
                         <SearchBar />
-                        <Nav className="me-auto">
+                        <Nav className="ml-auto">
                             <LinkContainer to="/cart">
                                 <Nav.Link ><i className="fas fa-shopping-cart"></i> Cart</Nav.Link>
                             </LinkContainer>

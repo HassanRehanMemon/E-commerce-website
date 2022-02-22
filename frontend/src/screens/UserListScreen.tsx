@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Alert, Button, Container, Table } from 'react-bootstrap'
+import { Alert, Button, Table } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router'
 import { LinkContainer } from 'react-router-bootstrap'
@@ -32,7 +32,7 @@ const UserListScreen = (props: Props) => {
     }
 
     return (
-        <Container>
+        <>
 
             {
                 loading
@@ -84,7 +84,7 @@ const UserListScreen = (props: Props) => {
                             </tbody>
                         </Table>
             }
-        </Container>
+        </>
     )
 }
 

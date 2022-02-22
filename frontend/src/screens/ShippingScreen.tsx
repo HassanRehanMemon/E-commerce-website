@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Container, Row, Col, Form, Button } from 'react-bootstrap';
+import { Row, Col, Form, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { saveShippingAddressAction } from '../actions/cartAction';
@@ -28,7 +28,7 @@ const ShippingScreen = (props: Props) => {
 
     return (
 
-        <Container>
+        <>
             <Row className={'justify-content-md-center'}>
                 <Col xs={12} md={8}>
                     <CheckoutSteps signIn shipping />
@@ -63,7 +63,7 @@ const ShippingScreen = (props: Props) => {
                     </Form>
                 </Col>
             </Row>
-        </Container>
+        </>
     );
 };
 

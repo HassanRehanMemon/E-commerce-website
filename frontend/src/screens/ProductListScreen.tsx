@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Alert, Button, Col, Container, Row, Table } from 'react-bootstrap'
+import { Alert, Button, Col, Row, Table } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router'
 import { LinkContainer } from 'react-router-bootstrap'
@@ -34,7 +34,7 @@ const ProductListScreen = (props: Props) => {
         }
         dispatch(listProducts())
         dispatch({ type: ProductDelete.RESET })
-}, [dispatch, navigate, user, successDelete, successCreated, product._id])
+    }, [dispatch, navigate, user, successDelete, successCreated, product._id])
 
 
     const deleteHandler = (id: string) => {
@@ -46,7 +46,7 @@ const ProductListScreen = (props: Props) => {
     }
 
     return (
-        <Container>
+        <>
 
             <Row className='align-items-center'>
                 <Col>
@@ -105,7 +105,7 @@ const ProductListScreen = (props: Props) => {
                             </tbody>
                         </Table>
             }
-        </Container>
+        </>
     )
 }
 

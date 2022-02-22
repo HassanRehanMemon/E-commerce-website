@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router'
 import { State } from '../reducers'
-import { Container, Row, Col, Alert, ListGroup, Image, Card, Button } from 'react-bootstrap'
+import {  Row, Col, Alert, ListGroup, Image, Card, Button } from 'react-bootstrap'
 import Loader from '../components/Loader'
 import { orderDeliverAction, orderDetailAction, orderPaidAction } from '../actions/orderAction'
 import { Link } from 'react-router-dom'
@@ -81,7 +81,7 @@ const OrderScreen = (props: Props) => {
   return (
     // <div>{order.orderItems}</div>
 
-    <Container>
+    <>
       {payError !== "" && <Alert variant={'danger'}>{payError}</Alert>}
       {deliverError !== "" && <Alert variant={'danger'}>{deliverError}</Alert>}
       {orderLoading ? <Loader /> : (
@@ -211,7 +211,7 @@ const OrderScreen = (props: Props) => {
           </Col>
         </Row>
       )}
-    </Container>
+    </>
 
 
   )

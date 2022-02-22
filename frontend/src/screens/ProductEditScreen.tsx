@@ -1,7 +1,7 @@
 
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { Alert, Button, Container, Form, Row, Col } from 'react-bootstrap'
+import { Alert, Button, Form, Row, Col } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router'
 import { Link } from 'react-router-dom'
@@ -131,7 +131,7 @@ const ProductEditScreen = (props: Props) => {
             <Link to='/admin/products' className='btn btn-light my-3'>
                 Go Back
             </Link>
-            <Container>
+            <>
                 <Row className={'justify-content-md-center'}>
                     <Col md={8} xs={12}>
 
@@ -171,7 +171,7 @@ const ProductEditScreen = (props: Props) => {
                                         type='text'
                                         // placeholder=''
                                         value={image}
-                                    onChange={(e) => setImage((e.target.value))}
+                                        onChange={(e) => setImage((e.target.value))}
                                     ></Form.Control>
                                     <Form.Control
                                         type='file'
@@ -240,7 +240,7 @@ const ProductEditScreen = (props: Props) => {
 
                     </Col>
                 </Row>
-            </Container>
+            </>
         </>
     )
 }

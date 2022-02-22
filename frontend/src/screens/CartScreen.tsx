@@ -14,7 +14,7 @@ const CartScreen = (props: Props) => {
   const { search } = useLocation()
   const qty = search.split('=')[1]
   const dispatch = useDispatch();
-  const { cartItems  } = useSelector((state: State) => state.cart)
+  const { cartItems } = useSelector((state: State) => state.cart)
   console.log(cartItems, id, qty);
 
   useEffect(() => {
@@ -28,13 +28,13 @@ const CartScreen = (props: Props) => {
     dispatch(cartRemoveItemAction(product))
 
   }
-  
+
   const checkoutHandler = () => {
-    navigate('/signIn?redirect=/shipping') 
+    navigate('/signIn?redirect=/shipping')
   }
 
   return (
-      <Row>
+    <Row>
       <Col md={8}>
         <h1>Shopping Cart</h1>
         {cartItems.length === 0 ? (
@@ -105,12 +105,12 @@ const CartScreen = (props: Props) => {
                 <Col>${cartItems.reduce((acc, item) => acc + item.qty * item.price, 0).toFixed(2)}</Col>
               </Row>
             </ListGroup.Item>
-            
+
             <Button
-            type={'button'}
-            className={'btn btn-block'}
-            disabled = {cartItems.length === 0}
-            onClick={checkoutHandler}
+              type={'button'}
+              className={'btn btn-block'}
+              disabled={cartItems.length === 0}
+              onClick={checkoutHandler}
             >
               Chekout
             </Button>

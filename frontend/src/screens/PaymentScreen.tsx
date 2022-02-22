@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Col, Container, Row, Form, Button } from 'react-bootstrap';
+import { Col, Row, Form, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { savePaymentAction } from '../actions/cartAction';
@@ -36,7 +36,7 @@ const PaymentScreen = (props: Props) => {
 
   return (
 
-    <Container>
+    <>
       <Row className={'justify-content-md-center'}>
         <Col xs={12} md={8}>
           <CheckoutSteps signIn shipping payment />
@@ -72,7 +72,7 @@ const PaymentScreen = (props: Props) => {
 
         </Col>
       </Row>
-    </Container >
+    </>
   );
 };
 

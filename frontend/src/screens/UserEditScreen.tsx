@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Alert, Button, Container, Form, Row, Col } from 'react-bootstrap'
+import { Alert, Button, Form, Row, Col } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router'
 import { Link } from 'react-router-dom'
@@ -60,7 +60,7 @@ const UserEditScreen = (props: Props) => {
             <Link to='/admin/users' className='btn btn-light my-3'>
                 Go Back
             </Link>
-            <Container>
+            <>
                 <Row className={'justify-content-md-center'}>
                     <Col md={8} xs={12}>
 
@@ -111,7 +111,7 @@ const UserEditScreen = (props: Props) => {
 
                     </Col>
                 </Row>
-            </Container>
+            </>
         </>
     )
 }

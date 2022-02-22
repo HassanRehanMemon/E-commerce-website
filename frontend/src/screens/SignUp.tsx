@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Row, Col, Form, Button, Alert } from 'react-bootstrap';
+import {  Row, Col, Form, Button, Alert } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
@@ -39,7 +39,7 @@ const SignUp = (props: Props) => {
   }
 
   return (
-    <Container>
+    <>
       <Row className={'justify-content-md-center'}>
         <Col xs={12} md={8}>
           {error !== "" &&
@@ -83,7 +83,7 @@ const SignUp = (props: Props) => {
           </Row>
         </Col>
       </Row>
-    </Container>
+    </>
   );
 };
 

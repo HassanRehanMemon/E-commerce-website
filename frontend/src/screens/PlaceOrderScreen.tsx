@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
-import { Row, Col, ListGroup, Image,  Button, Alert, Card, Container } from 'react-bootstrap'
+import { Row, Col, ListGroup, Image, Button, Alert, Card, } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux';
-import {  useNavigate, } from 'react-router';
+import { useNavigate, } from 'react-router';
 import { Link } from 'react-router-dom';
 import { calculatePriceAction, } from '../actions/cartAction';
 import { placeOrderAction } from '../actions/orderAction';
@@ -64,7 +64,7 @@ const PlaceOrderScreen = (props: Props) => {
 
 
     return (
-        <Container>
+        <>
             <Row className={'justify-content-md-center'}>
                 <CheckoutSteps signIn shipping payment order />
                 <Col xs={12} md={8}>
@@ -155,7 +155,7 @@ const PlaceOrderScreen = (props: Props) => {
                     </Card>
                 </Col>
             </Row>
-        </Container>
+        </>
 
     );
 };
