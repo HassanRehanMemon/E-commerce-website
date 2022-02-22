@@ -10,6 +10,8 @@ const router = express_1.default.Router();
 router.route('/')
     .get(productController_1.listProduct)
     .post(authMiddleware_1.authMiddleware, authMiddleware_1.adminMiddleware, productController_1.createProductAsAdmin);
+router.route('/topThree')
+    .get(productController_1.getTopThree);
 router.route('/:id')
     .get(productController_1.getProductById)
     .put(authMiddleware_1.authMiddleware, authMiddleware_1.adminMiddleware, productController_1.updateProductAsAdmin)

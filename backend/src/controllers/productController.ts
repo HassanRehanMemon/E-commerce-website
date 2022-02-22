@@ -134,3 +134,9 @@ export const addReview = expressAsyncHandler(async (req, res) => {
     throw new Error('Could not update product')
   }
 })
+
+
+
+export const getTopThree = expressAsyncHandler(async (req: Request, res: Response) => {
+  res.send(await Product.find({}).sort({ rating: -1}).limit(3))
+})

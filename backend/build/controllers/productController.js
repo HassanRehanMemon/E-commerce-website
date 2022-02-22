@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.addReview = exports.updateProductAsAdmin = exports.createProductAsAdmin = exports.deleteProductAsAdmin = exports.getProductById = exports.listProduct = void 0;
+exports.getTopThree = exports.addReview = exports.updateProductAsAdmin = exports.createProductAsAdmin = exports.deleteProductAsAdmin = exports.getProductById = exports.listProduct = void 0;
 const express_async_handler_1 = __importDefault(require("express-async-handler"));
 const productModel_1 = __importDefault(require("../models/productModel"));
 exports.listProduct = (0, express_async_handler_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -124,4 +124,7 @@ exports.addReview = (0, express_async_handler_1.default)((req, res) => __awaiter
         res.status(404);
         throw new Error('Could not update product');
     }
+}));
+exports.getTopThree = (0, express_async_handler_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    res.send(yield productModel_1.default.find({}).sort({ rating: -1 }).limit(3));
 }));

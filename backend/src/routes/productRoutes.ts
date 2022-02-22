@@ -1,7 +1,5 @@
 import express from 'express'
-import multer from 'multer'
-import path from 'path'
-import { addReview, createProductAsAdmin, deleteProductAsAdmin, getProductById, listProduct, updateProductAsAdmin } from '../controllers/productController'
+import { addReview, createProductAsAdmin, deleteProductAsAdmin, getProductById, getTopThree, listProduct, updateProductAsAdmin } from '../controllers/productController'
 import { adminMiddleware, authMiddleware } from '../middleware/authMiddleware'
 
 const router = express.Router()
@@ -9,6 +7,9 @@ const router = express.Router()
 router.route('/')
   .get(listProduct)
   .post(authMiddleware, adminMiddleware, createProductAsAdmin)
+  
+router.route('/topThree')
+  .get(getTopThree)
 
 router.route('/:id')
   .get(getProductById)
