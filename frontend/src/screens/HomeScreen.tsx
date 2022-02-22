@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Col, Container, Alert } from 'react-bootstrap'
+import { Row, Col, Alert } from 'react-bootstrap'
 import Product from '../components/Product';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'

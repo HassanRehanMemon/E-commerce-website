@@ -171,7 +171,7 @@ const initProductCarouselState: ProductCarouselState = {
 }
 
 
-export const productCarouselReducer = (state: ProductCarouselState = initProductListState, action: typeAction) => {
+export const productCarouselReducer = (state: ProductCarouselState = initProductCarouselState, action: typeAction) => {
     switch (action.type) {
         case (ProductCarousel.REQUEST):
             return { ...state, loading: true }
