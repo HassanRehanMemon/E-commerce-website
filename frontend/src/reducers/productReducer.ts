@@ -1,5 +1,5 @@
-import { AddReview, ProductCreate, ProductDelete, ProductDetail, ProductEdit, ProductList } from '../constants';
-import { AddReviewState, product, ProductCreateState, ProductDeleteState, productDetailAction, ProductDetailState, ProductEditAction, ProductEditState, ProductListAction, ProductListState, typeAction } from '../interfaces';
+import { AddReview, ProductCarousel, ProductCreate, ProductDelete, ProductDetail, ProductEdit, ProductList } from '../constants';
+import { AddReviewState, product, ProductCarouselState, ProductCreateState, ProductDeleteState, productDetailAction, ProductDetailState, ProductEditAction, ProductEditState, ProductListAction, ProductListState, typeAction } from '../interfaces';
 
 
 
@@ -157,6 +157,30 @@ export const AddReviewReducer = (state: AddReviewState = initAddReviewState, act
         case (AddReview.RESET):
             return initAddReviewState
 
+
+        default:
+            return state
+    }
+};
+
+const initProductCarouselState: ProductCarouselState = {
+    products: [] as product[],
+    error: "",
+    loading: true
+
+}
+
+
+export const productCarouselReducer = (state: ProductCarouselState = initProductListState, action: typeAction) => {
+    switch (action.type) {
+        case (ProductCarousel.REQUEST):
+            return { ...state, loading: true }
+
+        case (ProductCarousel.SUCCESS):
+            return { ...state, products: action.payload as product[], loading: false }
+
+        case (ProductCarousel.FAIL):
+            return { ...state, error: action.payload, loading: false }
 
         default:
             return state

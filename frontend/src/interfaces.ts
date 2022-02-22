@@ -92,6 +92,13 @@ export interface AddReviewState {
     success: boolean
 }
 
+
+export interface ProductCarouselState {
+    products?: product[],
+    error?: string,
+    loading: boolean
+};
+
 // ---------------- Cart ---------------
 //// Add to cart reducer
 export interface shippingAddressType {

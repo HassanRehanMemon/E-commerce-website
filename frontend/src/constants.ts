@@ -37,6 +37,13 @@ export enum ProductEdit {
     RESET = "PRODUCT_EDIT_RESET",
 
 }
+    
+
+export enum ProductCarousel {
+    REQUEST = "PRODUCT_CAROUSEL_REQUEST",
+    SUCCESS = "PRODUCT_CAROUSEL_SUCCESS",
+    FAIL = "PRODUCT_CAROUSEL_FAIL",
+}
 
 
 export enum AddReview {

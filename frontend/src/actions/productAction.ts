@@ -1,5 +1,5 @@
 import { Dispatch } from "redux";
-import { AddReview, ProductCreate, ProductDelete, ProductDetail, ProductEdit, ProductList } from "../constants";
+import { AddReview, ProductCarousel, ProductCreate, ProductDelete, ProductDetail, ProductEdit, ProductList } from "../constants";
 import axios from 'axios'
 import { product } from "../interfaces";
 import { State } from "../reducers";
@@ -185,3 +185,25 @@ export const AddReivewAction = (
         })
     }
 };
+
+
+
+export const productCarouselAction = () => async (dispatch: Dispatch) => {
+
+    try {
+        dispatch({ type: ProductCarousel.REQUEST })
+        const data = await axios.get('/api/products/topThree')
+        dispatch({ type: ProductCarousel.SUCCESS, payload: data.data as product[] })
+
+
+    } catch (error: any) {
+        dispatch({
+            type: ProductCarousel.FAIL,
+            payload: error.response && error.response.data.message
+                ? error.response.data.message
+                : error.message,
+        })
+
+
+    }
+}
