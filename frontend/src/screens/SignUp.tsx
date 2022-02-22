@@ -28,12 +28,12 @@ const SignUp = (props: Props) => {
   }, [user, redirect, navigate])
 
 
-  console.log('is there any problem');
+  // console.log('is there any problem');
   const signUpSubmitHandler = (e: React.FormEvent) => {
     e.preventDefault()
     if (password === confirmPassword){
 
-      console.log(name, email, password, confirmPassword);
+      // console.log(name, email, password, confirmPassword);
       dispatch(userSignUpAction(name, email, password))
     }
   }

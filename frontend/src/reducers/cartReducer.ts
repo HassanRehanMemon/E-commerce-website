@@ -17,10 +17,10 @@ const cartReducer = (state: AddToCartState = initState, action: AddToCartAction)
             const existItem = state.cartItems.find((cartItem) =>
                 cartItem.product_id === item.product_id
             )
-            console.log(existItem);
+            // console.log(existItem);
 
             if (existItem) {
-                console.log('replacing item : already exits');
+                // console.log('replacing item : already exits');
                 return {
                     ...state,
                     cartItems: state.cartItems.map((cartItem) => {
@@ -29,7 +29,7 @@ const cartReducer = (state: AddToCartState = initState, action: AddToCartAction)
                 }
             }
             else {
-                console.log('adding new item');
+                // console.log('adding new item');
                 return {
                     ...state,
                     cartItems: [...state.cartItems, item]
@@ -46,7 +46,7 @@ const cartReducer = (state: AddToCartState = initState, action: AddToCartAction)
             }
 
         case AddToCart.SAVE_SHIPPING:
-            console.log(action.payload);
+            // console.log(action.payload);
             return {
                 ...state,
                 shippingAddress: action.payload as shippingAddressType

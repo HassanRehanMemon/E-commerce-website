@@ -15,7 +15,7 @@ const CartScreen = (props: Props) => {
   const qty = search.split('=')[1]
   const dispatch = useDispatch();
   const { cartItems } = useSelector((state: State) => state.cart)
-  console.log(cartItems, id, qty);
+  // console.log(cartItems, id, qty);
 
   useEffect(() => {
     if (id) {

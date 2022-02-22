@@ -23,14 +23,14 @@ const SignIn = (props: Props) => {
   useEffect(() => {
 
     if (user !== null) {
-      console.log(redirect);
+      // console.log(redirect);
       navigate(redirect ?? '/')
 
     }
   }, [user, redirect, navigate])
 
 
-  console.log('is there any problem');
+  // console.log('is there any problem');
   const signInSubmitHandler = (e: React.FormEvent) => {
     e.preventDefault()
     dispatch(userSignInAction(email, password))

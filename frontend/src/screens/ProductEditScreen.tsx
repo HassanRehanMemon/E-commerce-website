@@ -49,7 +49,7 @@ const ProductEditScreen = (props: Props) => {
             if (id && (!product.name || product._id !== id)) {
                 dispatch(listDetailProduct(id))
             } else {
-                console.log(`loaded ${product}`)
+                // console.log(`loaded ${product}`)
                 setName(product.name)
                 setPrice(Number(product.price))
                 setImage(product.image)
@@ -85,10 +85,10 @@ const ProductEditScreen = (props: Props) => {
             setImage(data)
             setUploading(false)
         } catch (error) {
-            console.error(error)
+            // console.error(error)
             setUploading(false)
         }
-        console.log(uploading);
+        // console.log(uploading);
     }
 
     const submitHandler = (e: React.FormEvent) => {

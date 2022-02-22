@@ -16,7 +16,7 @@ const ProductScreen = () => {
     const [qty, setQty] = useState(1)
     const [rating, setRating] = useState('')
     const [comment, setComment] = useState('')
-    console.log(qty)
+    // console.log(qty)
     const dispatch = useDispatch()
     const { product, error, loading } = useSelector((state: State) => state.productDetail)
     const { loading: reviewLoading, error: reviewError, success: reviewSuccess } = useSelector((state: State) => state.addReview)

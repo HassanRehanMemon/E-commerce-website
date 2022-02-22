@@ -23,23 +23,23 @@ const OrderScreen = (props: Props) => {
   const { user, } = useSelector((state: State) => state.userSignIn)
   const { success: PaySuccess, error: payError } = useSelector((state: State) => state.orderPaid)
   const { id } = useParams()
-  console.log(order);
+  // console.log(order);
 
   useEffect(() => {
 
     const payPalScript = async () => {
       const client_id = await axios.get('/api/config/paypal')
 
-      console.log(client_id);
+      // console.log(client_id);
       //script
       const script = document.createElement('script')
       script.type = 'text/javascript'
       script.src = `https://www.paypal.com/sdk/js?client-id=${client_id.data}`
       script.async = true
-      console.log(payPalSDK);
+      // console.log(payPalSDK);
       script.addEventListener('load', () => {
 
-        console.log('should be here');
+        // console.log('should be here');
         setPayPalSDK(true)
       })
       document.body.appendChild(script)
@@ -51,7 +51,7 @@ const OrderScreen = (props: Props) => {
 
       dispatch({ type: OrderPaid.RESET })
       dispatch({ type: OrderDeliver.RESET })
-      console.log(`fetching ${id}`);
+      // console.log(`fetching ${id}`);
       dispatch(orderDetailAction(id, user.token))
     } else if (!order.isPaid) {
       if (!window.paypal) {
@@ -61,7 +61,7 @@ const OrderScreen = (props: Props) => {
       }
     }
     else {
-      console.log('something went wrong');
+      // console.log('something went wrong');
     }
   }, [dispatch, id, user, order, PaySuccess, payPalSDK, deliverSuccess])
 

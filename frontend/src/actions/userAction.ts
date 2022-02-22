@@ -17,7 +17,7 @@ export const userSignInAction = (email: string, password: string) => async (disp
             { email, password },
             config
         )
-        console.log(data);
+        // console.log(data);
 
         dispatch({
             type: UserSingIn.SUCCESS,
@@ -49,7 +49,7 @@ export const userSignUpAction = (name: string, email: string, password: string) 
             { name, email, password },
             config
         )
-        console.log(data);
+        // console.log(data);
 
         dispatch({
             type: UserSingUp.SUCCESS,

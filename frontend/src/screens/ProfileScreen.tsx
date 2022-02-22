@@ -18,7 +18,7 @@ const ProfileScreen = (props: Props) => {
     const dispatch = useDispatch()
     const { orders, loading: orderLoading, error: orderError } = useSelector((state: State) => state.orderList)
     const { user } = useSelector((state: State) => state.userSignIn)
-    console.log(orders);
+    // console.log(orders);
 
     useEffect(() => {
         if (!user) {
